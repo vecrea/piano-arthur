@@ -1,0 +1,2992 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Piano · Méthode en douze semaines</title>
+<meta name="description" content="Un cours de piano en douze semaines pour comprendre, jouer à deux mains et composer, conçu pour un débutant sur un clavier de 49 touches — avec détection MIDI en direct." />
+<style>
+  :root {
+    --paper:     #F4EBD3;
+    --paper-2:   #EBE0BF;
+    --paper-3:   #E0D2A8;
+    --ink:       #1B1410;
+    --ink-2:     #3B2E24;
+    --muted:     #6B5C4A;
+    --line:      #C2AF85;
+    --brass:     #A9752A;
+    --brass-hi:  #C48A2E;
+    --burgundy:  #7A2E2E;
+    --sage:      #5E6E4A;
+    --key-white: #FFFDF3;
+    --key-white-shadow: #C9B681;
+    --key-black: #1A140F;
+    --key-active: #C48A2E;
+    --shadow-tint: 27, 20, 16;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:     #0F0B14;
+      --paper-2:   #17111E;
+      --paper-3:   #1F1728;
+      --ink:       #F0E4CC;
+      --ink-2:     #C9B79B;
+      --muted:     #8E7F6C;
+      --line:      #2E2437;
+      --brass:     #D9A94E;
+      --brass-hi:  #F0C56A;
+      --burgundy:  #C56A63;
+      --sage:      #93A576;
+      --key-white: #E6DAB8;
+      --key-white-shadow: #6B5C3F;
+      --key-black: #060309;
+      --key-active: #F0C56A;
+      --shadow-tint: 0, 0, 0;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper:     #F4EBD3;
+    --paper-2:   #EBE0BF;
+    --paper-3:   #E0D2A8;
+    --ink:       #1B1410;
+    --ink-2:     #3B2E24;
+    --muted:     #6B5C4A;
+    --line:      #C2AF85;
+    --brass:     #A9752A;
+    --brass-hi:  #C48A2E;
+    --burgundy:  #7A2E2E;
+    --sage:      #5E6E4A;
+    --key-white: #FFFDF3;
+    --key-white-shadow: #C9B681;
+    --key-black: #1A140F;
+    --key-active: #C48A2E;
+    --shadow-tint: 27, 20, 16;
+  }
+  :root[data-theme="dark"] {
+    --paper:     #0F0B14;
+    --paper-2:   #17111E;
+    --paper-3:   #1F1728;
+    --ink:       #F0E4CC;
+    --ink-2:     #C9B79B;
+    --muted:     #8E7F6C;
+    --line:      #2E2437;
+    --brass:     #D9A94E;
+    --brass-hi:  #F0C56A;
+    --burgundy:  #C56A63;
+    --sage:      #93A576;
+    --key-white: #E6DAB8;
+    --key-white-shadow: #6B5C3F;
+    --key-black: #060309;
+    --key-active: #F0C56A;
+    --shadow-tint: 0, 0, 0;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Palatino', 'Book Antiqua', serif;
+    font-size: 17px;
+    line-height: 1.65;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--brass); color: var(--paper); }
+  a { color: var(--brass); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s ease; }
+  a:hover { border-bottom-color: var(--brass); }
+  :focus-visible { outline: 2px solid var(--brass-hi); outline-offset: 3px; border-radius: 2px; }
+
+  /* Typography */
+  .display {
+    font-family: 'Playfair Display', 'Bodoni 72', 'Didot', Georgia, serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    text-wrap: balance;
+  }
+  .display-italic {
+    font-family: 'Playfair Display', 'Bodoni 72', 'Didot', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  .eyebrow {
+    font-family: Georgia, serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    color: var(--brass);
+    font-weight: 700;
+  }
+  .mono {
+    font-family: ui-monospace, 'SF Mono', 'IBM Plex Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
+    font-size: 0.92em;
+    letter-spacing: -0.01em;
+  }
+  .small-caps {
+    font-family: Georgia, serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 12px;
+    color: var(--ink-2);
+  }
+  h2, h3, h4 { margin: 0; }
+  p { margin: 0 0 1em 0; }
+
+  /* Layout wrapper */
+  .wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  @media (max-width: 640px) {
+    .wrap { padding: 0 20px; }
+    body { font-size: 16px; }
+  }
+
+  /* ==================== HEADER TOOLBAR ==================== */
+  .toolbar {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    gap: 8px;
+    z-index: 100;
+    align-items: center;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: all .2s ease;
+    font-family: Georgia, serif;
+  }
+  .chip:hover { background: var(--paper-3); }
+  .chip__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--muted);
+    transition: background .2s, box-shadow .2s;
+  }
+  .chip__dot--live {
+    background: var(--sage);
+    box-shadow: 0 0 0 3px rgba(94, 110, 74, 0.2);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  .chip__dot--wait { background: var(--brass); }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(94, 110, 74, 0.2); }
+    50% { box-shadow: 0 0 0 6px rgba(94, 110, 74, 0.05); }
+  }
+
+  /* ==================== COVER ==================== */
+  .cover {
+    min-height: 100vh;
+    padding: 32px 32px 80px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(169, 117, 42, 0.06), transparent 60%),
+      radial-gradient(ellipse at 80% 90%, rgba(122, 46, 46, 0.05), transparent 60%),
+      var(--paper);
+  }
+  .cover__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    margin-top: 40px;
+  }
+  .cover__stamp {
+    font-family: Georgia, serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .cover__stamp b { color: var(--ink); font-weight: 700; }
+  .cover__center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 0;
+    max-width: 1100px;
+  }
+  .cover__opus {
+    font-family: Georgia, serif;
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 32px;
+  }
+  .cover__title {
+    font-size: clamp(88px, 20vw, 260px);
+    margin: 0;
+    color: var(--ink);
+  }
+  .cover__title-piano {
+    font-family: 'Playfair Display', 'Bodoni 72', 'Didot', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+  }
+  .cover__title-dot {
+    color: var(--brass);
+    font-style: normal;
+  }
+  .cover__deck {
+    max-width: 720px;
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .cover__rule {
+    height: 1px;
+    background: var(--brass);
+    margin-top: 14px;
+  }
+  .cover__deck-text {
+    font-size: clamp(18px, 2.2vw, 22px);
+    line-height: 1.5;
+    color: var(--ink-2);
+    font-style: italic;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 400;
+  }
+  .cover__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .cover__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 0;
+  }
+  .pill {
+    padding: 6px 16px;
+    font-family: Georgia, serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    border-right: 1px solid var(--line);
+  }
+  .pill:last-child { border-right: none; }
+  .pill:first-child { padding-left: 0; }
+  .cover__scroll {
+    font-family: Georgia, serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    padding-right: 8px;
+  }
+  .cover__scroll::before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 40px;
+    background: var(--line);
+    margin: 0 auto 16px;
+  }
+  @media (max-width: 640px) {
+    .cover__scroll { display: none; }
+    .cover__deck { grid-template-columns: 1fr; gap: 12px; }
+    .cover__rule { width: 40px; }
+  }
+
+  /* ==================== SECTION SCAFFOLD ==================== */
+  section.chapter {
+    padding: 96px 0;
+    border-top: 1px solid var(--line);
+    position: relative;
+  }
+  .section-head {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
+    margin-bottom: 56px;
+    align-items: baseline;
+  }
+  .section-head__label {
+    font-family: Georgia, serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--brass);
+    padding-top: 8px;
+    border-top: 1px solid var(--brass);
+  }
+  .section-head__title {
+    font-size: clamp(40px, 6vw, 72px);
+  }
+  .section-head__lede {
+    max-width: 640px;
+    font-size: 20px;
+    color: var(--ink-2);
+    font-style: italic;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 400;
+    margin-top: 24px;
+  }
+  @media (max-width: 720px) {
+    .section-head {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    section.chapter { padding: 64px 0; }
+  }
+
+  /* ==================== GOALS SECTION ==================== */
+  .goals {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 40px;
+  }
+  .goal {
+    padding: 32px 4px 0;
+    border-top: 3px solid var(--brass);
+    position: relative;
+  }
+  .goal__num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 64px;
+    color: var(--brass);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .goal__title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+  .goal__text {
+    color: var(--ink-2);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  @media (max-width: 800px) {
+    .goals { grid-template-columns: 1fr; gap: 32px; }
+  }
+
+  /* ==================== PACT LIST ==================== */
+  .pact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-top: 56px;
+  }
+  .pact__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .pact__list li {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .pact__list li:last-child { border-bottom: none; }
+  .pact__list li .n {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 28px;
+    color: var(--brass);
+  }
+  .pact__list li b {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4px;
+    color: var(--ink);
+    font-size: 20px;
+  }
+  .pact__list li span {
+    color: var(--ink-2);
+    font-size: 16px;
+  }
+  .pact__routine {
+    background: var(--paper-2);
+    padding: 32px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    position: relative;
+  }
+  .pact__routine::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--brass), var(--burgundy));
+  }
+  .pact__routine h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+  .pact__routine ol {
+    padding-left: 0;
+    list-style: none;
+    counter-reset: routine;
+  }
+  .pact__routine ol li {
+    counter-increment: routine;
+    padding: 12px 0 12px 40px;
+    position: relative;
+    border-bottom: 1px dashed var(--line);
+    color: var(--ink-2);
+  }
+  .pact__routine ol li:last-child { border-bottom: none; }
+  .pact__routine ol li::before {
+    content: counter(routine, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 11px;
+    color: var(--brass);
+    top: 16px;
+    letter-spacing: 0.1em;
+  }
+  .pact__routine ol li b { color: var(--ink); }
+  .pact__routine ol li .t {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 11px;
+    color: var(--brass);
+    float: right;
+    letter-spacing: 0.05em;
+  }
+  @media (max-width: 800px) {
+    .pact { grid-template-columns: 1fr; }
+  }
+
+  /* ==================== INSTRUMENT / KEYBOARD ==================== */
+  .instrument {
+    background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+    padding: 24px;
+    border-radius: 6px;
+    margin-top: 32px;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.4) inset,
+      0 30px 60px -20px rgba(var(--shadow-tint), 0.25);
+    border: 1px solid var(--line);
+  }
+  .instrument__toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px dashed var(--line);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .instrument__label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .instrument__label .eyebrow { margin: 0; }
+  .instrument__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background: var(--paper-3);
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-2);
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  }
+  .instrument__badge .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--muted);
+  }
+  .instrument__badge.live .dot { background: var(--sage); box-shadow: 0 0 0 3px rgba(94,110,74,0.2); }
+  .instrument__badge.wait .dot { background: var(--brass); }
+  .instrument__controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    padding: 8px 16px;
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-family: Georgia, serif;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: all .15s ease;
+    text-transform: uppercase;
+  }
+  .btn:hover { background: var(--paper-3); border-color: var(--brass); }
+  .btn.is-active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .btn--primary { background: var(--brass); color: var(--paper); border-color: var(--brass); }
+  .btn--primary:hover { background: var(--brass-hi); border-color: var(--brass-hi); }
+
+  /* Keyboard SVG container */
+  .keyboard-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 0 8px;
+  }
+  .keyboard-container::-webkit-scrollbar { height: 6px; }
+  .keyboard-container::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+  #keyboard {
+    display: block;
+    width: 100%;
+    min-width: 720px;
+    height: auto;
+    max-height: 180px;
+    touch-action: manipulation;
+  }
+  .kb-key-white {
+    fill: var(--key-white);
+    stroke: var(--key-white-shadow);
+    stroke-width: 0.5;
+    cursor: pointer;
+    transition: fill .05s ease;
+  }
+  .kb-key-white:hover { fill: var(--paper-3); }
+  .kb-key-white.is-active { fill: var(--key-active); }
+  .kb-key-white.is-scale { fill: color-mix(in oklab, var(--key-white) 70%, var(--brass) 30%); }
+  .kb-key-white.is-chord { fill: color-mix(in oklab, var(--key-white) 55%, var(--brass) 45%); }
+  .kb-key-white.is-root { fill: color-mix(in oklab, var(--key-white) 40%, var(--burgundy) 60%); }
+  .kb-key-black {
+    fill: var(--key-black);
+    stroke: var(--key-white-shadow);
+    stroke-width: 0.4;
+    cursor: pointer;
+    transition: fill .05s ease;
+  }
+  .kb-key-black:hover { fill: #3a2c22; }
+  .kb-key-black.is-active { fill: var(--key-active); }
+  .kb-key-black.is-scale { fill: color-mix(in oklab, var(--key-black) 60%, var(--brass) 40%); }
+  .kb-key-black.is-chord { fill: color-mix(in oklab, var(--key-black) 40%, var(--brass) 60%); }
+  .kb-key-black.is-root { fill: color-mix(in oklab, var(--key-black) 30%, var(--burgundy) 70%); }
+  .kb-label {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 8px;
+    fill: var(--muted);
+    pointer-events: none;
+    text-anchor: middle;
+    user-select: none;
+  }
+  .kb-label.on-black { fill: var(--key-white); }
+  .kb-key-white.is-active + .kb-label,
+  .kb-key-white.is-scale + .kb-label,
+  .kb-key-white.is-chord + .kb-label,
+  .kb-key-white.is-root + .kb-label { fill: var(--ink); font-weight: 700; }
+  .kb-label--octave { font-size: 7px; opacity: 0.6; }
+
+  .kb-hint {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 4px 0;
+    font-size: 12px;
+    color: var(--muted);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .kb-hint .mono { color: var(--ink-2); }
+  .kb-legend { display: flex; gap: 20px; flex-wrap: wrap; }
+  .kb-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .kb-legend .sw {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    border: 1px solid var(--line);
+  }
+
+  /* ==================== PROGRAMME GRID ==================== */
+  .programme {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    margin-top: 40px;
+  }
+  .module {
+    display: contents;
+  }
+  .module-header {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
+    padding-top: 40px;
+    padding-bottom: 24px;
+    border-top: 2px solid var(--ink);
+    align-items: baseline;
+  }
+  .module-header:first-child { border-top: none; padding-top: 0; }
+  .module-header__num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 64px;
+    line-height: 1;
+    color: var(--brass);
+  }
+  .module-header__title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .module-header__desc {
+    color: var(--ink-2);
+    font-size: 15px;
+    max-width: 500px;
+  }
+
+  .week {
+    grid-column: span 1;
+    padding: 20px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    position: relative;
+    transition: transform .2s ease, box-shadow .2s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+  }
+  .week:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px -12px rgba(var(--shadow-tint), 0.25);
+    border-color: var(--brass);
+  }
+  .week__num {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--brass);
+    margin-bottom: 12px;
+  }
+  .week__title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 12px;
+    min-height: 48px;
+  }
+  .week__obj {
+    color: var(--ink-2);
+    font-size: 14px;
+    margin-bottom: 16px;
+    flex-grow: 1;
+  }
+  .week__meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 11px;
+    color: var(--muted);
+    padding-top: 12px;
+    border-top: 1px dashed var(--line);
+  }
+  @media (max-width: 900px) {
+    .programme { grid-template-columns: repeat(3, 1fr); }
+    .module-header { grid-template-columns: 100px 1fr; gap: 24px; }
+    .module-header__num { font-size: 48px; }
+  }
+  @media (max-width: 720px) {
+    .programme { grid-template-columns: 1fr 1fr; gap: 20px; }
+  }
+  @media (max-width: 480px) {
+    .programme { grid-template-columns: 1fr; }
+  }
+
+  /* ==================== LESSON DETAIL ==================== */
+  .lesson-detail {
+    display: none;
+    grid-column: 1 / -1;
+    padding: 40px;
+    background: var(--paper-2);
+    border: 1px solid var(--brass);
+    border-radius: 6px;
+    margin-top: 8px;
+    box-shadow: 0 20px 50px -20px rgba(var(--shadow-tint), 0.3);
+    position: relative;
+  }
+  .lesson-detail.is-open { display: block; }
+  .lesson-detail__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ink-2);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-family: Georgia, serif;
+    font-size: 18px;
+    line-height: 1;
+    transition: all .15s ease;
+  }
+  .lesson-detail__close:hover { background: var(--ink); color: var(--paper); }
+  .lesson-detail__meta {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--line);
+    flex-wrap: wrap;
+  }
+  .lesson-detail__meta span {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .lesson-detail__meta span b { color: var(--brass); }
+  .lesson-detail h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 8px;
+    max-width: 700px;
+  }
+  .lesson-detail__deck {
+    font-style: italic;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    color: var(--ink-2);
+    max-width: 600px;
+    margin-bottom: 32px;
+  }
+  .lesson-detail__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+  }
+  .lesson-detail__body h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--ink);
+    margin-top: 32px;
+    margin-bottom: 12px;
+  }
+  .lesson-detail__body h4:first-child { margin-top: 0; }
+  .lesson-detail__body p { color: var(--ink-2); }
+  .lesson-detail__body ul {
+    padding-left: 0;
+    list-style: none;
+    margin: 0 0 16px 0;
+  }
+  .lesson-detail__body ul li {
+    padding: 6px 0 6px 24px;
+    color: var(--ink-2);
+    position: relative;
+  }
+  .lesson-detail__body ul li::before {
+    content: "◆";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    color: var(--brass);
+    font-size: 10px;
+  }
+
+  .try-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background: var(--paper-3);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 12px;
+    color: var(--ink);
+    cursor: pointer;
+    margin: 4px 4px 4px 0;
+    transition: all .15s ease;
+  }
+  .try-btn:hover { background: var(--brass); color: var(--paper); border-color: var(--brass); }
+  .try-btn::before { content: "▶"; font-size: 9px; color: var(--brass); }
+  .try-btn:hover::before { color: var(--paper); }
+
+  .exercise {
+    padding: 16px;
+    background: var(--paper-3);
+    border-left: 3px solid var(--brass);
+    border-radius: 2px;
+    margin: 12px 0;
+  }
+  .exercise__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .exercise__title b {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .exercise__title .t {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+  .exercise__desc { color: var(--ink-2); font-size: 14px; margin: 0; }
+
+  .checkbox {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: Georgia, serif;
+    font-size: 12px;
+    color: var(--ink-2);
+    margin-top: 12px;
+    transition: all .15s ease;
+    letter-spacing: 0.05em;
+  }
+  .checkbox:hover { border-color: var(--brass); }
+  .checkbox__box {
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--muted);
+    border-radius: 2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--paper);
+  }
+  .checkbox.is-checked { background: var(--sage); color: var(--paper); border-color: var(--sage); }
+  .checkbox.is-checked .checkbox__box { background: var(--paper); border-color: var(--paper); color: var(--sage); }
+  .checkbox.is-checked .checkbox__box::before { content: "✓"; font-weight: 700; }
+
+  .lesson-detail__aside {
+    background: var(--paper);
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+  }
+  .lesson-detail__aside h4 {
+    font-family: Georgia, serif;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 11px;
+    color: var(--brass);
+    margin-bottom: 16px;
+  }
+  .lesson-detail__aside .listen {
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--line);
+    color: var(--ink-2);
+    font-size: 14px;
+  }
+  .lesson-detail__aside .listen:last-child { border-bottom: none; }
+  .lesson-detail__aside .listen b { color: var(--ink); display: block; font-family: 'Playfair Display', Georgia, serif; }
+  .lesson-detail__aside .listen span { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 11px; color: var(--muted); }
+
+  @media (max-width: 800px) {
+    .lesson-detail__grid { grid-template-columns: 1fr; gap: 24px; }
+    .lesson-detail { padding: 24px; }
+    .lesson-detail h3 { font-size: 28px; }
+  }
+
+  /* ==================== CHORD LIBRARY ==================== */
+  .chord-tabs {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    background: var(--paper-2);
+    border-radius: 6px;
+    margin-bottom: 32px;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+  }
+  .chord-tab {
+    padding: 10px 20px;
+    background: transparent;
+    border: none;
+    color: var(--ink-2);
+    font-family: Georgia, serif;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all .15s ease;
+    white-space: nowrap;
+  }
+  .chord-tab:hover { color: var(--ink); }
+  .chord-tab.is-active { background: var(--ink); color: var(--paper); }
+  .chord-family {
+    display: none;
+  }
+  .chord-family.is-active {
+    display: block;
+  }
+  .chord-family__intro {
+    max-width: 640px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-2);
+    margin-bottom: 24px;
+  }
+  .chord-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+  }
+  .chord-card {
+    padding: 16px 12px;
+    text-align: center;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all .15s ease;
+  }
+  .chord-card:hover { background: var(--brass); color: var(--paper); border-color: var(--brass); }
+  .chord-card:hover .chord-card__notes { color: var(--paper); opacity: 0.85; }
+  .chord-card__name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .chord-card:hover .chord-card__name { color: var(--paper); }
+  .chord-card__notes {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 6px;
+    letter-spacing: 0.05em;
+  }
+  @media (max-width: 900px) { .chord-grid { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 500px) { .chord-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  /* ==================== THEORY REFERENCE ==================== */
+  .theory-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 40px;
+  }
+  .theory-card {
+    padding: 32px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+  }
+  .theory-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .theory-card p {
+    color: var(--ink-2);
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+  .interval-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .interval-table th {
+    text-align: left;
+    padding: 8px 0;
+    color: var(--brass);
+    font-family: Georgia, serif;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    font-size: 11px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--line);
+  }
+  .interval-table td {
+    padding: 8px 8px 8px 0;
+    color: var(--ink-2);
+    border-bottom: 1px dashed var(--line);
+  }
+  .interval-table td:first-child { color: var(--ink); font-weight: 700; }
+  .interval-table td.mono { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; color: var(--brass); }
+
+  .scale-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 12px;
+  }
+  .scale-btn {
+    padding: 6px 10px;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 11px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: all .15s ease;
+    letter-spacing: 0.05em;
+  }
+  .scale-btn:hover { background: var(--paper-3); }
+  .scale-btn.is-active { background: var(--brass); color: var(--paper); border-color: var(--brass); }
+
+  /* Cycle of fifths */
+  .cycle {
+    display: block;
+    margin: 0 auto;
+    max-width: 320px;
+    width: 100%;
+    height: auto;
+  }
+  .cycle-key {
+    fill: var(--paper);
+    stroke: var(--line);
+    stroke-width: 1;
+    cursor: pointer;
+    transition: fill .15s;
+  }
+  .cycle-key:hover { fill: var(--paper-3); }
+  .cycle-label {
+    fill: var(--ink);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 14px;
+    text-anchor: middle;
+    pointer-events: none;
+  }
+  .cycle-label--minor {
+    font-size: 10px;
+    fill: var(--muted);
+    font-style: italic;
+    font-weight: 400;
+  }
+  @media (max-width: 800px) { .theory-grid { grid-template-columns: 1fr; } }
+
+  /* ==================== PROGRESS BAR ==================== */
+  .progress-panel {
+    margin-top: 48px;
+    padding: 32px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 6px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: center;
+  }
+  .progress-panel h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 24px;
+    margin: 0 0 4px 0;
+  }
+  .progress-panel .small-caps { color: var(--brass-hi); font-size: 11px; }
+  .progress-panel .bar {
+    margin-top: 16px;
+    height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    grid-column: 1 / -1;
+  }
+  .progress-panel .bar__fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--brass), var(--brass-hi));
+    width: 0%;
+    transition: width .4s ease;
+  }
+  .progress-panel .stat {
+    text-align: right;
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  .progress-panel .stat b {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--brass-hi);
+  }
+  .progress-panel .stat span {
+    font-family: Georgia, serif;
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-top: 6px;
+  }
+  .progress-panel .reset {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.6);
+    padding: 6px 12px;
+    font-size: 11px;
+    border-radius: 3px;
+    cursor: pointer;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    grid-column: 1 / -1;
+    justify-self: start;
+    margin-top: 8px;
+    font-family: Georgia, serif;
+  }
+  .progress-panel .reset:hover { color: var(--paper); border-color: var(--paper); }
+
+  /* ==================== FOOTER ==================== */
+  .footer {
+    padding: 80px 0 60px;
+    border-top: 2px solid var(--ink);
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .footer .fin {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 48px;
+    color: var(--brass);
+    margin-bottom: 20px;
+  }
+  .footer p { max-width: 500px; margin: 0 auto 12px; }
+
+  /* Notes ticker (shows last played note) */
+  .played-note {
+    position: fixed;
+    left: 16px;
+    bottom: 16px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    padding: 12px 20px;
+    border-radius: 999px;
+    display: none;
+    align-items: baseline;
+    gap: 12px;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    box-shadow: 0 12px 30px -10px rgba(var(--shadow-tint), 0.2);
+    z-index: 90;
+  }
+  .played-note.visible { display: inline-flex; animation: slidein .2s ease; }
+  .played-note .n {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--brass);
+  }
+  .played-note .info { font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
+  @keyframes slidein {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Nav */
+  .side-nav {
+    position: fixed;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .side-nav a {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid var(--muted);
+    transition: all .2s ease;
+  }
+  .side-nav a:hover, .side-nav a.is-active {
+    background: var(--brass);
+    border-color: var(--brass);
+    transform: scale(1.4);
+  }
+  .side-nav a::after {
+    content: attr(data-label);
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: Georgia, serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--paper-2);
+    padding: 4px 10px;
+    border-radius: 3px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s;
+    border: 1px solid var(--line);
+  }
+  .side-nav a { position: relative; }
+  .side-nav a:hover::after { opacity: 1; }
+  @media (max-width: 900px) { .side-nav { display: none; } }
+
+  /* Print / accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="chip" id="midiChip" title="État de la connexion MIDI">
+    <span class="chip__dot" id="midiDot"></span>
+    <span id="midiText">Chercher piano MIDI…</span>
+  </div>
+  <button class="chip" id="themeChip" aria-label="Basculer thème clair/sombre">
+    <span id="themeText">◐ Thème</span>
+  </button>
+</div>
+
+<nav class="side-nav" aria-label="Navigation">
+  <a href="#pact" data-label="Le pacte"></a>
+  <a href="#instrument" data-label="L'instrument"></a>
+  <a href="#programme" data-label="Programme"></a>
+  <a href="#accords" data-label="Accords"></a>
+  <a href="#theorie" data-label="Théorie"></a>
+  <a href="#progres" data-label="Progrès"></a>
+</nav>
+
+<!-- ==================== COVER ==================== -->
+<header class="cover">
+  <div class="cover__top">
+    <div class="cover__stamp">Méthode <b>Piano</b> · Édition privée</div>
+    <div class="cover__stamp">Séquence <b>001</b></div>
+  </div>
+
+  <div class="cover__center wrap">
+    <div class="cover__opus">Douze semaines · quatre modules · un clavier</div>
+    <h1 class="display cover__title">
+      <span class="cover__title-piano">Piano</span><span class="cover__title-dot">.</span>
+    </h1>
+    <div class="cover__deck">
+      <div class="cover__rule"></div>
+      <p class="cover__deck-text">
+        Apprendre à jouer à deux mains, à composer ses propres accords, et à comprendre ce qu'on fait — en trente minutes par jour, avec un clavier de 49 touches et beaucoup de curiosité.
+      </p>
+    </div>
+  </div>
+
+  <div class="cover__bottom wrap">
+    <div class="cover__pills">
+      <span class="pill">Débutant → Confirmé</span>
+      <span class="pill">30 min · jour</span>
+      <span class="pill">49 touches</span>
+      <span class="pill">Pop · Jazz · Blues</span>
+      <span class="pill">MIDI live</span>
+    </div>
+    <div class="cover__scroll">Faire défiler</div>
+  </div>
+</header>
+
+<!-- ==================== LE PACTE ==================== -->
+<section class="chapter" id="pact">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head__label">Prélude · le pacte</div>
+      <div>
+        <h2 class="display section-head__title">Trois objectifs, une méthode.</h2>
+        <p class="section-head__lede">
+          Ce cours n'est pas là pour te faire jouer un morceau et repartir. Il est là pour que tu comprennes le clavier — que tu puisses t'asseoir devant, penser une progression, la jouer, et l'entendre marcher.
+        </p>
+      </div>
+    </div>
+
+    <div class="goals">
+      <article class="goal">
+        <div class="goal__num">I.</div>
+        <h3 class="goal__title">Jouer à deux mains</h3>
+        <p class="goal__text">
+          Une main qui accompagne, une main qui chante. On construit l'indépendance des mains progressivement — d'abord des ostinatos simples à gauche, puis des mélodies à droite, jusqu'à ce que le cerveau arrête de choisir.
+        </p>
+      </article>
+      <article class="goal">
+        <div class="goal__num">II.</div>
+        <h3 class="goal__title">Composer tes accords</h3>
+        <p class="goal__text">
+          Un accord n'est pas une forme à mémoriser — c'est une construction. Tu apprendras à empiler tierce sur tierce, à choisir majeur ou mineur, à colorer avec des 7e, puis à enchaîner tes propres progressions.
+        </p>
+      </article>
+      <article class="goal">
+        <div class="goal__num">III.</div>
+        <h3 class="goal__title">Comprendre la théorie</h3>
+        <p class="goal__text">
+          La théorie n'est pas académique ici. C'est le mode d'emploi de ton instrument : intervalles, gammes, cercle des quintes, cadences. Chaque notion arrive quand tu en as besoin pour jouer.
+        </p>
+      </article>
+    </div>
+
+    <div class="pact">
+      <ul class="pact__list">
+        <li>
+          <span class="n">1</span>
+          <div>
+            <b>Trente minutes suffisent.</b>
+            <span>Chaque jour, courte et régulière — la répétition sculpte le geste mieux que la longueur.</span>
+          </div>
+        </li>
+        <li>
+          <span class="n">2</span>
+          <div>
+            <b>Lentement d'abord.</b>
+            <span>Un tempo trop rapide grave des erreurs. On accélère seulement quand le mouvement est propre.</span>
+          </div>
+        </li>
+        <li>
+          <span class="n">3</span>
+          <div>
+            <b>Écouter avant de jouer.</b>
+            <span>Chaque semaine tu écouteras un morceau qui illustre la notion. L'oreille apprend en amont.</span>
+          </div>
+        </li>
+        <li>
+          <span class="n">4</span>
+          <div>
+            <b>Jouer sans regarder.</b>
+            <span>Le clavier a 88 touches (ici 49). Tes doigts doivent trouver seuls — la vue est un béquille.</span>
+          </div>
+        </li>
+        <li>
+          <span class="n">5</span>
+          <div>
+            <b>Se tromper est le cours.</b>
+            <span>Une erreur bien identifiée vaut trois exercices bien joués. Tu es autorisé à trébucher.</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="pact__routine">
+        <h3>La routine de 30 minutes</h3>
+        <ol>
+          <li><span class="t">05 min</span><b>Réchauffement.</b> Gammes ou arpèges lents, mains séparées.</li>
+          <li><span class="t">10 min</span><b>Théorie du jour.</b> Un concept, une démonstration au clavier.</li>
+          <li><span class="t">10 min</span><b>Exercice de la semaine.</b> Le geste ciblé, répété lentement.</li>
+          <li><span class="t">05 min</span><b>Jouer libre.</b> Ce que tu veux — inventer, rejouer, explorer.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== L'INSTRUMENT ==================== -->
+<section class="chapter" id="instrument">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head__label">Chapitre I · l'instrument</div>
+      <div>
+        <h2 class="display-italic section-head__title">Ton piano, ici.</h2>
+        <p class="section-head__lede">
+          Branche ton KeyLab Essential 49 en USB : ce clavier virtuel réagira à ce que tu joues, et jouera avec toi. Sans câble, tu peux quand même cliquer les touches pour entendre le son.
+        </p>
+      </div>
+    </div>
+
+    <div class="instrument">
+      <div class="instrument__toolbar">
+        <div class="instrument__label">
+          <span class="eyebrow">Clavier · 49 touches · C2 → C6</span>
+          <span class="instrument__badge" id="midiBadge">
+            <span class="dot"></span>
+            <span id="midiBadgeText">MIDI · non détecté</span>
+          </span>
+        </div>
+        <div class="instrument__controls">
+          <button class="btn is-active" id="btnLabels">Notes affichées</button>
+          <button class="btn" id="btnSustain">Sustain</button>
+          <button class="btn" id="btnClear">Effacer</button>
+        </div>
+      </div>
+
+      <div class="keyboard-container">
+        <svg id="keyboard" viewBox="0 0 1450 200" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+          <!-- Keys are generated by JS -->
+        </svg>
+      </div>
+
+      <div class="kb-hint">
+        <div class="kb-legend">
+          <span><span class="sw" style="background: var(--brass)"></span> Jouée</span>
+          <span><span class="sw" style="background: color-mix(in oklab, var(--key-white) 55%, var(--brass) 45%);"></span> Note d'accord</span>
+          <span><span class="sw" style="background: color-mix(in oklab, var(--key-white) 40%, var(--burgundy) 60%);"></span> Fondamentale</span>
+          <span><span class="sw" style="background: color-mix(in oklab, var(--key-white) 70%, var(--brass) 30%);"></span> Note de gamme</span>
+        </div>
+        <span class="mono" id="playedInfo">— clique une touche ou joue sur ton piano —</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 32px; padding: 20px; background: var(--paper-2); border-left: 3px solid var(--brass); border-radius: 3px; color: var(--ink-2); font-size: 15px;">
+      <b style="color: var(--ink); font-family: 'Playfair Display', Georgia, serif;">Comment brancher ?</b> —
+      Un câble USB (fourni avec le KeyLab) entre ton piano et l'ordinateur. La détection est automatique dès que tu joues une note, ou tu peux cliquer sur "<span class="mono">MIDI · non détecté</span>" pour forcer l'autorisation. Ça fonctionne sur Chrome, Edge, et Opera. Safari et Firefox ne supportent pas encore Web MIDI — utilise Chrome.
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PROGRAMME ==================== -->
+<section class="chapter" id="programme">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head__label">Chapitre II · le programme</div>
+      <div>
+        <h2 class="display section-head__title">Douze semaines.</h2>
+        <p class="section-head__lede">
+          Quatre modules qui s'enchaînent : les fondations du clavier, la construction des accords, l'accompagnement à deux mains, puis le jazz et la composition. Chaque semaine tient dans une carte — clique pour ouvrir la leçon détaillée, les exercices, et cocher ce que tu maîtrises.
+        </p>
+      </div>
+    </div>
+
+    <div class="programme" id="programme">
+      <!-- Filled by JS from CURRICULUM -->
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BIBLIOTHÈQUE D'ACCORDS ==================== -->
+<section class="chapter" id="accords">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head__label">Chapitre III · bibliothèque</div>
+      <div>
+        <h2 class="display-italic section-head__title">Les accords, un par un.</h2>
+        <p class="section-head__lede">
+          Toutes les couleurs d'accords que tu utiliseras dans ce cours — majeur pour la joie, mineur pour la nostalgie, la 7e pour le blues, la 9e pour le jazz. Clique sur un accord : les touches s'allument, et l'accord se joue.
+        </p>
+      </div>
+    </div>
+
+    <div class="chord-tabs" id="chordTabs">
+      <button class="chord-tab is-active" data-family="major">Majeurs</button>
+      <button class="chord-tab" data-family="minor">Mineurs</button>
+      <button class="chord-tab" data-family="7">7e de dominante</button>
+      <button class="chord-tab" data-family="maj7">Maj7</button>
+      <button class="chord-tab" data-family="m7">m7</button>
+      <button class="chord-tab" data-family="sus">Sus2 · Sus4</button>
+      <button class="chord-tab" data-family="dim">Diminués</button>
+      <button class="chord-tab" data-family="9">9e</button>
+    </div>
+
+    <div id="chordFamilies">
+      <!-- Filled by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ==================== THÉORIE ==================== -->
+<section class="chapter" id="theorie">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head__label">Chapitre IV · référence</div>
+      <div>
+        <h2 class="display section-head__title">Théorie de poche.</h2>
+        <p class="section-head__lede">
+          De quoi comprendre chaque semaine sans se noyer. Les intervalles à connaître, les gammes principales, et le cercle des quintes — le plan de métro de la musique tonale.
+        </p>
+      </div>
+    </div>
+
+    <div class="theory-grid">
+      <div class="theory-card">
+        <h3>Les intervalles</h3>
+        <p>La distance entre deux notes — la brique de base de tout. Un demi-ton = deux touches voisines (blanche → noire, ou blanche → blanche s'il n'y a pas de noire entre).</p>
+        <table class="interval-table">
+          <thead>
+            <tr><th>Intervalle</th><th>Demi-tons</th><th class="mono">Ex. depuis Do</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Seconde mineure</td><td>1</td><td class="mono">Do → Ré♭</td></tr>
+            <tr><td>Seconde majeure</td><td>2</td><td class="mono">Do → Ré</td></tr>
+            <tr><td>Tierce mineure</td><td>3</td><td class="mono">Do → Mi♭</td></tr>
+            <tr><td>Tierce majeure</td><td>4</td><td class="mono">Do → Mi</td></tr>
+            <tr><td>Quarte juste</td><td>5</td><td class="mono">Do → Fa</td></tr>
+            <tr><td>Triton</td><td>6</td><td class="mono">Do → Fa♯</td></tr>
+            <tr><td>Quinte juste</td><td>7</td><td class="mono">Do → Sol</td></tr>
+            <tr><td>Sixte majeure</td><td>9</td><td class="mono">Do → La</td></tr>
+            <tr><td>Septième mineure</td><td>10</td><td class="mono">Do → Si♭</td></tr>
+            <tr><td>Septième majeure</td><td>11</td><td class="mono">Do → Si</td></tr>
+            <tr><td>Octave</td><td>12</td><td class="mono">Do → Do′</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="theory-card">
+        <h3>Les gammes</h3>
+        <p>Une gamme = une suite d'intervalles répétée à chaque octave. Sélectionne-en une, le clavier plus haut te la montre en surbrillance dorée.</p>
+        <div>
+          <div class="small-caps" style="margin-bottom: 8px;">Tonalité</div>
+          <div class="scale-picker" id="scaleRoot">
+            <button class="scale-btn is-active" data-root="0">Do</button>
+            <button class="scale-btn" data-root="1">Do♯</button>
+            <button class="scale-btn" data-root="2">Ré</button>
+            <button class="scale-btn" data-root="3">Mi♭</button>
+            <button class="scale-btn" data-root="4">Mi</button>
+            <button class="scale-btn" data-root="5">Fa</button>
+            <button class="scale-btn" data-root="6">Fa♯</button>
+            <button class="scale-btn" data-root="7">Sol</button>
+            <button class="scale-btn" data-root="8">La♭</button>
+            <button class="scale-btn" data-root="9">La</button>
+            <button class="scale-btn" data-root="10">Si♭</button>
+            <button class="scale-btn" data-root="11">Si</button>
+          </div>
+          <div class="small-caps" style="margin: 20px 0 8px;">Mode</div>
+          <div class="scale-picker" id="scaleMode">
+            <button class="scale-btn is-active" data-mode="major">Majeure</button>
+            <button class="scale-btn" data-mode="natminor">Mineure naturelle</button>
+            <button class="scale-btn" data-mode="harmminor">Mineure harmonique</button>
+            <button class="scale-btn" data-mode="dorian">Dorien</button>
+            <button class="scale-btn" data-mode="mixolydian">Mixolydien</button>
+            <button class="scale-btn" data-mode="pentmajor">Penta majeure</button>
+            <button class="scale-btn" data-mode="pentminor">Penta mineure</button>
+            <button class="scale-btn" data-mode="blues">Blues</button>
+            <button class="scale-btn" data-mode="chromatic">Chromatique</button>
+          </div>
+          <div style="margin-top: 20px; padding: 12px 16px; background: var(--paper); border-radius: 3px; border-left: 3px solid var(--brass);">
+            <div class="small-caps" style="margin-bottom: 6px;">Notes de la gamme</div>
+            <div class="mono" id="scaleNotes" style="font-size: 15px; color: var(--ink);">Do — Ré — Mi — Fa — Sol — La — Si</div>
+          </div>
+          <div style="margin-top: 12px;">
+            <button class="btn btn--primary" id="playScaleBtn" style="font-size: 12px;">▶ Jouer la gamme</button>
+            <button class="btn" id="clearScaleBtn" style="font-size: 12px;">Effacer</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="theory-card">
+        <h3>Le cercle des quintes</h3>
+        <p>Chaque tonalité est reliée à sa voisine par un intervalle de quinte. Utile pour deviner la tonalité d'un morceau, moduler, ou composer une progression qui "avance" naturellement.</p>
+        <svg class="cycle" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="160" cy="160" r="140" fill="none" stroke="var(--line)" stroke-width="1" stroke-dasharray="2 4"/>
+          <circle cx="160" cy="160" r="80" fill="none" stroke="var(--line)" stroke-width="1" stroke-dasharray="2 4"/>
+          <g id="cycleKeys"></g>
+        </svg>
+      </div>
+
+      <div class="theory-card">
+        <h3>Les cadences essentielles</h3>
+        <p>Une cadence, c'est la ponctuation d'une phrase musicale. Trois à connaître :</p>
+        <div style="margin-top: 16px;">
+          <div style="padding: 14px 0; border-bottom: 1px dashed var(--line);">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+              <b style="font-family: 'Playfair Display', serif; color: var(--ink); font-size: 17px;">Cadence parfaite</b>
+              <span class="mono" style="color: var(--brass);">V → I</span>
+            </div>
+            <p style="font-size: 14px; margin: 0; color: var(--ink-2);">La conclusion la plus forte. En Do : Sol → Do. Tout le classique et 90% de la pop finit ainsi.</p>
+            <button class="try-btn" data-progression="G:0-C:0">Écouter (Sol → Do)</button>
+          </div>
+          <div style="padding: 14px 0; border-bottom: 1px dashed var(--line);">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+              <b style="font-family: 'Playfair Display', serif; color: var(--ink); font-size: 17px;">Cadence plagale</b>
+              <span class="mono" style="color: var(--brass);">IV → I</span>
+            </div>
+            <p style="font-size: 14px; margin: 0; color: var(--ink-2);">La conclusion "amen". Plus douce, plus religieuse. En Do : Fa → Do.</p>
+            <button class="try-btn" data-progression="F:0-C:0">Écouter (Fa → Do)</button>
+          </div>
+          <div style="padding: 14px 0;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+              <b style="font-family: 'Playfair Display', serif; color: var(--ink); font-size: 17px;">ii-V-I</b>
+              <span class="mono" style="color: var(--brass);">ii7 → V7 → Imaj7</span>
+            </div>
+            <p style="font-size: 14px; margin: 0; color: var(--ink-2);">Le mouvement fondamental du jazz. En Do : Rém7 → Sol7 → Do maj7.</p>
+            <button class="try-btn" data-progression="Dm7:0-G7:0-Cmaj7:0">Écouter (Rém7 → Sol7 → Do maj7)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PROGRÈS ==================== -->
+<section class="chapter" id="progres">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head__label">Épilogue · ton progrès</div>
+      <div>
+        <h2 class="display section-head__title">Là où tu en es.</h2>
+        <p class="section-head__lede">
+          Chaque exercice coché est sauvegardé dans ton navigateur. Rien n'est envoyé nulle part.
+        </p>
+      </div>
+    </div>
+
+    <div class="progress-panel" id="progressPanel">
+      <div>
+        <div class="small-caps">Avancement global</div>
+        <h3>Le chemin est fait pour être long.</h3>
+      </div>
+      <div class="stat">
+        <b id="progressPct">0%</b>
+        <span>Exercices validés</span>
+      </div>
+      <div class="bar"><div class="bar__fill" id="progressBar"></div></div>
+      <button class="reset" id="progressReset">Réinitialiser</button>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="fin">Fin de la partition.</div>
+    <p>Une méthode assemblée pour toi, ton KeyLab Essential 49, et trente minutes par jour.</p>
+    <p class="mono" style="margin-top: 24px; font-size: 11px; letter-spacing: 0.15em;">Édition privée · MMXXVI</p>
+  </div>
+</footer>
+
+<div class="played-note" id="playedNote">
+  <span class="n" id="playedNoteName">Do</span>
+  <span class="info" id="playedNoteInfo">C4 · MIDI 60</span>
+</div>
+
+<script>
+// ============================================================
+// CORE DATA
+// ============================================================
+const NOTE_NAMES_FR = ['Do','Do♯','Ré','Mi♭','Mi','Fa','Fa♯','Sol','La♭','La','Si♭','Si'];
+const NOTE_NAMES_EN = ['C','C#','D','Eb','E','F','F#','G','Ab','A','Bb','B'];
+const BLACK_KEY_INDICES = new Set([1, 3, 6, 8, 10]);
+// KeyLab Essential 49 default range: MIDI 36 (C2) to MIDI 84 (C6) — 49 notes
+const MIDI_LOW = 36;
+const MIDI_HIGH = 84;
+
+const CURRICULUM = [
+  // MODULE 1 — Fondations
+  {
+    module: 1,
+    moduleTitle: "Fondations",
+    moduleDesc: "Reconnaître le clavier, doser le geste, poser les deux mains sans se perdre. Trois semaines pour que le piano cesse d'être une forêt de touches.",
+    week: 1,
+    title: "Le clavier et la main droite",
+    obj: "Repérer chaque note en une seconde. Jouer une gamme et une mélodie de trois notes.",
+    deck: "Avant d'aborder la théorie, il faut habiter l'espace physique du clavier.",
+    duration: "3h30 sem",
+    exercises: 4,
+    body: [
+      { h: "Ce qu'on regarde", type: "prose", text: "Un clavier de 49 touches, c'est 4 octaves plus une note. Chaque octave contient 7 touches blanches et 5 noires, arrangées en un groupe de 2 et un groupe de 3. Ces deux groupes te servent de repère : la blanche juste à gauche des <b>deux noires</b> est un <b>Do</b>. Toujours." },
+      { h: "Les 7 notes", type: "prose", text: "Do — Ré — Mi — Fa — Sol — La — Si — puis Do à nouveau, une octave plus haut. Ce sont les 7 blanches d'une octave. Les noires en anglo-saxon s'appellent \"dièses\" (♯, un demi-ton plus haut) ou \"bémols\" (♭, un demi-ton plus bas)." },
+      { h: "Position de la main droite", type: "prose", text: "Pouce sur Do (le Do central, appelé C4). Les 5 doigts posent-toi sur Do, Ré, Mi, Fa, Sol. Le poignet reste souple, les doigts naturellement recourbés." },
+      { h: "Exercices", type: "exercises", items: [
+        { name: "Trouver Do en 2s", time: "5×3 min", desc: "Ferme les yeux, ouvre-les, pose l'index sur le Do le plus proche. Toutes les octaves.", play: "C:4" },
+        { name: "Gamme Do majeur MD", time: "10 min", desc: "Ré doigté 1-2-3, passer le pouce sous, 1-2-3-4-5. Monter et descendre. Très lent.", play: "scale:C:major:4" },
+        { name: "Frère Jacques MD", time: "10 min", desc: "Do Ré Mi Do — Do Ré Mi Do — Mi Fa Sol — Mi Fa Sol.", play: "seq:C4,D4,E4,C4,C4,D4,E4,C4,E4,F4,G4,E4,F4,G4" },
+        { name: "Nommer sans regarder", time: "5 min", desc: "Ton doigt sur une touche au hasard. Nomme la note avant de vérifier." },
+      ]},
+      { h: "Le sais-tu ?", type: "aside", items: [
+        { b: "Ludovico Einaudi", s: "Nuvole Bianche — écouter la simplicité." },
+        { b: "Erik Satie", s: "Gnossienne n°1 — mélodie unique, peu de notes." },
+        { b: "The Beatles", s: "Let It Be (intro) — un seul doigt suffit." },
+      ]},
+    ]
+  },
+  {
+    module: 1,
+    week: 2,
+    title: "Le rythme et la main gauche",
+    obj: "Pulser à 60 BPM. Jouer 4 mesures main gauche seule sans caler.",
+    deck: "Le rythme, c'est ce qui transforme des notes en musique. La main gauche ancre la pulsation.",
+    duration: "3h30 sem",
+    exercises: 4,
+    body: [
+      { h: "Compter la musique", type: "prose", text: "Une mesure = un groupe de temps qui se répète. Le plus fréquent : 4 temps (« quatre-quatre »). Tu comptes 1, 2, 3, 4, 1, 2, 3, 4. Chaque chiffre = un temps. Une <b>noire</b> dure 1 temps, une <b>blanche</b> 2 temps, une <b>ronde</b> 4 temps. Une <b>croche</b> = un demi-temps." },
+      { h: "Le tempo", type: "prose", text: "60 BPM (battements par minute) = 1 battement par seconde. Le tic-tac d'une horloge. Commence toujours en dessous du confort : mieux vaut jouer à 50 BPM proprement que 90 avec des trébuchements." },
+      { h: "La main gauche", type: "prose", text: "Sur un 49 touches, la MG habite plutôt l'octave 2-3 (basses). Position de départ : petit doigt sur le Do (C3), 5-4-3-2-1 remonte sur Do-Ré-Mi-Fa-Sol." },
+      { h: "Exercices", type: "exercises", items: [
+        { name: "Métronome intérieur", time: "5 min", desc: "Compte à voix haute 1-2-3-4, tape le pied sur chaque temps. 60 BPM.", },
+        { name: "Gamme Do majeur MG", time: "10 min", desc: "Doigté 5-4-3-2-1, passer le 3 par-dessus, 3-2-1. Monter, descendre.", play: "scale:C:major:3" },
+        { name: "Basse Do-Sol", time: "10 min", desc: "MG : Do (2 temps) — Sol (2 temps) — Do — Sol. Quatre mesures. Bien régulier.", play: "seq:C3,-,G3,-,C3,-,G3,-" },
+        { name: "Basse alternée", time: "5 min", desc: "Do (temps 1), Sol (temps 3) — souvent utilisée en pop.", play: "seq:C3,-,G3,-,C3,-,G3,-" },
+      ]},
+      { h: "Le sais-tu ?", type: "aside", items: [
+        { b: "The Beatles", s: "Let It Be — MG piano très simple." },
+        { b: "Adele", s: "Someone Like You — écouter la MG." },
+        { b: "Bill Evans", s: "Peace Piece — un ostinato MG toute la pièce." },
+      ]},
+    ]
+  },
+  {
+    module: 1,
+    week: 3,
+    title: "Coordonner les deux mains",
+    obj: "Jouer une mélodie main droite avec un accompagnement main gauche stable.",
+    deck: "Le mur qu'on croit infranchissable — et qui tombe en trois jours de patience.",
+    duration: "3h30 sem",
+    exercises: 3,
+    body: [
+      { h: "Le principe", type: "prose", text: "Commence toujours mains séparées, à tempo lent, très propre. Ensuite tu superposes : une main tient une note longue, l'autre bouge. Puis les deux bougent. Tu vas te tromper — reprends deux mesures avant." },
+      { h: "La technique du blocs", type: "prose", text: "Divise la mélodie en petits blocs (2-3 notes). Joue MG + MD sur le bloc 1 quinze fois, puis bloc 2 quinze fois, puis enchaîne. Bien plus efficace qu'une lecture linéaire." },
+      { h: "Exercices", type: "exercises", items: [
+        { name: "Ostinato MG + note MD", time: "10 min", desc: "MG : Do-Sol-Do-Sol (noires). MD : Do (blanche) 2 temps, silence 2 temps.", play: "chord:C:0" },
+        { name: "Au clair de la lune", time: "15 min", desc: "MD : Do-Do-Do-Ré-Mi-Ré | Do-Mi-Ré-Ré-Do. MG : Do (ronde) tout du long.", play: "seq:C4,C4,C4,D4,E4,D4,C4,E4,D4,D4,C4" },
+        { name: "Ode à la Joie", time: "10 min", desc: "MD : Mi-Mi-Fa-Sol-Sol-Fa-Mi-Ré-Do-Do-Ré-Mi-Mi-Ré-Ré. MG : Do (blanche) sur chaque mesure.", play: "seq:E4,E4,F4,G4,G4,F4,E4,D4,C4,C4,D4,E4,E4,D4,D4" },
+      ]},
+      { h: "Le sais-tu ?", type: "aside", items: [
+        { b: "Beethoven", s: "Ode à la Joie — l'exercice devient un tube." },
+        { b: "Coldplay", s: "Clocks — pattern MG hypnotique." },
+        { b: "Yiruma", s: "River Flows In You — pattern MD simple, MG lentement." },
+      ]},
+    ]
+  },
+
+  // MODULE 2 — Théorie & premiers accords
+  {
+    module: 2,
+    moduleTitle: "Théorie & premiers accords",
+    moduleDesc: "Passer de \"je joue des notes\" à \"je construis des accords\". La gamme majeure, les triades, et la magie de la progression I-V-vi-IV qui a écrit 80% des tubes.",
+    week: 4,
+    title: "La gamme majeure",
+    obj: "Construire n'importe quelle gamme majeure à partir de sa formule d'intervalles.",
+    deck: "La gamme majeure est la mère de presque tout ce qu'on écoute. Six intervalles, un secret.",
+    duration: "3h30 sem",
+    exercises: 3,
+    body: [
+      { h: "La formule sacrée", type: "prose", text: "Une gamme majeure suit toujours la même suite d'intervalles : <b>ton — ton — demi-ton — ton — ton — ton — demi-ton</b>. Sur Do, ça tombe naturellement sur les blanches. Sur Sol, il faut un Fa♯ pour que la formule reste juste." },
+      { h: "Ton et demi-ton", type: "prose", text: "Un demi-ton = deux touches immédiatement voisines (Mi→Fa, Si→Do, Do→Do♯). Un ton = deux demi-tons (Do→Ré, Ré→Mi). Sur les blanches, Mi-Fa et Si-Do sont les seuls demi-tons naturels." },
+      { h: "Le cercle des quintes", type: "prose", text: "Chaque nouvelle tonalité ajoute un dièse (dans le sens des aiguilles) ou un bémol (sens inverse). Do (0 altération) → Sol (1♯) → Ré (2♯) → La (3♯)… Utile à mémoriser pour les tonalités les plus fréquentes en pop : Do, Sol, Ré, La, Mi, Fa." },
+      { h: "Exercices", type: "exercises", items: [
+        { name: "Gamme de Sol majeur MD", time: "10 min", desc: "Sol-La-Si-Do-Ré-Mi-Fa♯-Sol. Attention au Fa♯ (touche noire).", play: "scale:G:major:4" },
+        { name: "Gamme de Fa majeur MD", time: "10 min", desc: "Fa-Sol-La-Si♭-Do-Ré-Mi-Fa. Attention au Si♭.", play: "scale:F:major:4" },
+        { name: "Construire Ré majeur", time: "10 min", desc: "Sans regarder, applique la formule T-T-1/2-T-T-T-1/2 à partir de Ré. Note les altérations.", play: "scale:D:major:4" },
+      ]},
+      { h: "Le sais-tu ?", type: "aside", items: [
+        { b: "Do majeur", s: "0 altération — la tonalité \"par défaut\"." },
+        { b: "Sol majeur", s: "1 dièse (Fa♯) — beaucoup de folk." },
+        { b: "Ré majeur", s: "2 dièses — brillante, hymnes." },
+        { b: "Fa majeur", s: "1 bémol (Si♭) — chaleureuse, pastorale." },
+      ]},
+    ]
+  },
+  {
+    module: 2,
+    week: 5,
+    title: "Construire les triades",
+    obj: "Empiler tierce + quinte à partir de n'importe quelle note. Nommer majeur/mineur à l'oreille.",
+    deck: "Un accord est une construction, pas une forme. Trois notes, deux tierces, un caractère.",
+    duration: "3h30 sem",
+    exercises: 4,
+    body: [
+      { h: "Recette d'une triade", type: "prose", text: "Prends une note (la fondamentale). Ajoute une tierce (2 touches blanches au-dessus, en ignorant la note de départ). Ajoute une quinte (encore 2 blanches au-dessus). Résultat : 3 notes empilées en tierces. C'est une <b>triade</b>." },
+      { h: "Majeur vs mineur", type: "prose", text: "La différence entre majeur (joyeux) et mineur (mélancolique) tient à un seul demi-ton — celui de la <b>tierce</b>. Tierce majeure = 4 demi-tons. Tierce mineure = 3 demi-tons. Do majeur = Do-Mi-Sol. Do mineur = Do-Mi♭-Sol." },
+      { h: "Les 7 triades de Do majeur", type: "prose", text: "En construisant une triade sur chaque note de la gamme, tu obtiens : <b>Do</b> majeur, Ré <b>mineur</b>, Mi <b>mineur</b>, <b>Fa</b> majeur, <b>Sol</b> majeur, La <b>mineur</b>, Si <b>diminué</b>. Le motif majeur-mineur-mineur-majeur-majeur-mineur-diminué est vrai pour toute gamme majeure." },
+      { h: "Exercices", type: "exercises", items: [
+        { name: "Les triades de Do", time: "10 min", desc: "Joue chaque triade de Do majeur en montant : Do, Rém, Mim, Fa, Sol, Lam. Nomme-les.", play: "chords:C:0,Dm:0,Em:0,F:0,G:0,Am:0" },
+        { name: "Majeur vs mineur", time: "5 min", desc: "Joue Do majeur, puis Do mineur. Écoute la différence.", play: "chords:C:0,Cm:0" },
+        { name: "Deviner à l'oreille", time: "10 min", desc: "Ferme les yeux, joue un accord au hasard. Devine avant d'ouvrir les yeux." },
+        { name: "Enchaîner Do → Sol → Lam → Fa", time: "10 min", desc: "La progression pop la plus utilisée au monde. Une mesure par accord.", play: "chords:C:0,G:0,Am:0,F:0" },
+      ]},
+      { h: "Le sais-tu ?", type: "aside", items: [
+        { b: "The Axis of Awesome", s: "\"4 Chords\" — mashup de tubes tous en Do-Sol-Lam-Fa." },
+        { b: "Journey", s: "Don't Stop Believin' — même 4 accords." },
+        { b: "Ed Sheeran", s: "Perfect — variation de la même progression." },
+      ]},
+    ]
+  },
+  {
+    module: 2,
+    week: 6,
+    title: "Renversements et progressions",
+    obj: "Enchaîner 4 accords avec un mouvement fluide en utilisant les renversements.",
+    deck: "Les renversements sont ce qui distingue un débutant qui saute d'un accord à l'autre d'un pianiste qui \"connecte\".",
+    duration: "3h30 sem",
+    exercises: 3,
+    body: [
+      { h: "Qu'est-ce qu'un renversement", type: "prose", text: "Un accord contient toujours les 3 mêmes notes, mais tu peux les empiler dans un ordre différent. Do-Mi-Sol (position fondamentale), Mi-Sol-Do (premier renversement), Sol-Do-Mi (deuxième renversement). Le son reste \"Do majeur\", mais la position change." },
+      { h: "Pourquoi c'est utile", type: "prose", text: "Passer de Do (Do-Mi-Sol) à Sol (Sol-Si-Ré) implique un grand mouvement. Mais si tu joues Sol en 2e renversement (Ré-Sol-Si), tu ne bouges qu'un doigt. La progression sonne \"connectée\" au lieu de sauter." },
+      { h: "La progression pop I-V-vi-IV", type: "prose", text: "En Do majeur : Do → Sol → Lam → Fa. Avec renversements pour rester en place : <br><b>Do</b> (Do-Mi-Sol) → <b>Sol</b> 1er renv. (Si-Ré-Sol) → <b>Lam</b> (La-Do-Mi) → <b>Fa</b> 2e renv. (Do-Fa-La). Ta main bouge à peine." },
+      { h: "Exercices", type: "exercises", items: [
+        { name: "Les 3 positions de Do", time: "8 min", desc: "Joue Do en position fondamentale, 1er renv., 2e renv. Écoute la couleur." },
+        { name: "Progression pop lisse", time: "15 min", desc: "Do → Sol/Si → Lam → Fa/Do. Mains droites, renversements choisis pour minimiser le mouvement.", play: "chords:C:0,G:1,Am:0,F:2" },
+        { name: "Trouver ta version", time: "7 min", desc: "Reprends Rém → Sol → Do → Fa. Trouve les renversements qui rendent le mouvement fluide." },
+      ]},
+      { h: "Le sais-tu ?", type: "aside", items: [
+        { b: "The Beatles", s: "Let It Be — I-V-vi-IV en Do." },
+        { b: "Adele", s: "Someone Like You — I-iii-vi-IV." },
+        { b: "U2", s: "With Or Without You — I-V-vi-IV." },
+      ]},
+    ]
+  },
+
+  // MODULE 3 — Jouer à deux mains
+  {
+    module: 3,
+    moduleTitle: "Deux mains, vraiment",
+    moduleDesc: "Passer du \"MD seule + MG posée\" à un véritable duo. Patterns d'accompagnement, arpèges, et ton premier morceau complet arrangé pour toi.",
+    week: 7,
+    title: "Patterns d'accompagnement",
+    obj: "Maîtriser trois patterns MG standard : basse-accord, basse alternée, arpèges.",
+    deck: "Une bonne main gauche transforme une mélodie nue en chanson.",
+    duration: "3h30 sem",
+    exercises: 4,
+    body: [
+      { h: "Le basse-accord (« oom-pah »)", type: "prose", text: "Le grand classique. Sur chaque mesure : temps 1 = fondamentale grave, temps 2/3/4 = accord au-dessus. Sur Do : Do (temps 1) — Do-Mi-Sol (temps 2, 3, 4). Utilisé partout en piano-bar et en variété." },
+      { h: "La basse alternée", type: "prose", text: "Fondamentale sur les temps 1 et 3, quinte sur les temps 2 et 4. Sur Do : Do — Sol — Do — Sol. Très pop, très folk. Sonne \"marchant\"." },
+      { h: "L'arpège", type: "prose", text: "Au lieu de jouer les 3 notes ensemble, tu les fais rouler une par une. Sur Do : Do — Sol — Mi — Sol (ou Do-Mi-Sol-Mi). C'est la texture \"berceuse\", romantique." },
+      { h: "Exercices", type: "exercises", items: [
+        { name: "Pattern basse-accord Do", time: "8 min", desc: "MG : Do grave (temps 1), Do-Mi-Sol (temps 2-3-4). Recommence.", play: "chord:C:0" },
+        { name: "Basse alternée sur I-V-vi-IV", time: "10 min", desc: "MG : sur chaque accord, alterne fondamentale et quinte." },
+        { name: "Arpège en Do majeur", time: "10 min", desc: "MG : Do-Sol-Mi-Sol (croches, régulier). Recommence avec Fa, Sol, Lam." },
+        { name: "Arpège brisé (Alberti)", time: "10 min", desc: "Do-Sol-Mi-Sol répété — c'est le pattern de Mozart. Très classique.", play: "seq:C3,G3,E3,G3,C3,G3,E3,G3" },
+      ]},
+      { h: "Le sais-tu ?", type: "aside", items: [
+        { b: "Mozart", s: "Sonate K. 545 — l'Alberti bass pur." },
+        { b: "Coldplay", s: "The Scientist — arpèges lents en Fa." },
+        { b: "Yann Tiersen", s: "Comptine d'un autre été — arpèges hypnotiques." },
+      ]},
+    ]
+  },
+  {
+    module: 3,
+    week: 8,
+    title: "Mélodie + accords",
+    obj: "Chanter une mélodie main droite sur un accompagnement main gauche construit soi-même.",
+    deck: "Là où tout se joue vraiment. Tu ne suis plus une partition — tu accompagnes une mélodie que tu as choisie.",
+    duration: "3h30 sem",
+    exercises: 3,
+    body: [
+      { h: "La méthode \"grille + mélodie\"", type: "prose", text: "En pop, on note souvent juste la grille d'accords (C — G — Am — F) au-dessus des paroles. À toi de fabriquer l'accompagnement. Version débutant : joue la fondamentale de chaque accord en ronde à la MG, la mélodie à la MD. Ça marche déjà." },
+      { h: "Enrichir progressivement", type: "prose", text: "Étape 1 : fondamentale MG en ronde. Étape 2 : fondamentale + quinte alternées. Étape 3 : basse-accord. Étape 4 : arpèges. Ne saute pas les étapes." },
+      { h: "Choisir sa version", type: "prose", text: "Un même morceau se joue de dix manières. Adele lente et douce = arpèges. Beatles enjoués = basse-accord. Blues = basse alternée avec swing. Le choix du pattern raconte l'émotion." },
+      { h: "Exercices", type: "exercises", items: [
+        { name: "Let It Be (débutant)", time: "20 min", desc: "Grille : Do-Sol-Lam-Fa | Do-Sol-Fa-Do. MG : fondamentales en ronde. MD : mélodie du refrain." },
+        { name: "Someone Like You (débutant)", time: "20 min", desc: "Grille : La-Mi/Sol♯-Fa♯m-Ré (arpèges MG). MD : mélodie principale." },
+        { name: "Ton propre morceau", time: "15 min", desc: "Choisis une chanson que tu aimes, trouve sa grille en ligne, applique ta méthode." },
+      ]},
+      { h: "Le sais-tu ?", type: "aside", items: [
+        { b: "Ultimate-Guitar", s: "ultimate-guitar.com — grilles de milliers de morceaux." },
+        { b: "Chordify", s: "Analyse un YouTube et te donne les accords." },
+        { b: "Hooktheory", s: "Base de données de progressions par style." },
+      ]},
+    ]
+  },
+  {
+    module: 3,
+    week: 9,
+    title: "Ton premier morceau complet",
+    obj: "Jouer un morceau entier — intro, couplet, refrain — à deux mains, de mémoire.",
+    deck: "L'objectif de trois mois de fondations : tenir un morceau complet devant quelqu'un.",
+    duration: "3h30 sem",
+    exercises: 3,
+    body: [
+      { h: "Comment choisir", type: "prose", text: "Un morceau que tu aimes vraiment — tu vas le jouer 200 fois cette semaine. Idéalement 3-4 accords, tempo lent-moyen, pas trop de sauts d'octave. Suggestions : <i>Let It Be</i>, <i>Imagine</i>, <i>River Flows In You</i> (version simplifiée), <i>Comptine d'un autre été</i>." },
+      { h: "Le découpage", type: "prose", text: "Divise le morceau en sections : intro, couplet, refrain, pont, fin. Travaille chaque section séparément, mains séparées d'abord, puis mains ensemble, puis à tempo. Assemble seulement quand chaque section est prête." },
+      { h: "L'objectif de la semaine", type: "prose", text: "Tu ne dois pas jouer parfaitement — tu dois jouer <b>de bout en bout sans t'arrêter</b>. C'est différent. Une fausse note qu'on continue vaut mieux que dix reprises." },
+      { h: "Exercices", type: "exercises", items: [
+        { name: "Choix + découpe", time: "10 min", desc: "Choisis ton morceau. Découpe-le en 4-5 sections. Note-les." },
+        { name: "Travail par section", time: "20 min ×5j", desc: "Chaque jour, une section jusqu'à ce qu'elle soit fluide MS puis MD." },
+        { name: "Enregistrement final", time: "15 min", desc: "En fin de semaine : joue le morceau entier en t'enregistrant sur ton téléphone. Écoute." },
+      ]},
+      { h: "Le sais-tu ?", type: "aside", items: [
+        { b: "Musescore.com", s: "Partitions gratuites classées par difficulté." },
+        { b: "Sheet Music Boss", s: "YouTube — tutoriels lents, difficultés multiples." },
+        { b: "PianoTv", s: "YouTube — bonnes explications techniques." },
+      ]},
+    ]
+  },
+
+  // MODULE 4 — Jazz & composition
+  {
+    module: 4,
+    moduleTitle: "Jazz, blues & composition",
+    moduleDesc: "Élargir la palette : accords colorés du jazz, structure fondamentale du blues, et enfin composer tes propres 16 mesures qui tiennent debout.",
+    week: 10,
+    title: "Les accords de 7e",
+    obj: "Construire et enchaîner maj7, m7, 7 (dominante). Jouer un ii-V-I en Do.",
+    deck: "La 7e est la couleur qui fait passer du chant d'enfant à l'harmonie adulte.",
+    duration: "3h30 sem",
+    exercises: 3,
+    body: [
+      { h: "Recette", type: "prose", text: "Prends une triade. Ajoute une 4e note : la septième. Il en existe trois principales :<br>— <b>Majeure (maj7)</b> : 11 demi-tons au-dessus de la fondamentale. Do-Mi-Sol-Si. Lumineux, jazz.<br>— <b>Mineure (m7)</b> : 10 demi-tons. Dom = Do-Mi♭-Sol-Si♭. Doux, feutré.<br>— <b>Dominante (7)</b> : 10 demi-tons sur une triade majeure. Do7 = Do-Mi-Sol-Si♭. Tension, blues." },
+      { h: "Le ii-V-I", type: "prose", text: "Le mouvement fondamental du jazz. En Do : <b>Rém7</b> (le ii) → <b>Sol7</b> (le V) → <b>Do maj7</b> (le I). Trois mesures, une phrase complète. Ce mouvement se retrouve dans des milliers de standards." },
+      { h: "Voicings de jazz", type: "prose", text: "Au piano jazz, on ne joue pas les accords \"empilés\" (fondamentale, tierce, quinte, septième). On saute la fondamentale (le bassiste s'en charge), et on joue tierce et septième : Do maj7 devient juste Mi-Si à la main gauche. C'est ce qui donne le son \"open\"." },
+      { h: "Exercices", type: "exercises", items: [
+        { name: "Les 3 types de 7e sur Do", time: "10 min", desc: "Joue Cmaj7, Cm7, C7. Écoute la différence.", play: "chords:Cmaj7:0,Cm7:0,C7:0" },
+        { name: "ii-V-I en Do", time: "15 min", desc: "Dm7 → G7 → Cmaj7. Répète 20 fois.", play: "chords:Dm7:0,G7:0,Cmaj7:0" },
+        { name: "ii-V-I en Fa", time: "15 min", desc: "Gm7 → C7 → Fmaj7.", play: "chords:Gm7:0,C7:0,Fmaj7:0" },
+      ]},
+      { h: "Le sais-tu ?", type: "aside", items: [
+        { b: "Autumn Leaves", s: "Standard jazz — ii-V-I en boucle." },
+        { b: "Fly Me to the Moon", s: "ii-V-I dans les deux tonalités." },
+        { b: "Michel Legrand", s: "Les Moulins de mon cœur — maj7 partout." },
+      ]},
+    ]
+  },
+  {
+    module: 4,
+    week: 11,
+    title: "Le blues en 12 mesures",
+    obj: "Jouer une grille de blues complète en Do. Improviser 4 mesures sur la gamme blues.",
+    deck: "Le blues est le squelette du jazz, du rock et de la soul. Douze mesures qui contiennent une civilisation.",
+    duration: "3h30 sem",
+    exercises: 3,
+    body: [
+      { h: "La grille de 12 mesures", type: "prose", text: "En Do : <br><b>C7 — C7 — C7 — C7</b> (mesures 1-4)<br><b>F7 — F7 — C7 — C7</b> (mesures 5-8)<br><b>G7 — F7 — C7 — G7</b> (mesures 9-12)<br>Douze mesures, on reprend. Cette forme est universelle : <i>Sweet Home Chicago</i>, <i>Kansas City</i>, mille chansons." },
+      { h: "La gamme blues", type: "prose", text: "Do — Mi♭ — Fa — Fa♯ — Sol — Si♭ — Do. Six notes. Le Fa♯ est la fameuse \"blue note\" qui donne cette couleur. Tu peux improviser dessus sur tout un blues en Do, même quand les accords changent." },
+      { h: "Le shuffle", type: "prose", text: "Le blues se joue rarement \"droit\". Chaque croche est légèrement plus longue que la suivante : une longue-courte, longue-courte. On dit \"swing\" ou \"shuffle\". Écoute et imite." },
+      { h: "Exercices", type: "exercises", items: [
+        { name: "Grille en accords blocs", time: "15 min", desc: "MG : fondamentale grave. MD : accord de 7e. Joue la grille de 12 mesures.", play: "chords:C7:0,C7:0,C7:0,C7:0,F7:0,F7:0,C7:0,C7:0,G7:0,F7:0,C7:0,G7:0" },
+        { name: "Gamme blues", time: "10 min", desc: "MD : Do-Mi♭-Fa-Fa♯-Sol-Si♭-Do. Monter, descendre, plusieurs fois.", play: "scale:C:blues:4" },
+        { name: "Impro sur 4 mesures", time: "15 min", desc: "MG : joue Do7 en ronde. MD : improvise avec la gamme blues, une note à la fois." },
+      ]},
+      { h: "Le sais-tu ?", type: "aside", items: [
+        { b: "Ray Charles", s: "What'd I Say — piano blues électrique." },
+        { b: "B.B. King", s: "The Thrill Is Gone — blues mineur." },
+        { b: "Nina Simone", s: "See-Line Woman — piano-voix minimal." },
+      ]},
+    ]
+  },
+  {
+    module: 4,
+    week: 12,
+    title: "Composer 16 mesures",
+    obj: "Écrire et jouer une pièce originale de 16 mesures avec ta propre progression.",
+    deck: "L'aboutissement. Tu ne joues plus la musique des autres — tu commences la tienne.",
+    duration: "3h30 sem",
+    exercises: 4,
+    body: [
+      { h: "Choisir sa tonalité", type: "prose", text: "Do majeur pour la neutralité, Sol pour la brillance, Fa pour la chaleur, La mineur pour la mélancolie. Choisis selon l'émotion visée." },
+      { h: "Construire une progression", type: "prose", text: "Ne réinvente pas la roue. Utilise les degrés de ta tonalité. Suggestions pour Do : <b>I-vi-IV-V</b> (rétro), <b>I-V-vi-IV</b> (pop), <b>ii-V-I</b> (jazz), <b>vi-IV-I-V</b> (émo). Fais 4 mesures × 4 = 16 mesures." },
+      { h: "Ajouter une mélodie", type: "prose", text: "Une bonne mélodie utilise principalement les notes des accords en cours, avec quelques notes de passage. Commence sur une note d'accord, finis sur la fondamentale. Répète des motifs — le cerveau adore la répétition." },
+      { h: "Structurer", type: "prose", text: "Intro (2 mesures) — A (4) — B (4) — A (4) — Fin (2). Ou : Verse (8) — Refrain (8). Alterne intensités : couplet doux, refrain plus fort." },
+      { h: "Exercices", type: "exercises", items: [
+        { name: "Choisir progression + tonalité", time: "10 min", desc: "Ta tonalité, tes 4 accords. Note-les." },
+        { name: "Trouver une mélodie MD", time: "20 min", desc: "Improvise sur les accords. Retiens 4 idées, garde la meilleure. Écris-la (nom des notes)." },
+        { name: "Ajouter accompagnement MG", time: "15 min", desc: "Choisis un pattern (basse-accord / arpège) et applique-le à tes 16 mesures." },
+        { name: "Jouer et enregistrer", time: "20 min", desc: "Répète, puis enregistre. Écoute avec attention." },
+      ]},
+      { h: "Le sais-tu ?", type: "aside", items: [
+        { b: "Simplicité", s: "Les plus grands tubes ont 4 accords." },
+        { b: "Contraste", s: "Alterne aigu/grave, fort/doux." },
+        { b: "Répétition", s: "Ne change pas d'idée toutes les 2 mesures." },
+      ]},
+    ]
+  },
+];
+
+// ============================================================
+// CHORDS DATABASE
+// ============================================================
+// Each chord: intervals from root in semitones
+const CHORD_TYPES = {
+  major:    { intervals: [0, 4, 7],     suffix: '',    label: 'majeur' },
+  minor:    { intervals: [0, 3, 7],     suffix: 'm',   label: 'mineur' },
+  '7':      { intervals: [0, 4, 7, 10], suffix: '7',   label: '7e' },
+  maj7:     { intervals: [0, 4, 7, 11], suffix: 'maj7',label: 'Maj7' },
+  m7:       { intervals: [0, 3, 7, 10], suffix: 'm7',  label: 'm7' },
+  sus2:     { intervals: [0, 2, 7],     suffix: 'sus2',label: 'sus2' },
+  sus4:     { intervals: [0, 5, 7],     suffix: 'sus4',label: 'sus4' },
+  dim:      { intervals: [0, 3, 6],     suffix: '°',   label: 'dim' },
+  '9':      { intervals: [0, 4, 7, 10, 14], suffix: '9', label: '9e' },
+};
+const CHORD_FAMILIES = {
+  major:  { title: "Les accords majeurs", intro: "Trois notes empilées en tierces majeure puis mineure — le son \"joyeux\" par défaut. La base de tout.", type: 'major', roots: [0,2,4,5,7,9,11,1,3,6,8,10] },
+  minor:  { title: "Les accords mineurs", intro: "Une tierce mineure au lieu de majeure — deux touches noires plus bas. Instantanément mélancolique.", type: 'minor', roots: [0,2,4,5,7,9,11,1,3,6,8,10] },
+  '7':    { title: "Les 7e de dominante", intro: "Triade majeure + septième mineure. La tension du blues, la respiration du jazz. Sur Sol en Do majeur, appelle la résolution vers Do.", type: '7', roots: [0,2,4,5,7,9,11,1,3,6,8,10] },
+  maj7:   { title: "Les Maj7", intro: "Triade majeure + septième majeure. Le son \"café-jazz\", lumineux, un peu suspendu. Grand favori de la bossa-nova.", type: 'maj7', roots: [0,2,4,5,7,9,11,1,3,6,8,10] },
+  m7:     { title: "Les m7", intro: "Triade mineure + septième mineure. Le son \"cool\" par excellence — soul, R&B, jazz feutré.", type: 'm7', roots: [0,2,4,5,7,9,11,1,3,6,8,10] },
+  sus:    { title: "Les accords suspendus", intro: "Ni majeur ni mineur — la tierce est remplacée par une seconde (sus2) ou une quarte (sus4). Sensation d'attente. Utilisé par Coldplay, U2, etc.", mixed: true },
+  dim:    { title: "Les accords diminués", intro: "Deux tierces mineures empilées. Sonne \"inquiet\", instable. Utilisé comme note de passage entre deux accords voisins.", type: 'dim', roots: [0,2,4,5,7,9,11,1,3,6,8,10] },
+  '9':    { title: "Les 9e", intro: "L'accord de 7e + une neuvième au-dessus. Le son \"Stevie Wonder\", le funk soul. Cinq notes qui remplissent tout.", type: '9', roots: [0,2,4,5,7,9,11,1,3,6,8,10] },
+};
+
+// ============================================================
+// SCALES DATABASE
+// ============================================================
+const SCALES = {
+  major:     [0, 2, 4, 5, 7, 9, 11],           // Ionien / Majeure
+  natminor:  [0, 2, 3, 5, 7, 8, 10],           // Mineure naturelle
+  harmminor: [0, 2, 3, 5, 7, 8, 11],           // Mineure harmonique
+  dorian:    [0, 2, 3, 5, 7, 9, 10],
+  mixolydian:[0, 2, 4, 5, 7, 9, 10],
+  pentmajor: [0, 2, 4, 7, 9],
+  pentminor: [0, 3, 5, 7, 10],
+  blues:     [0, 3, 5, 6, 7, 10],
+  chromatic: [0,1,2,3,4,5,6,7,8,9,10,11],
+};
+const SCALE_LABELS = {
+  major: "Majeure",
+  natminor: "Mineure naturelle",
+  harmminor: "Mineure harmonique",
+  dorian: "Dorien",
+  mixolydian: "Mixolydien",
+  pentmajor: "Pentatonique majeure",
+  pentminor: "Pentatonique mineure",
+  blues: "Blues",
+  chromatic: "Chromatique",
+};
+
+// ============================================================
+// AUDIO ENGINE (Web Audio API)
+// ============================================================
+class AudioEngine {
+  constructor() {
+    this.ctx = null;
+    this.gainNode = null;
+    this.activeNotes = new Map(); // midi -> { osc, gain, releaseTime }
+    this.sustain = false;
+  }
+  init() {
+    if (this.ctx) return;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    this.ctx = new AC();
+    this.gainNode = this.ctx.createGain();
+    this.gainNode.gain.value = 0.5;
+    this.gainNode.connect(this.ctx.destination);
+  }
+  ensure() {
+    if (!this.ctx) this.init();
+    if (this.ctx.state === 'suspended') this.ctx.resume();
+  }
+  midiToFreq(midi) {
+    return 440 * Math.pow(2, (midi - 69) / 12);
+  }
+  noteOn(midi, velocity = 0.7) {
+    this.ensure();
+    if (this.activeNotes.has(midi)) this.noteOff(midi, true);
+    const now = this.ctx.currentTime;
+    const freq = this.midiToFreq(midi);
+    // Simple additive/FM piano-ish sound
+    const osc1 = this.ctx.createOscillator();
+    const osc2 = this.ctx.createOscillator();
+    const osc3 = this.ctx.createOscillator();
+    osc1.type = 'triangle'; osc1.frequency.value = freq;
+    osc2.type = 'sine';     osc2.frequency.value = freq * 2;
+    osc3.type = 'sine';     osc3.frequency.value = freq * 3;
+    const g = this.ctx.createGain();
+    g.gain.setValueAtTime(0, now);
+    g.gain.linearRampToValueAtTime(velocity, now + 0.005);
+    g.gain.exponentialRampToValueAtTime(velocity * 0.5, now + 0.1);
+    g.gain.exponentialRampToValueAtTime(velocity * 0.15, now + 1.5);
+    const g2 = this.ctx.createGain(); g2.gain.value = 0.15;
+    const g3 = this.ctx.createGain(); g3.gain.value = 0.05;
+    osc1.connect(g);
+    osc2.connect(g2); g2.connect(g);
+    osc3.connect(g3); g3.connect(g);
+    // Add a lowpass for warmth
+    const lp = this.ctx.createBiquadFilter();
+    lp.type = 'lowpass';
+    lp.frequency.value = 3200;
+    lp.Q.value = 0.5;
+    g.connect(lp).connect(this.gainNode);
+    osc1.start(now); osc2.start(now); osc3.start(now);
+    this.activeNotes.set(midi, { osc1, osc2, osc3, gain: g, startedAt: now });
+  }
+  noteOff(midi, immediate = false) {
+    const note = this.activeNotes.get(midi);
+    if (!note) return;
+    if (this.sustain && !immediate) return;
+    const now = this.ctx.currentTime;
+    const release = immediate ? 0.02 : 0.35;
+    try {
+      note.gain.gain.cancelScheduledValues(now);
+      note.gain.gain.setValueAtTime(note.gain.gain.value, now);
+      note.gain.gain.exponentialRampToValueAtTime(0.0001, now + release);
+    } catch(e) {}
+    setTimeout(() => {
+      try { note.osc1.stop(); note.osc2.stop(); note.osc3.stop(); } catch(e) {}
+    }, release * 1000 + 40);
+    this.activeNotes.delete(midi);
+  }
+  releaseAll() {
+    for (const midi of Array.from(this.activeNotes.keys())) {
+      this.noteOff(midi, true);
+    }
+  }
+  setSustain(on) {
+    this.sustain = on;
+    if (!on) {
+      // Release all held notes that were sustained
+      for (const midi of Array.from(this.activeNotes.keys())) {
+        this.noteOff(midi, true);
+      }
+    }
+  }
+}
+const audio = new AudioEngine();
+
+// ============================================================
+// KEYBOARD SVG
+// ============================================================
+class Keyboard {
+  constructor(svgEl) {
+    this.svg = svgEl;
+    this.keys = new Map(); // midi -> {rect, label}
+    this.showLabels = true;
+    this.activeVisual = new Set();
+    this.build();
+  }
+  build() {
+    // 49 keys: MIDI 36 (C2) to MIDI 84 (C6)
+    // Compute white keys: 4*7+1 = 29 white keys
+    const totalWhite = 29;
+    const svgW = 1450;
+    const svgH = 200;
+    const whiteW = svgW / totalWhite;
+    const whiteH = svgH;
+    const blackW = whiteW * 0.62;
+    const blackH = svgH * 0.62;
+
+    // Pass 1: white keys
+    let whiteIdx = 0;
+    const positions = new Map();
+    for (let midi = MIDI_LOW; midi <= MIDI_HIGH; midi++) {
+      const noteIdx = midi % 12;
+      if (!BLACK_KEY_INDICES.has(noteIdx)) {
+        const x = whiteIdx * whiteW;
+        positions.set(midi, { x, y: 0, w: whiteW, h: whiteH, isBlack: false });
+        whiteIdx++;
+      }
+    }
+    // Pass 2: black keys (positioned relative to prev white)
+    for (let midi = MIDI_LOW; midi <= MIDI_HIGH; midi++) {
+      const noteIdx = midi % 12;
+      if (BLACK_KEY_INDICES.has(noteIdx)) {
+        const prevWhiteMidi = midi - 1;
+        const prevPos = positions.get(prevWhiteMidi);
+        if (prevPos) {
+          const x = prevPos.x + whiteW - (blackW / 2);
+          positions.set(midi, { x, y: 0, w: blackW, h: blackH, isBlack: true });
+        }
+      }
+    }
+
+    // Render white first (so they're under)
+    const whiteGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    const blackGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    const labelGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+
+    for (let midi = MIDI_LOW; midi <= MIDI_HIGH; midi++) {
+      const pos = positions.get(midi);
+      if (!pos) continue;
+      const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      rect.setAttribute('x', pos.x);
+      rect.setAttribute('y', pos.y);
+      rect.setAttribute('width', pos.w);
+      rect.setAttribute('height', pos.h);
+      rect.setAttribute('rx', pos.isBlack ? 2 : 3);
+      rect.setAttribute('class', pos.isBlack ? 'kb-key-black' : 'kb-key-white');
+      rect.dataset.midi = midi;
+      rect.addEventListener('mousedown', (e) => { e.preventDefault(); this.onKeyPress(midi); });
+      rect.addEventListener('mouseup', () => this.onKeyRelease(midi));
+      rect.addEventListener('mouseleave', () => this.onKeyRelease(midi));
+      rect.addEventListener('touchstart', (e) => { e.preventDefault(); this.onKeyPress(midi); }, { passive: false });
+      rect.addEventListener('touchend', () => this.onKeyRelease(midi));
+      (pos.isBlack ? blackGroup : whiteGroup).appendChild(rect);
+      // Labels
+      const noteIdx = midi % 12;
+      const octave = Math.floor(midi / 12) - 1;
+      const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      label.setAttribute('x', pos.x + pos.w / 2);
+      label.setAttribute('y', pos.isBlack ? pos.h - 8 : pos.h - 10);
+      label.setAttribute('class', 'kb-label' + (pos.isBlack ? ' on-black' : ''));
+      label.textContent = NOTE_NAMES_FR[noteIdx];
+      labelGroup.appendChild(label);
+      // Octave marks on C
+      if (noteIdx === 0) {
+        const oct = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        oct.setAttribute('x', pos.x + pos.w / 2);
+        oct.setAttribute('y', pos.h - 22);
+        oct.setAttribute('class', 'kb-label kb-label--octave');
+        oct.textContent = 'C' + octave;
+        labelGroup.appendChild(oct);
+      }
+      this.keys.set(midi, { rect, label });
+    }
+
+    this.svg.appendChild(whiteGroup);
+    this.svg.appendChild(blackGroup);
+    this.svg.appendChild(labelGroup);
+    this.labelGroup = labelGroup;
+  }
+  setLabelsVisible(on) {
+    this.showLabels = on;
+    this.labelGroup.style.display = on ? '' : 'none';
+  }
+  clearHighlights() {
+    for (const [midi, k] of this.keys) {
+      k.rect.classList.remove('is-active', 'is-chord', 'is-scale', 'is-root');
+    }
+    this.activeVisual.clear();
+    setPlayedNote(null);
+  }
+  highlight(midis, cls) {
+    for (const midi of midis) {
+      const k = this.keys.get(midi);
+      if (k) k.rect.classList.add(cls);
+    }
+  }
+  removeHighlight(cls) {
+    for (const [midi, k] of this.keys) k.rect.classList.remove(cls);
+  }
+  visualNoteOn(midi) {
+    const k = this.keys.get(midi);
+    if (k) { k.rect.classList.add('is-active'); this.activeVisual.add(midi); }
+    setPlayedNote(midi);
+  }
+  visualNoteOff(midi) {
+    const k = this.keys.get(midi);
+    if (k) k.rect.classList.remove('is-active');
+    this.activeVisual.delete(midi);
+  }
+  onKeyPress(midi) {
+    audio.ensure();
+    audio.noteOn(midi, 0.7);
+    this.visualNoteOn(midi);
+  }
+  onKeyRelease(midi) {
+    audio.noteOff(midi);
+    this.visualNoteOff(midi);
+  }
+}
+
+let keyboard = null;
+
+// ============================================================
+// PLAYED NOTE INDICATOR
+// ============================================================
+const playedNoteEl = document.getElementById('playedNote');
+const playedNoteName = document.getElementById('playedNoteName');
+const playedNoteInfo = document.getElementById('playedNoteInfo');
+const playedInfoInline = document.getElementById('playedInfo');
+let playedNoteTimeout = null;
+
+function setPlayedNote(midi) {
+  if (midi == null) {
+    playedNoteEl.classList.remove('visible');
+    if (playedInfoInline) playedInfoInline.textContent = '— clique une touche ou joue sur ton piano —';
+    return;
+  }
+  const noteIdx = midi % 12;
+  const octave = Math.floor(midi / 12) - 1;
+  const nameFR = NOTE_NAMES_FR[noteIdx];
+  const nameEN = NOTE_NAMES_EN[noteIdx];
+  playedNoteName.textContent = nameFR;
+  playedNoteInfo.textContent = nameEN + octave + ' · MIDI ' + midi;
+  playedNoteEl.classList.add('visible');
+  if (playedInfoInline) playedInfoInline.textContent = nameFR + ' ' + octave + '  (' + nameEN + octave + ', MIDI ' + midi + ')';
+  clearTimeout(playedNoteTimeout);
+  playedNoteTimeout = setTimeout(() => playedNoteEl.classList.remove('visible'), 1200);
+}
+
+// ============================================================
+// WEB MIDI
+// ============================================================
+class MidiController {
+  constructor() {
+    this.access = null;
+    this.inputs = [];
+    this.chip = document.getElementById('midiChip');
+    this.dot = document.getElementById('midiDot');
+    this.text = document.getElementById('midiText');
+    this.badge = document.getElementById('midiBadge');
+    this.badgeText = document.getElementById('midiBadgeText');
+    this.chip.addEventListener('click', () => this.requestAccess());
+    this.badge.addEventListener('click', () => this.requestAccess());
+    if (!navigator.requestMIDIAccess) {
+      this.setStatus('unsupported', 'Web MIDI non supporté (utilise Chrome)');
+      return;
+    }
+    // Try to connect on load, in case permission already granted
+    setTimeout(() => this.requestAccess(false), 800);
+  }
+  async requestAccess(showError = true) {
+    if (!navigator.requestMIDIAccess) {
+      this.setStatus('unsupported', 'Web MIDI non supporté (utilise Chrome)');
+      return;
+    }
+    try {
+      this.setStatus('wait', 'Autorisation MIDI…');
+      this.access = await navigator.requestMIDIAccess();
+      this.access.onstatechange = (e) => this.updateInputs();
+      this.updateInputs();
+    } catch (e) {
+      if (showError) this.setStatus('none', 'Autorisation refusée');
+    }
+  }
+  updateInputs() {
+    if (!this.access) return;
+    this.inputs = [];
+    for (const input of this.access.inputs.values()) {
+      this.inputs.push(input);
+      input.onmidimessage = (m) => this.onMessage(m);
+    }
+    if (this.inputs.length === 0) {
+      this.setStatus('wait', 'Aucun piano détecté — branche l\'USB');
+    } else {
+      const name = this.inputs[0].name || 'Piano MIDI';
+      this.setStatus('live', name.length > 24 ? name.slice(0, 22) + '…' : name);
+    }
+  }
+  onMessage(m) {
+    const [status, data1, data2] = m.data;
+    const cmd = status & 0xf0;
+    if (cmd === 0x90 && data2 > 0) {
+      // Note on
+      audio.ensure();
+      audio.noteOn(data1, data2 / 127);
+      keyboard.visualNoteOn(data1);
+    } else if (cmd === 0x80 || (cmd === 0x90 && data2 === 0)) {
+      // Note off
+      audio.noteOff(data1);
+      keyboard.visualNoteOff(data1);
+    } else if (cmd === 0xb0 && data1 === 64) {
+      // Sustain pedal CC64
+      audio.setSustain(data2 >= 64);
+    }
+  }
+  setStatus(state, msg) {
+    this.dot.className = 'chip__dot';
+    this.badge.classList.remove('live', 'wait');
+    if (state === 'live') { this.dot.classList.add('chip__dot--live'); this.badge.classList.add('live'); this.badgeText.textContent = 'MIDI · ' + msg; }
+    else if (state === 'wait') { this.dot.classList.add('chip__dot--wait'); this.badge.classList.add('wait'); this.badgeText.textContent = 'MIDI · ' + msg; }
+    else { this.badgeText.textContent = 'MIDI · ' + msg; }
+    this.text.textContent = msg;
+  }
+}
+let midiCtrl = null;
+
+// ============================================================
+// CHORD & SCALE UTILITIES
+// ============================================================
+function parseChord(str) {
+  // e.g. "C:0" → root=0 (C), type='major', inversion=0
+  // e.g. "Dm7:1" → root=2, type='m7', inversion=1
+  // e.g. "F/C" not supported — use "F:2" for 2nd inversion
+  const parts = str.split(':');
+  const nameStr = parts[0];
+  const inversion = parseInt(parts[1] || '0', 10);
+  // Parse root: C, C#, Db, D, D#, Eb, E, F, F#, Gb, G, G#, Ab, A, A#, Bb, B
+  let root, remainder;
+  if (nameStr.length >= 2 && (nameStr[1] === '#' || nameStr[1] === 'b')) {
+    const rootStr = nameStr.slice(0, 2);
+    remainder = nameStr.slice(2);
+    root = rootStrToMidi(rootStr);
+  } else {
+    root = rootStrToMidi(nameStr[0]);
+    remainder = nameStr.slice(1);
+  }
+  let type = 'major';
+  if (remainder === 'maj7') type = 'maj7';
+  else if (remainder === 'm7') type = 'm7';
+  else if (remainder === '7') type = '7';
+  else if (remainder === 'm') type = 'minor';
+  else if (remainder === 'sus2') type = 'sus2';
+  else if (remainder === 'sus4') type = 'sus4';
+  else if (remainder === '°' || remainder === 'dim') type = 'dim';
+  else if (remainder === '9') type = '9';
+  return { root, type, inversion };
+}
+function rootStrToMidi(str) {
+  const map = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
+  let val = map[str[0]];
+  if (str[1] === '#') val += 1;
+  if (str[1] === 'b') val -= 1;
+  return (val + 12) % 12;
+}
+function chordMidiNotes(chord, baseOctave = 4) {
+  const t = CHORD_TYPES[chord.type];
+  if (!t) return [];
+  let notes = t.intervals.map(iv => chord.root + iv + baseOctave * 12);
+  for (let i = 0; i < chord.inversion; i++) {
+    const first = notes.shift();
+    notes.push(first + 12);
+  }
+  return notes;
+}
+function chordDisplayName(chord) {
+  const t = CHORD_TYPES[chord.type];
+  return NOTE_NAMES_FR[chord.root] + (t.suffix || '');
+}
+function chordNoteNames(chord) {
+  const notes = CHORD_TYPES[chord.type].intervals.map(iv => (chord.root + iv) % 12);
+  return notes.map(n => NOTE_NAMES_FR[n]).join(' — ');
+}
+function scaleMidiNotes(rootIdx, mode, baseOctave = 4) {
+  const scale = SCALES[mode];
+  if (!scale) return [];
+  return scale.map(iv => rootIdx + iv + baseOctave * 12);
+}
+
+// ============================================================
+// PLAYBACK HELPERS
+// ============================================================
+function playChord(midis, duration = 1.0) {
+  audio.ensure();
+  keyboard.clearHighlights();
+  for (const m of midis) {
+    audio.noteOn(m, 0.5);
+    keyboard.visualNoteOn(m);
+  }
+  setTimeout(() => {
+    for (const m of midis) {
+      audio.noteOff(m);
+      keyboard.visualNoteOff(m);
+    }
+  }, duration * 1000);
+}
+function playSequence(midiList, noteDur = 0.4, gap = 0.05) {
+  audio.ensure();
+  keyboard.clearHighlights();
+  let time = 0;
+  for (const m of midiList) {
+    if (m === '-' || m == null) { time += (noteDur + gap); continue; }
+    ((mid, delay) => {
+      setTimeout(() => {
+        audio.noteOn(mid, 0.5);
+        keyboard.visualNoteOn(mid);
+        setTimeout(() => {
+          audio.noteOff(mid);
+          keyboard.visualNoteOff(mid);
+        }, noteDur * 1000);
+      }, delay * 1000);
+    })(m, time);
+    time += (noteDur + gap);
+  }
+}
+function playChordProgression(chords, msPerChord = 1200) {
+  audio.ensure();
+  keyboard.clearHighlights();
+  chords.forEach((c, i) => {
+    setTimeout(() => {
+      const chord = parseChord(c);
+      const notes = chordMidiNotes(chord, 4);
+      keyboard.clearHighlights();
+      keyboard.highlight([notes[0]], 'is-root');
+      keyboard.highlight(notes.slice(1), 'is-chord');
+      for (const m of notes) {
+        audio.noteOn(m, 0.5);
+        keyboard.visualNoteOn(m);
+      }
+      setTimeout(() => {
+        for (const m of notes) {
+          audio.noteOff(m);
+          keyboard.visualNoteOff(m);
+        }
+      }, msPerChord - 100);
+    }, i * msPerChord);
+  });
+}
+
+// Parse note like "C4" → MIDI number
+function noteStrToMidi(str) {
+  const m = str.match(/^([A-G])([#b]?)(-?\d+)$/);
+  if (!m) return null;
+  const base = { C:0, D:2, E:4, F:5, G:7, A:9, B:11 }[m[1]];
+  const acc = m[2] === '#' ? 1 : (m[2] === 'b' ? -1 : 0);
+  const oct = parseInt(m[3], 10);
+  return (oct + 1) * 12 + base + acc;
+}
+
+// Universal "play" from a data string
+function playAction(str) {
+  // Formats:
+  //  C:4        → single note C octave 4
+  //  chord:C:0  → C major, inversion 0
+  //  chords:C:0,G:1,Am:0  → progression
+  //  scale:C:major:4  → play scale
+  //  seq:C4,D4,E4,...  → melody sequence
+  if (str.startsWith('chords:')) {
+    const parts = str.slice(7).split(',');
+    playChordProgression(parts, 1000);
+  } else if (str.startsWith('chord:')) {
+    const chord = parseChord(str.slice(6));
+    const notes = chordMidiNotes(chord, 4);
+    keyboard.clearHighlights();
+    keyboard.highlight([notes[0]], 'is-root');
+    keyboard.highlight(notes.slice(1), 'is-chord');
+    playChord(notes, 1.5);
+  } else if (str.startsWith('scale:')) {
+    const [_, rootStr, mode, octStr] = str.split(':');
+    const root = rootStrToMidi(rootStr);
+    const oct = parseInt(octStr || '4', 10);
+    const notes = scaleMidiNotes(root, mode, oct);
+    notes.push(root + (oct + 1) * 12);
+    keyboard.clearHighlights();
+    keyboard.highlight([notes[0]], 'is-root');
+    keyboard.highlight(notes.slice(1, -1), 'is-scale');
+    playSequence(notes, 0.28, 0.02);
+  } else if (str.startsWith('seq:')) {
+    const parts = str.slice(4).split(',');
+    const midis = parts.map(p => p === '-' ? '-' : noteStrToMidi(p.trim()));
+    playSequence(midis, 0.35, 0.03);
+  } else {
+    // Single note like "C:4"
+    const [rootStr, octStr] = str.split(':');
+    const midi = 60; // fallback
+    playChord([midi], 1.0);
+  }
+}
+
+// ============================================================
+// RENDER PROGRAMME
+// ============================================================
+function renderProgramme() {
+  const container = document.getElementById('programme');
+  let modules = {};
+  for (const week of CURRICULUM) {
+    if (!modules[week.module]) modules[week.module] = { title: week.moduleTitle, desc: week.moduleDesc, num: week.module, weeks: [] };
+    modules[week.module].weeks.push(week);
+  }
+  container.innerHTML = '';
+  const romans = ['', 'I.', 'II.', 'III.', 'IV.'];
+  for (const modNum of [1, 2, 3, 4]) {
+    const mod = modules[modNum];
+    const header = document.createElement('div');
+    header.className = 'module-header';
+    header.innerHTML = `
+      <div class="module-header__num">${romans[modNum]}</div>
+      <div>
+        <div class="module-header__title">${mod.title}</div>
+        <div class="module-header__desc">${mod.desc}</div>
+      </div>
+    `;
+    container.appendChild(header);
+    for (const week of mod.weeks) {
+      const card = document.createElement('article');
+      card.className = 'week';
+      card.dataset.week = week.week;
+      card.innerHTML = `
+        <div class="week__num">Semaine ${String(week.week).padStart(2, '0')}</div>
+        <div class="week__title">${week.title}</div>
+        <div class="week__obj">${week.obj}</div>
+        <div class="week__meta">
+          <span>${week.exercises} exercices</span>
+          <span>${week.duration}</span>
+        </div>
+      `;
+      card.addEventListener('click', () => openLesson(week.week));
+      container.appendChild(card);
+    }
+    // Slot for expanded detail after this module's weeks
+    const slot = document.createElement('div');
+    slot.className = 'lesson-slot';
+    slot.style.gridColumn = '1 / -1';
+    slot.dataset.module = modNum;
+    container.appendChild(slot);
+  }
+}
+
+let openWeek = null;
+function openLesson(weekNum) {
+  const week = CURRICULUM.find(w => w.week === weekNum);
+  if (!week) return;
+  // Close any open lesson
+  document.querySelectorAll('.lesson-detail').forEach(d => d.remove());
+  if (openWeek === weekNum) { openWeek = null; return; }
+  openWeek = weekNum;
+  const slot = document.querySelector(`.lesson-slot[data-module="${week.module}"]`);
+  const detail = document.createElement('div');
+  detail.className = 'lesson-detail is-open';
+  const checkedKey = 'piano12w:done';
+  const checked = JSON.parse(localStorage.getItem(checkedKey) || '{}');
+  const bodyItems = week.body.map((section, sidx) => {
+    if (section.type === 'exercises') {
+      return `<h4>Exercices</h4>` + section.items.map((ex, i) => {
+        const key = `w${week.week}_ex${i}`;
+        const done = checked[key] === true;
+        return `
+          <div class="exercise">
+            <div class="exercise__title"><b>${ex.name}</b><span class="t">${ex.time}</span></div>
+            <p class="exercise__desc">${ex.desc}</p>
+            ${ex.play ? `<button class="try-btn" data-play="${ex.play}">Écouter</button>` : ''}
+            <button class="checkbox ${done ? 'is-checked' : ''}" data-check="${key}">
+              <span class="checkbox__box"></span>${done ? 'Validé' : 'Marquer comme fait'}
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+    return `<h4>${section.h}</h4><p>${section.text}</p>`;
+  }).join('');
+  const asideItems = week.body.filter(b => b.type === 'aside')
+    .map(a => a.items.map(item => `<div class="listen"><b>${item.b}</b><span>${item.s}</span></div>`).join(''))
+    .join('');
+  detail.innerHTML = `
+    <button class="lesson-detail__close" data-close>×</button>
+    <div class="lesson-detail__meta">
+      <span>Module <b>${['','I','II','III','IV'][week.module]}</b></span>
+      <span>Semaine <b>${week.week}</b> / 12</span>
+      <span>Durée <b>${week.duration}</b></span>
+      <span><b>${week.exercises}</b> exercices</span>
+    </div>
+    <h3>${week.title}</h3>
+    <div class="lesson-detail__deck">${week.deck}</div>
+    <div class="lesson-detail__grid">
+      <div class="lesson-detail__body">${bodyItems}</div>
+      <aside class="lesson-detail__aside">
+        <h4>À écouter cette semaine</h4>
+        ${asideItems}
+      </aside>
+    </div>
+  `;
+  slot.appendChild(detail);
+  // Wire up close, play, and check buttons
+  detail.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => { detail.remove(); openWeek = null; }));
+  detail.querySelectorAll('[data-play]').forEach(b => b.addEventListener('click', () => {
+    playAction(b.dataset.play);
+    document.getElementById('instrument').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }));
+  detail.querySelectorAll('[data-check]').forEach(b => b.addEventListener('click', () => {
+    const key = b.dataset.check;
+    const state = JSON.parse(localStorage.getItem(checkedKey) || '{}');
+    state[key] = !state[key];
+    localStorage.setItem(checkedKey, JSON.stringify(state));
+    b.classList.toggle('is-checked', state[key]);
+    b.innerHTML = `<span class="checkbox__box"></span>${state[key] ? 'Validé' : 'Marquer comme fait'}`;
+    updateProgress();
+  }));
+  // Scroll to detail
+  setTimeout(() => detail.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+}
+
+// ============================================================
+// CHORD LIBRARY UI
+// ============================================================
+function renderChordLibrary() {
+  const container = document.getElementById('chordFamilies');
+  container.innerHTML = '';
+  for (const [famKey, fam] of Object.entries(CHORD_FAMILIES)) {
+    const div = document.createElement('div');
+    div.className = 'chord-family' + (famKey === 'major' ? ' is-active' : '');
+    div.dataset.family = famKey;
+    let cards = '';
+    if (fam.mixed) {
+      // Sus family - both sus2 and sus4
+      const roots = [0,2,4,5,7,9,11];
+      for (const type of ['sus2', 'sus4']) {
+        for (const r of roots) {
+          const chord = { root: r, type, inversion: 0 };
+          cards += chordCardHTML(chord);
+        }
+      }
+    } else {
+      for (const r of fam.roots) {
+        const chord = { root: r, type: fam.type, inversion: 0 };
+        cards += chordCardHTML(chord);
+      }
+    }
+    div.innerHTML = `
+      <div class="chord-family__intro">${fam.intro}</div>
+      <div class="chord-grid">${cards}</div>
+    `;
+    container.appendChild(div);
+  }
+  // Wire chord card clicks
+  container.querySelectorAll('.chord-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const str = card.dataset.chord;
+      playAction('chord:' + str);
+      document.getElementById('instrument').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  });
+  // Tabs
+  document.getElementById('chordTabs').addEventListener('click', (e) => {
+    if (!e.target.matches('.chord-tab')) return;
+    const fam = e.target.dataset.family;
+    document.querySelectorAll('.chord-tab').forEach(t => t.classList.toggle('is-active', t === e.target));
+    document.querySelectorAll('.chord-family').forEach(f => f.classList.toggle('is-active', f.dataset.family === fam));
+  });
+}
+function chordCardHTML(chord) {
+  const t = CHORD_TYPES[chord.type];
+  const name = NOTE_NAMES_FR[chord.root] + (t.suffix || '');
+  const nameEN = NOTE_NAMES_EN[chord.root] + (t.suffix || '');
+  const notes = t.intervals.map(iv => NOTE_NAMES_FR[(chord.root + iv) % 12]).join(' ');
+  return `<div class="chord-card" data-chord="${nameEN}:0">
+    <div class="chord-card__name">${name}</div>
+    <div class="chord-card__notes">${notes}</div>
+  </div>`;
+}
+
+// ============================================================
+// THEORY: scale picker
+// ============================================================
+let currentScaleRoot = 0;
+let currentScaleMode = 'major';
+function renderScaleNotes() {
+  const scale = SCALES[currentScaleMode];
+  const notes = scale.map(iv => NOTE_NAMES_FR[(currentScaleRoot + iv) % 12]);
+  document.getElementById('scaleNotes').textContent = notes.join(' — ');
+}
+function updateScaleOnKeyboard() {
+  keyboard.clearHighlights();
+  const notes = scaleMidiNotes(currentScaleRoot, currentScaleMode, 4);
+  notes.push(currentScaleRoot + 5 * 12);
+  keyboard.highlight([notes[0]], 'is-root');
+  keyboard.highlight(notes.slice(1, -1), 'is-scale');
+}
+function wireScalePicker() {
+  document.getElementById('scaleRoot').addEventListener('click', (e) => {
+    if (!e.target.matches('.scale-btn')) return;
+    currentScaleRoot = parseInt(e.target.dataset.root, 10);
+    document.querySelectorAll('#scaleRoot .scale-btn').forEach(b => b.classList.toggle('is-active', b === e.target));
+    renderScaleNotes();
+    updateScaleOnKeyboard();
+  });
+  document.getElementById('scaleMode').addEventListener('click', (e) => {
+    if (!e.target.matches('.scale-btn')) return;
+    currentScaleMode = e.target.dataset.mode;
+    document.querySelectorAll('#scaleMode .scale-btn').forEach(b => b.classList.toggle('is-active', b === e.target));
+    renderScaleNotes();
+    updateScaleOnKeyboard();
+  });
+  document.getElementById('playScaleBtn').addEventListener('click', () => {
+    const notes = scaleMidiNotes(currentScaleRoot, currentScaleMode, 4);
+    notes.push(currentScaleRoot + 5 * 12);
+    keyboard.clearHighlights();
+    keyboard.highlight([notes[0]], 'is-root');
+    keyboard.highlight(notes.slice(1, -1), 'is-scale');
+    playSequence(notes, 0.28, 0.02);
+    document.getElementById('instrument').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+  document.getElementById('clearScaleBtn').addEventListener('click', () => {
+    keyboard.clearHighlights();
+  });
+  renderScaleNotes();
+}
+
+// ============================================================
+// CYCLE OF FIFTHS
+// ============================================================
+function renderCycle() {
+  const majorKeys = ['Do', 'Sol', 'Ré', 'La', 'Mi', 'Si', 'Fa♯', 'Ré♭', 'La♭', 'Mi♭', 'Si♭', 'Fa'];
+  const minorKeys = ['la', 'mi', 'si', 'fa♯', 'do♯', 'sol♯', 'ré♯', 'si♭', 'fa', 'do', 'sol', 'ré'];
+  const majorMidi = [0, 7, 2, 9, 4, 11, 6, 1, 8, 3, 10, 5];
+  const g = document.getElementById('cycleKeys');
+  g.innerHTML = '';
+  const cx = 160, cy = 160, rOuter = 140, rInner = 80;
+  for (let i = 0; i < 12; i++) {
+    const angle = (i / 12) * Math.PI * 2 - Math.PI / 2;
+    // Outer (major)
+    const x = cx + Math.cos(angle) * (rOuter - 20);
+    const y = cy + Math.sin(angle) * (rOuter - 20);
+    const bg = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    bg.setAttribute('cx', x);
+    bg.setAttribute('cy', y);
+    bg.setAttribute('r', 18);
+    bg.setAttribute('class', 'cycle-key');
+    bg.dataset.root = majorMidi[i];
+    bg.addEventListener('click', () => {
+      const root = majorMidi[i];
+      currentScaleRoot = root;
+      currentScaleMode = 'major';
+      document.querySelectorAll('#scaleRoot .scale-btn').forEach(b => b.classList.toggle('is-active', parseInt(b.dataset.root, 10) === root));
+      document.querySelectorAll('#scaleMode .scale-btn').forEach(b => b.classList.toggle('is-active', b.dataset.mode === 'major'));
+      renderScaleNotes();
+      updateScaleOnKeyboard();
+      playAction('chord:' + NOTE_NAMES_EN[root] + ':0');
+    });
+    g.appendChild(bg);
+    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    label.setAttribute('x', x);
+    label.setAttribute('y', y + 5);
+    label.setAttribute('class', 'cycle-label');
+    label.textContent = majorKeys[i];
+    g.appendChild(label);
+    // Inner (relative minor)
+    const xi = cx + Math.cos(angle) * rInner;
+    const yi = cy + Math.sin(angle) * rInner;
+    const labelMin = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    labelMin.setAttribute('x', xi);
+    labelMin.setAttribute('y', yi + 4);
+    labelMin.setAttribute('class', 'cycle-label cycle-label--minor');
+    labelMin.textContent = minorKeys[i] + 'm';
+    g.appendChild(labelMin);
+  }
+}
+
+// ============================================================
+// PROGRESS TRACKER
+// ============================================================
+function updateProgress() {
+  let total = 0;
+  for (const w of CURRICULUM) total += w.exercises;
+  const done = Object.values(JSON.parse(localStorage.getItem('piano12w:done') || '{}')).filter(v => v === true).length;
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  document.getElementById('progressPct').textContent = pct + '%';
+  document.getElementById('progressBar').style.width = pct + '%';
+}
+function wireProgressReset() {
+  document.getElementById('progressReset').addEventListener('click', () => {
+    if (confirm('Effacer tout ton progrès ? (Rien n\'est envoyé nulle part, mais c\'est irréversible)')) {
+      localStorage.removeItem('piano12w:done');
+      document.querySelectorAll('.checkbox.is-checked').forEach(b => {
+        b.classList.remove('is-checked');
+        b.innerHTML = '<span class="checkbox__box"></span>Marquer comme fait';
+      });
+      updateProgress();
+    }
+  });
+}
+
+// ============================================================
+// KEYBOARD CONTROLS (buttons)
+// ============================================================
+function wireInstrumentControls() {
+  const btnLabels = document.getElementById('btnLabels');
+  const btnSustain = document.getElementById('btnSustain');
+  const btnClear = document.getElementById('btnClear');
+  btnLabels.addEventListener('click', () => {
+    const active = btnLabels.classList.toggle('is-active');
+    keyboard.setLabelsVisible(active);
+  });
+  btnSustain.addEventListener('click', () => {
+    const active = btnSustain.classList.toggle('is-active');
+    audio.setSustain(active);
+  });
+  btnClear.addEventListener('click', () => {
+    audio.releaseAll();
+    keyboard.clearHighlights();
+  });
+  // Progression cadence buttons in theory section
+  document.querySelectorAll('[data-progression]').forEach(b => {
+    b.addEventListener('click', () => {
+      playAction('chords:' + b.dataset.progression.replace(/-/g, ','));
+      document.getElementById('instrument').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  });
+}
+
+// ============================================================
+// THEME TOGGLE
+// ============================================================
+function wireTheme() {
+  const chip = document.getElementById('themeChip');
+  const stored = localStorage.getItem('piano12w:theme');
+  if (stored) document.documentElement.setAttribute('data-theme', stored);
+  chip.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    const isDarkNow = current === 'dark' || (!current && matchMedia('(prefers-color-scheme: dark)').matches);
+    const next = isDarkNow ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('piano12w:theme', next);
+  });
+}
+
+// ============================================================
+// SIDE NAV ACTIVE STATE
+// ============================================================
+function wireSideNav() {
+  const links = Array.from(document.querySelectorAll('.side-nav a'));
+  const sections = links.map(a => document.querySelector(a.getAttribute('href')));
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const idx = sections.indexOf(e.target);
+        links.forEach((l, i) => l.classList.toggle('is-active', i === idx));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => s && obs.observe(s));
+}
+
+// ============================================================
+// COMPUTER KEYBOARD → PIANO (fallback for no MIDI)
+// ============================================================
+const KB_MAP = { 'q':60,'z':61,'s':62,'e':63,'d':64,'f':65,'t':66,'g':67,'y':68,'h':69,'u':70,'j':71,'k':72,'o':73,'l':74,'p':75,'m':76 };
+document.addEventListener('keydown', (e) => {
+  if (e.repeat) return;
+  const m = KB_MAP[e.key.toLowerCase()];
+  if (m == null) return;
+  audio.ensure();
+  audio.noteOn(m, 0.6);
+  keyboard.visualNoteOn(m);
+});
+document.addEventListener('keyup', (e) => {
+  const m = KB_MAP[e.key.toLowerCase()];
+  if (m == null) return;
+  audio.noteOff(m);
+  keyboard.visualNoteOff(m);
+});
+
+// ============================================================
+// INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  keyboard = new Keyboard(document.getElementById('keyboard'));
+  midiCtrl = new MidiController();
+  renderProgramme();
+  renderChordLibrary();
+  wireScalePicker();
+  renderCycle();
+  wireInstrumentControls();
+  wireProgressReset();
+  wireTheme();
+  wireSideNav();
+  updateProgress();
+});
+</script>
+
+</body>
+</html>
