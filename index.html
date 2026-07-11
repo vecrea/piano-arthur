@@ -1448,6 +1448,199 @@
     .drill-bar__target { font-size: 22px; }
     body.drill-active { padding-bottom: 220px; }
   }
+
+  /* ==================== RESUME WIDGET ==================== */
+  .resume-widget {
+    margin-bottom: 48px;
+    padding: 32px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 6px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 32px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .resume-widget::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--brass), var(--brass-hi));
+  }
+  .resume-widget__num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 68px;
+    line-height: 1;
+    color: var(--brass-hi);
+    letter-spacing: -0.02em;
+  }
+  .resume-widget__body { display: flex; flex-direction: column; gap: 6px; }
+  .resume-widget__label {
+    font-family: Georgia, serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 10px;
+    color: var(--brass-hi);
+    font-weight: 700;
+  }
+  .resume-widget__title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.15;
+    color: var(--paper);
+  }
+  .resume-widget__progress {
+    color: rgba(255,255,255,0.6);
+    font-size: 13px;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    letter-spacing: 0.06em;
+    margin-top: 4px;
+  }
+  .resume-widget__progress-bar {
+    height: 3px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    margin-top: 8px;
+    max-width: 240px;
+    overflow: hidden;
+  }
+  .resume-widget__progress-fill {
+    height: 100%;
+    background: var(--brass-hi);
+    transition: width .4s ease;
+  }
+  .resume-widget__cta {
+    padding: 14px 28px;
+    background: var(--brass);
+    color: var(--paper);
+    border: none;
+    border-radius: 4px;
+    font-family: Georgia, serif;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .15s ease;
+    font-weight: 700;
+  }
+  .resume-widget__cta:hover { background: var(--brass-hi); }
+  .resume-widget.is-done { background: linear-gradient(135deg, #4a5c38 0%, #3a4a2c 100%); }
+  .resume-widget.is-done .resume-widget__num,
+  .resume-widget.is-done .resume-widget__label { color: var(--brass-hi); }
+  .resume-widget.is-done .resume-widget__cta { background: var(--brass-hi); color: var(--ink); }
+  @media (max-width: 700px) {
+    .resume-widget { grid-template-columns: 1fr; gap: 16px; text-align: left; padding: 24px; }
+    .resume-widget__num { font-size: 40px; }
+    .resume-widget__title { font-size: 20px; }
+  }
+
+  /* Week card state variants */
+  .week__badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 3px 10px;
+    font-family: Georgia, serif;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+  .week__badge--current {
+    background: var(--brass);
+    color: var(--paper);
+  }
+  .week__badge--done {
+    background: var(--sage);
+    color: var(--paper);
+  }
+  .week__mini-progress {
+    height: 4px;
+    background: var(--paper-3);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 12px;
+  }
+  .week__mini-fill {
+    height: 100%;
+    background: var(--brass);
+    width: 0%;
+    transition: width .3s ease;
+  }
+  .week--current {
+    border-color: var(--brass);
+    border-width: 2px;
+    padding: 19px;
+    box-shadow: 0 0 0 3px rgba(169, 117, 42, 0.12);
+  }
+  .week--current .week__num { color: var(--brass); font-weight: 700; }
+  .week--done { background: color-mix(in oklab, var(--paper-2) 85%, var(--sage) 15%); }
+  .week--done .week__mini-fill { background: var(--sage); }
+  .week--done .week__title { color: var(--muted); }
+  .week--done:hover .week__title { color: var(--ink); }
+  .week--upcoming { opacity: 0.85; }
+
+  /* Lesson breadcrumb + nav */
+  .lesson-detail__nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 18px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .lesson-detail__breadcrumb {
+    font-family: Georgia, serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .lesson-detail__breadcrumb b { color: var(--brass); font-weight: 700; }
+  .lesson-detail__breadcrumb .sep { color: var(--line); margin: 0 6px; }
+  .lesson-detail__nav-btns { display: flex; gap: 6px; }
+  .lesson-detail__nav-btn {
+    padding: 7px 14px;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ink-2);
+    border-radius: 4px;
+    font-family: Georgia, serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all .15s ease;
+  }
+  .lesson-detail__nav-btn:hover:not(:disabled) { border-color: var(--brass); color: var(--brass); background: var(--paper); }
+  .lesson-detail__nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+  /* Exercise done + current state */
+  .exercise--done {
+    border-left-color: var(--sage);
+    background: color-mix(in oklab, var(--paper-3) 80%, var(--sage) 20%);
+  }
+  .exercise--done .exercise__title b { color: var(--muted); text-decoration: line-through; text-decoration-color: color-mix(in oklab, var(--muted) 50%, transparent); }
+  .exercise--next {
+    outline: 2px solid var(--brass);
+    outline-offset: 4px;
+    animation: exNext 1.6s ease-out;
+  }
+  @keyframes exNext {
+    0% { outline-color: var(--brass-hi); box-shadow: 0 0 24px rgba(200, 138, 46, 0.35); }
+    100% { outline-color: var(--brass); box-shadow: none; }
+  }
 </style>
 </head>
 <body>
@@ -1657,6 +1850,8 @@
         </p>
       </div>
     </div>
+
+    <div id="resumeWidget"></div>
 
     <div class="programme" id="programme">
       <!-- Filled by JS from CURRICULUM -->
@@ -3046,8 +3241,24 @@ class Drill {
       if (cb) {
         cb.classList.add('is-checked');
         cb.innerHTML = '<span class="checkbox__box"></span>Validé';
+        const exEl = cb.closest('.exercise');
+        if (exEl) exEl.classList.add('exercise--done');
       }
       if (typeof updateProgress === 'function') updateProgress();
+      // Highlight the next uncompleted exercise in the open lesson
+      const openLessonEl = document.querySelector('.lesson-detail.is-open');
+      if (openLessonEl) {
+        openLessonEl.querySelectorAll('.exercise--next').forEach(e => e.classList.remove('exercise--next'));
+        const exercises = openLessonEl.querySelectorAll('.exercise');
+        for (const ex of exercises) {
+          const excb = ex.querySelector('[data-check]');
+          if (excb && !excb.classList.contains('is-checked')) {
+            ex.classList.add('exercise--next');
+            setTimeout(() => { ex.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 1300);
+            break;
+          }
+        }
+      }
     }
   }
   demo() {
@@ -3101,6 +3312,81 @@ class DrillEngine {
 DrillEngine.current = null;
 
 // ============================================================
+// PROGRESS HELPERS
+// ============================================================
+function weekProgress(weekNum) {
+  const week = CURRICULUM.find(w => w.week === weekNum);
+  if (!week) return { done: 0, total: 0, pct: 0 };
+  const state = JSON.parse(localStorage.getItem('piano12w:done') || '{}');
+  let done = 0;
+  for (let i = 0; i < week.exercises; i++) {
+    if (state[`w${weekNum}_ex${i}`]) done++;
+  }
+  return { done, total: week.exercises, pct: week.exercises ? Math.round((done / week.exercises) * 100) : 0 };
+}
+function currentWeek() {
+  for (const w of CURRICULUM) {
+    if (weekProgress(w.week).pct < 100) return w.week;
+  }
+  return null;
+}
+function weekStatus(weekNum) {
+  const p = weekProgress(weekNum);
+  if (p.pct === 100) return 'done';
+  const curr = currentWeek();
+  if (weekNum === curr) return 'current';
+  return 'upcoming';
+}
+function moduleTitleFor(moduleNum) {
+  const w = CURRICULUM.find(w => w.module === moduleNum && w.moduleTitle);
+  return w ? w.moduleTitle : '';
+}
+
+// ============================================================
+// RESUME WIDGET
+// ============================================================
+function renderResumeWidget() {
+  const el = document.getElementById('resumeWidget');
+  if (!el) return;
+  const curr = currentWeek();
+  if (curr === null) {
+    el.innerHTML = `
+      <div class="resume-widget is-done">
+        <div class="resume-widget__num">✓</div>
+        <div class="resume-widget__body">
+          <span class="resume-widget__label">Programme terminé</span>
+          <span class="resume-widget__title">Tu as complété les 12 semaines. Chapeau.</span>
+          <span class="resume-widget__progress">Reprends n'importe quelle semaine pour te rafraîchir.</span>
+        </div>
+        <button class="resume-widget__cta" data-open-week="12">Revoir la S12</button>
+      </div>
+    `;
+  } else {
+    const week = CURRICULUM.find(w => w.week === curr);
+    const p = weekProgress(curr);
+    const total = CURRICULUM.length;
+    const label = p.done === 0 ? 'Commencer la semaine ' + curr : 'Reprendre la semaine ' + curr;
+    const cta = p.done === 0 ? 'Commencer' : 'Continuer';
+    el.innerHTML = `
+      <div class="resume-widget">
+        <div class="resume-widget__num">${String(curr).padStart(2, '0')}</div>
+        <div class="resume-widget__body">
+          <span class="resume-widget__label">${label}</span>
+          <span class="resume-widget__title">${week.title}</span>
+          <span class="resume-widget__progress">${p.done} / ${p.total} exercices validés · Semaine ${curr} sur ${total}</span>
+          <div class="resume-widget__progress-bar"><div class="resume-widget__progress-fill" style="width: ${p.pct}%"></div></div>
+        </div>
+        <button class="resume-widget__cta" data-open-week="${curr}">${cta}</button>
+      </div>
+    `;
+  }
+  el.querySelectorAll('[data-open-week]').forEach(b => b.addEventListener('click', () => {
+    const w = parseInt(b.dataset.openWeek, 10);
+    openLesson(w);
+  }));
+}
+
+// ============================================================
 // RENDER PROGRAMME
 // ============================================================
 function renderProgramme() {
@@ -3125,22 +3411,30 @@ function renderProgramme() {
     `;
     container.appendChild(header);
     for (const week of mod.weeks) {
+      const status = weekStatus(week.week);
+      const p = weekProgress(week.week);
       const card = document.createElement('article');
-      card.className = 'week';
+      card.className = 'week week--' + status;
       card.dataset.week = week.week;
+      const badge = status === 'current'
+        ? '<span class="week__badge week__badge--current">Actuel</span>'
+        : status === 'done'
+        ? '<span class="week__badge week__badge--done">✓ Fini</span>'
+        : '';
       card.innerHTML = `
+        ${badge}
         <div class="week__num">Semaine ${String(week.week).padStart(2, '0')}</div>
         <div class="week__title">${week.title}</div>
         <div class="week__obj">${week.obj}</div>
         <div class="week__meta">
-          <span>${week.exercises} exercices</span>
+          <span>${p.done} / ${p.total} exercices</span>
           <span>${week.duration}</span>
         </div>
+        <div class="week__mini-progress"><div class="week__mini-fill" style="width: ${p.pct}%"></div></div>
       `;
       card.addEventListener('click', () => openLesson(week.week));
       container.appendChild(card);
     }
-    // Slot for expanded detail after this module's weeks
     const slot = document.createElement('div');
     slot.className = 'lesson-slot';
     slot.style.gridColumn = '1 / -1';
@@ -3149,11 +3443,31 @@ function renderProgramme() {
   }
 }
 
+function updateWeekCards() {
+  document.querySelectorAll('.week[data-week]').forEach(card => {
+    const wn = parseInt(card.dataset.week, 10);
+    const status = weekStatus(wn);
+    const p = weekProgress(wn);
+    card.className = 'week week--' + status;
+    const existingBadge = card.querySelector('.week__badge');
+    if (existingBadge) existingBadge.remove();
+    if (status === 'current' || status === 'done') {
+      const badge = document.createElement('span');
+      badge.className = 'week__badge week__badge--' + status;
+      badge.textContent = status === 'current' ? 'Actuel' : '✓ Fini';
+      card.insertBefore(badge, card.firstChild);
+    }
+    const meta = card.querySelector('.week__meta span:first-child');
+    if (meta) meta.textContent = `${p.done} / ${p.total} exercices`;
+    const fill = card.querySelector('.week__mini-fill');
+    if (fill) fill.style.width = p.pct + '%';
+  });
+}
+
 let openWeek = null;
 function openLesson(weekNum) {
   const week = CURRICULUM.find(w => w.week === weekNum);
   if (!week) return;
-  // Close any open lesson
   document.querySelectorAll('.lesson-detail').forEach(d => d.remove());
   if (openWeek === weekNum) { openWeek = null; return; }
   openWeek = weekNum;
@@ -3169,7 +3483,7 @@ function openLesson(weekNum) {
         const key = `w${week.week}_ex${i}`;
         const done = checked[key] === true;
         return `
-          <div class="exercise">
+          <div class="exercise ${done ? 'exercise--done' : ''}" data-exkey="${attr(key)}">
             <div class="exercise__title"><b>${ex.name}</b><span class="t">${ex.time}</span></div>
             <p class="exercise__desc">${ex.desc}</p>
             ${ex.play ? `<button class="try-btn" data-play="${attr(ex.play)}">Écouter</button>` : ''}
@@ -3186,16 +3500,26 @@ function openLesson(weekNum) {
   const asideItems = week.body.filter(b => b.type === 'aside')
     .map(a => a.items.map(item => `<div class="listen"><b>${item.b}</b><span>${item.s}</span></div>`).join(''))
     .join('');
+  const roman = ['','I','II','III','IV'][week.module];
+  const modTitle = moduleTitleFor(week.module);
+  const p = weekProgress(week.week);
   detail.innerHTML = `
     <button class="lesson-detail__close" data-close>×</button>
-    <div class="lesson-detail__meta">
-      <span>Module <b>${['','I','II','III','IV'][week.module]}</b></span>
-      <span>Semaine <b>${week.week}</b> / 12</span>
-      <span>Durée <b>${week.duration}</b></span>
-      <span><b>${week.exercises}</b> exercices</span>
+    <div class="lesson-detail__nav">
+      <div class="lesson-detail__breadcrumb">
+        Module <b>${roman}</b> · ${modTitle}<span class="sep">›</span>Semaine <b>${String(week.week).padStart(2, '0')}</b> / 12
+      </div>
+      <div class="lesson-detail__nav-btns">
+        <button class="lesson-detail__nav-btn" ${week.week === 1 ? 'disabled' : ''} data-nav="prev">← Précédent</button>
+        <button class="lesson-detail__nav-btn" ${week.week === CURRICULUM.length ? 'disabled' : ''} data-nav="next">Suivant →</button>
+      </div>
     </div>
     <h3>${week.title}</h3>
     <div class="lesson-detail__deck">${week.deck}</div>
+    <div class="lesson-detail__meta">
+      <span>Durée <b>${week.duration}</b></span>
+      <span><b>${p.done}</b> / ${p.total} exercices validés</span>
+    </div>
     <div class="lesson-detail__grid">
       <div class="lesson-detail__body">${bodyItems}</div>
       <aside class="lesson-detail__aside">
@@ -3205,8 +3529,15 @@ function openLesson(weekNum) {
     </div>
   `;
   slot.appendChild(detail);
-  // Wire up close, play, and check buttons
   detail.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => { detail.remove(); openWeek = null; }));
+  detail.querySelectorAll('[data-nav]').forEach(b => b.addEventListener('click', () => {
+    const dir = b.dataset.nav;
+    const target = dir === 'prev' ? week.week - 1 : week.week + 1;
+    if (target < 1 || target > CURRICULUM.length) return;
+    detail.remove();
+    openWeek = null;
+    openLesson(target);
+  }));
   detail.querySelectorAll('[data-play]').forEach(b => b.addEventListener('click', () => {
     playAction(b.dataset.play);
     document.getElementById('instrument').scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -3225,9 +3556,10 @@ function openLesson(weekNum) {
     localStorage.setItem(checkedKey, JSON.stringify(state));
     b.classList.toggle('is-checked', state[key]);
     b.innerHTML = `<span class="checkbox__box"></span>${state[key] ? 'Validé' : 'Marquer comme fait'}`;
+    const exEl = b.closest('.exercise');
+    if (exEl) exEl.classList.toggle('exercise--done', state[key]);
     updateProgress();
   }));
-  // Scroll to detail
   setTimeout(() => detail.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
 }
 
@@ -3397,6 +3729,8 @@ function updateProgress() {
   const pct = total ? Math.round((done / total) * 100) : 0;
   document.getElementById('progressPct').textContent = pct + '%';
   document.getElementById('progressBar').style.width = pct + '%';
+  if (typeof renderResumeWidget === 'function') renderResumeWidget();
+  if (typeof updateWeekCards === 'function') updateWeekCards();
 }
 function wireProgressReset() {
   document.getElementById('progressReset').addEventListener('click', () => {
@@ -3406,6 +3740,7 @@ function wireProgressReset() {
         b.classList.remove('is-checked');
         b.innerHTML = '<span class="checkbox__box"></span>Marquer comme fait';
       });
+      document.querySelectorAll('.exercise.exercise--done').forEach(e => e.classList.remove('exercise--done'));
       updateProgress();
     }
   });
@@ -3498,6 +3833,7 @@ document.addEventListener('DOMContentLoaded', () => {
   keyboard = new Keyboard(document.getElementById('keyboard'));
   midiCtrl = new MidiController();
   renderProgramme();
+  renderResumeWidget();
   renderChordLibrary();
   wireScalePicker();
   renderCycle();
