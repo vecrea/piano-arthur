@@ -862,6 +862,13 @@
   .try-btn:hover { background: var(--brass); color: var(--paper); border-color: var(--brass); }
   .try-btn::before { content: "▶"; font-size: 9px; color: var(--brass); }
   .try-btn:hover::before { color: var(--paper); }
+  .try-btn[data-drill] {
+    background: color-mix(in oklab, var(--brass) 12%, var(--paper-3) 88%);
+    border-color: var(--brass);
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .try-btn[data-drill]::before { content: "◆"; color: var(--brass); }
 
   .exercise {
     padding: 16px;
@@ -1300,6 +1307,147 @@
     * { animation: none !important; transition: none !important; }
     html { scroll-behavior: auto; }
   }
+
+  /* ==================== DRILL BAR ==================== */
+  body.drill-active { padding-bottom: 160px; }
+  .drill-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 20px 32px;
+    border-top: 3px solid var(--brass);
+    box-shadow: 0 -20px 40px -10px rgba(0,0,0,0.35);
+    animation: drill-slideup .28s cubic-bezier(.4,.2,.2,1);
+  }
+  .drill-bar[hidden] { display: none; }
+  .drill-bar__grid {
+    display: grid;
+    grid-template-columns: 1fr 220px auto;
+    gap: 32px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .drill-bar__close {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.5);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 15px;
+    line-height: 1;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Georgia, serif;
+  }
+  .drill-bar__close:hover { color: var(--paper); border-color: var(--paper); }
+  .drill-bar__label {
+    font-family: Georgia, serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 10px;
+    color: var(--brass-hi);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .drill-bar__target {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 30px;
+    color: var(--paper);
+    line-height: 1.1;
+    display: block;
+    letter-spacing: -0.01em;
+    transition: color .2s ease;
+  }
+  .drill-bar__notes {
+    display: block;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 6px;
+    letter-spacing: 0.06em;
+  }
+  .drill-bar__progress {
+    height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .drill-bar__fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--brass), var(--brass-hi));
+    width: 0%;
+    transition: width .25s ease;
+  }
+  .drill-bar__stats {
+    display: flex;
+    justify-content: space-between;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.55);
+  }
+  .drill-bar__actions {
+    display: flex;
+    gap: 8px;
+  }
+  .drill-bar__action {
+    padding: 8px 14px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.18);
+    color: var(--paper);
+    border-radius: 4px;
+    font-family: Georgia, serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all .15s ease;
+  }
+  .drill-bar__action:hover { background: var(--brass); border-color: var(--brass); }
+  .drill-bar.is-complete { background: linear-gradient(180deg, #4a5c38 0%, #3a4a2c 100%); border-top-color: var(--brass-hi); }
+  .drill-bar.is-complete .drill-bar__label { color: rgba(255,255,255,0.7); }
+  .drill-bar.is-complete .drill-bar__target { color: var(--paper); font-style: normal; }
+  .drill-bar.is-complete .drill-bar__fill { background: var(--brass-hi); }
+
+  /* Keyboard drill states */
+  .kb-key-white.is-target,
+  .kb-key-black.is-target { animation: drill-pulse 1.4s ease-in-out infinite; }
+  .kb-key-white.is-target { fill: color-mix(in oklab, var(--key-white) 25%, var(--brass-hi) 75%); }
+  .kb-key-black.is-target { fill: color-mix(in oklab, var(--key-black) 15%, var(--brass-hi) 85%); }
+  .kb-key-white.is-target-hit,
+  .kb-key-black.is-target-hit { fill: #7A9057 !important; animation: none; }
+  .kb-key-white.is-target-miss,
+  .kb-key-black.is-target-miss { fill: #A84040 !important; animation: none; }
+  @keyframes drill-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.55; }
+  }
+  @keyframes drill-slideup {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  @media (max-width: 700px) {
+    .drill-bar { padding: 14px 18px 18px; }
+    .drill-bar__grid { grid-template-columns: 1fr; gap: 12px; }
+    .drill-bar__target { font-size: 22px; }
+    body.drill-active { padding-bottom: 220px; }
+  }
 </style>
 </head>
 <body>
@@ -1711,6 +1859,28 @@
   <span class="info" id="playedNoteInfo">C4 · MIDI 60</span>
 </div>
 
+<div class="drill-bar" id="drillBar" hidden aria-live="polite">
+  <button class="drill-bar__close" id="drillClose" aria-label="Fermer le drill">×</button>
+  <div class="drill-bar__grid">
+    <div>
+      <span class="drill-bar__label" id="drillLabel">Joue</span>
+      <span class="drill-bar__target" id="drillTarget">—</span>
+      <span class="drill-bar__notes" id="drillNotes"></span>
+    </div>
+    <div>
+      <div class="drill-bar__progress"><div class="drill-bar__fill" id="drillFill"></div></div>
+      <div class="drill-bar__stats">
+        <span id="drillStep">1 / 1</span>
+        <span id="drillErrors">0 erreur</span>
+      </div>
+    </div>
+    <div class="drill-bar__actions">
+      <button class="drill-bar__action" id="drillDemo" title="Écouter la note attendue">▶ Écouter</button>
+      <button class="drill-bar__action" id="drillRestart" title="Recommencer">↻ Recommencer</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ============================================================
 // CORE DATA
@@ -2111,51 +2281,98 @@ class AudioEngine {
   midiToFreq(midi) {
     return 440 * Math.pow(2, (midi - 69) / 12);
   }
+  createNoiseBuffer(duration) {
+    if (this._noiseBuffer && this._noiseBuffer.duration >= duration) return this._noiseBuffer;
+    const sr = this.ctx.sampleRate;
+    const len = Math.max(1, Math.floor(sr * duration));
+    const buf = this.ctx.createBuffer(1, len, sr);
+    const data = buf.getChannelData(0);
+    // Slightly filtered white noise (feels warmer)
+    let last = 0;
+    for (let i = 0; i < len; i++) {
+      const white = Math.random() * 2 - 1;
+      last = 0.5 * last + 0.5 * white;
+      data[i] = last * (1 - i / len);
+    }
+    this._noiseBuffer = buf;
+    return buf;
+  }
   noteOn(midi, velocity = 0.7) {
     this.ensure();
     if (this.activeNotes.has(midi)) this.noteOff(midi, true);
     const now = this.ctx.currentTime;
     const freq = this.midiToFreq(midi);
-    // Simple additive/FM piano-ish sound
-    const osc1 = this.ctx.createOscillator();
-    const osc2 = this.ctx.createOscillator();
-    const osc3 = this.ctx.createOscillator();
-    osc1.type = 'triangle'; osc1.frequency.value = freq;
-    osc2.type = 'sine';     osc2.frequency.value = freq * 2;
-    osc3.type = 'sine';     osc3.frequency.value = freq * 3;
+    // Piano-style additive synthesis: 6 harmonics with independent decay
+    // Higher harmonics decay faster (like a real string), fundamental sustains longest.
+    const noteDecay = Math.max(1.4, 6 - (midi - 36) * 0.06); // low notes ring longer
+    const harmonics = [
+      { mult: 1,      amp: 0.55, decay: noteDecay },
+      { mult: 2,      amp: 0.32, decay: noteDecay * 0.7 },
+      { mult: 3,      amp: 0.18, decay: noteDecay * 0.5 },
+      { mult: 4,      amp: 0.11, decay: noteDecay * 0.35 },
+      { mult: 5,      amp: 0.06, decay: noteDecay * 0.25 },
+      { mult: 6,      amp: 0.04, decay: noteDecay * 0.2 },
+    ];
+    const oscs = [];
     const g = this.ctx.createGain();
     g.gain.setValueAtTime(0, now);
-    g.gain.linearRampToValueAtTime(velocity, now + 0.005);
-    g.gain.exponentialRampToValueAtTime(velocity * 0.5, now + 0.1);
-    g.gain.exponentialRampToValueAtTime(velocity * 0.15, now + 1.5);
-    const g2 = this.ctx.createGain(); g2.gain.value = 0.15;
-    const g3 = this.ctx.createGain(); g3.gain.value = 0.05;
-    osc1.connect(g);
-    osc2.connect(g2); g2.connect(g);
-    osc3.connect(g3); g3.connect(g);
-    // Add a lowpass for warmth
+    g.gain.linearRampToValueAtTime(1, now + 0.004); // very fast attack, hammer strike
+    // Filter envelope: brighter with velocity, closes over time (piano tone darkens as it decays)
     const lp = this.ctx.createBiquadFilter();
     lp.type = 'lowpass';
-    lp.frequency.value = 3200;
-    lp.Q.value = 0.5;
+    const startCut = Math.min(14000, 1500 + velocity * 5500 + freq * 3);
+    const endCut = Math.max(400, 800 + freq * 1.2);
+    lp.frequency.setValueAtTime(startCut, now);
+    lp.frequency.exponentialRampToValueAtTime(endCut, now + 1.6);
+    lp.Q.value = 0.4;
+    // Each harmonic has its own gain envelope (partials decay at different rates)
+    for (const h of harmonics) {
+      const osc = this.ctx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = freq * h.mult;
+      // Slight inharmonicity for higher partials (piano strings are stiff)
+      if (h.mult >= 3) osc.detune.value = (h.mult - 2) * 4;
+      const hg = this.ctx.createGain();
+      const amp = h.amp * velocity;
+      hg.gain.setValueAtTime(amp, now);
+      hg.gain.exponentialRampToValueAtTime(0.0002, now + h.decay);
+      osc.connect(hg).connect(g);
+      osc.start(now);
+      osc.stop(now + h.decay + 0.1);
+      oscs.push(osc);
+    }
+    // Hammer strike: short filtered noise burst at attack
+    const noise = this.ctx.createBufferSource();
+    noise.buffer = this.createNoiseBuffer(0.05);
+    const noiseGain = this.ctx.createGain();
+    const noiseAmp = velocity * 0.12 * (1 - Math.min(1, (midi - 36) / 60) * 0.5); // less noise on high notes
+    noiseGain.gain.setValueAtTime(noiseAmp, now);
+    noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.045);
+    const noiseBP = this.ctx.createBiquadFilter();
+    noiseBP.type = 'bandpass';
+    noiseBP.frequency.value = Math.min(6000, 900 + freq * 1.5);
+    noiseBP.Q.value = 0.7;
+    noise.connect(noiseBP).connect(noiseGain).connect(g);
+    noise.start(now);
+    noise.stop(now + 0.06);
     g.connect(lp).connect(this.gainNode);
-    osc1.start(now); osc2.start(now); osc3.start(now);
-    this.activeNotes.set(midi, { osc1, osc2, osc3, gain: g, startedAt: now });
+    this.activeNotes.set(midi, { oscs, gain: g, noise, startedAt: now, releasing: false });
   }
   noteOff(midi, immediate = false) {
     const note = this.activeNotes.get(midi);
     if (!note) return;
     if (this.sustain && !immediate) return;
     const now = this.ctx.currentTime;
-    const release = immediate ? 0.02 : 0.35;
+    // Piano damper release: quick, ~120ms
+    const release = immediate ? 0.02 : 0.12;
     try {
       note.gain.gain.cancelScheduledValues(now);
       note.gain.gain.setValueAtTime(note.gain.gain.value, now);
       note.gain.gain.exponentialRampToValueAtTime(0.0001, now + release);
     } catch(e) {}
     setTimeout(() => {
-      try { note.osc1.stop(); note.osc2.stop(); note.osc3.stop(); } catch(e) {}
-    }, release * 1000 + 40);
+      try { note.oscs.forEach(o => { try { o.stop(); } catch(e) {} }); } catch(e) {}
+    }, release * 1000 + 60);
     this.activeNotes.delete(midi);
   }
   releaseAll() {
@@ -2293,11 +2510,13 @@ class Keyboard {
     const k = this.keys.get(midi);
     if (k) { k.rect.classList.add('is-active'); this.activeVisual.add(midi); }
     setPlayedNote(midi);
+    if (typeof DrillEngine !== 'undefined' && DrillEngine.current) DrillEngine.current.onNoteOn(midi);
   }
   visualNoteOff(midi) {
     const k = this.keys.get(midi);
     if (k) k.rect.classList.remove('is-active');
     this.activeVisual.delete(midi);
+    if (typeof DrillEngine !== 'undefined' && DrillEngine.current) DrillEngine.current.onNoteOff(midi);
   }
   onKeyPress(midi) {
     audio.ensure();
@@ -2589,6 +2808,299 @@ function playAction(str) {
 }
 
 // ============================================================
+// DRILL ENGINE (Duolingo-style interactive exercises)
+// ============================================================
+function midiToDisplay(midi) {
+  const noteIdx = midi % 12;
+  const octave = Math.floor(midi / 12) - 1;
+  return NOTE_NAMES_FR[noteIdx] + octave;
+}
+function midiToLongDisplay(midi) {
+  const noteIdx = midi % 12;
+  const octave = Math.floor(midi / 12) - 1;
+  return NOTE_NAMES_FR[noteIdx] + ' (' + NOTE_NAMES_EN[noteIdx] + octave + ')';
+}
+function parsePatternToSteps(patternStr) {
+  if (!patternStr) return null;
+  if (patternStr.startsWith('chords:')) {
+    return patternStr.slice(7).split(',').map(c => {
+      const chord = parseChord(c);
+      const midis = chordMidiNotes(chord, 4);
+      return {
+        type: 'chord',
+        midis,
+        pcs: new Set(midis.map(m => m % 12)),
+        display: chordDisplayName(chord),
+        notes: chordNoteNames(chord),
+      };
+    });
+  }
+  if (patternStr.startsWith('chord:')) {
+    const chord = parseChord(patternStr.slice(6));
+    const midis = chordMidiNotes(chord, 4);
+    return [{
+      type: 'chord',
+      midis,
+      pcs: new Set(midis.map(m => m % 12)),
+      display: chordDisplayName(chord),
+      notes: chordNoteNames(chord),
+    }];
+  }
+  if (patternStr.startsWith('scale:')) {
+    const parts = patternStr.split(':');
+    const rootStr = parts[1];
+    const mode = parts[2];
+    const oct = parseInt(parts[3] || '4', 10);
+    const root = rootStrToMidi(rootStr);
+    const scale = SCALES[mode] || [];
+    // Use scientific pitch consistently: MIDI 60 = C4
+    const base = (oct + 1) * 12;
+    const notes = scale.map(iv => root + iv + base);
+    notes.push(root + base + 12); // top octave
+    // Scale drills are octave-flexible for beginners — a Do at any octave counts.
+    return notes.map(midi => ({ type: 'note', midi, exactOctave: false, display: midiToDisplay(midi), long: midiToLongDisplay(midi) }));
+  }
+  if (patternStr.startsWith('seq:')) {
+    return patternStr.slice(4).split(',')
+      .filter(s => s !== '-')
+      .map(s => {
+        const midi = noteStrToMidi(s.trim());
+        if (midi == null) return null;
+        return { type: 'note', midi, exactOctave: true, display: midiToDisplay(midi), long: midiToLongDisplay(midi) };
+      })
+      .filter(Boolean);
+  }
+  // Single note pattern like "C:4"
+  const parts = patternStr.split(':');
+  if (parts.length === 2 && parts[0].match(/^[A-G][#b]?$/)) {
+    const midi = noteStrToMidi(parts[0] + parts[1]);
+    if (midi != null) {
+      return [{ type: 'note', midi, exactOctave: false, display: midiToDisplay(midi), long: midiToLongDisplay(midi) }];
+    }
+  }
+  return null;
+}
+
+class Drill {
+  constructor(steps, meta) {
+    this.steps = steps;
+    this.meta = meta || {};
+    this.currentIdx = 0;
+    this.errors = 0;
+    this.chordPressed = new Set(); // pitch classes pressed for the current chord step
+    this.wrongMidis = new Set(); // notes flagged as wrong (to avoid double-counting)
+    this.completed = false;
+    this.el = document.getElementById('drillBar');
+    this.el.hidden = false;
+    this.el.classList.remove('is-complete');
+    document.body.classList.add('drill-active');
+    this.wireControls();
+    this.render();
+    this.highlightCurrent();
+  }
+  wireControls() {
+    // Rewire (idempotent)
+    document.getElementById('drillClose').onclick = () => this.close();
+    document.getElementById('drillDemo').onclick = () => this.demo();
+    document.getElementById('drillRestart').onclick = () => this.restart();
+  }
+  currentStep() { return this.steps[this.currentIdx]; }
+  render() {
+    const total = this.steps.length;
+    if (this.completed) {
+      this.el.classList.add('is-complete');
+      document.getElementById('drillLabel').textContent = 'Bravo';
+      const errMsg = this.errors === 0 ? 'sans aucune erreur' : (this.errors === 1 ? 'avec 1 erreur' : 'avec ' + this.errors + ' erreurs');
+      document.getElementById('drillTarget').textContent = 'Exercice réussi ' + errMsg + '.';
+      document.getElementById('drillNotes').textContent = this.meta.title ? '« ' + this.meta.title + ' »' : '';
+      document.getElementById('drillFill').style.width = '100%';
+      document.getElementById('drillStep').textContent = total + ' / ' + total;
+      document.getElementById('drillErrors').textContent = this.errors + (this.errors === 1 ? ' erreur' : ' erreurs');
+      return;
+    }
+    const step = this.currentStep();
+    if (step.type === 'chord') {
+      document.getElementById('drillLabel').textContent = total > 1 ? 'Accord ' + (this.currentIdx + 1) + ' / ' + total : 'Joue cet accord';
+      document.getElementById('drillTarget').textContent = step.display;
+      document.getElementById('drillNotes').textContent = step.notes + ' · toutes les notes ensemble';
+    } else {
+      document.getElementById('drillLabel').textContent = total > 1 ? 'Note ' + (this.currentIdx + 1) + ' / ' + total : 'Joue';
+      document.getElementById('drillTarget').textContent = step.display;
+      document.getElementById('drillNotes').textContent = step.exactOctave === false ? 'toutes les octaves acceptées' : (step.long || '');
+    }
+    document.getElementById('drillFill').style.width = ((this.currentIdx / total) * 100) + '%';
+    document.getElementById('drillStep').textContent = (this.currentIdx + 1) + ' / ' + total;
+    document.getElementById('drillErrors').textContent = this.errors + (this.errors === 1 ? ' erreur' : ' erreurs');
+  }
+  highlightCurrent() {
+    keyboard.removeHighlight('is-target');
+    keyboard.removeHighlight('is-target-hit');
+    keyboard.removeHighlight('is-target-miss');
+    if (this.completed) return;
+    const step = this.currentStep();
+    if (!step) return;
+    if (step.type === 'note') {
+      if (step.exactOctave) {
+        keyboard.highlight([step.midi], 'is-target');
+      } else {
+        const pc = step.midi % 12;
+        const midis = [];
+        for (let m = MIDI_LOW; m <= MIDI_HIGH; m++) if (m % 12 === pc) midis.push(m);
+        keyboard.highlight(midis, 'is-target');
+      }
+    } else if (step.type === 'chord') {
+      keyboard.highlight(step.midis, 'is-target');
+    }
+  }
+  onNoteOn(midi) {
+    if (this.completed) return;
+    const step = this.currentStep();
+    if (!step) return;
+    if (step.type === 'note') {
+      const match = step.exactOctave ? (midi === step.midi) : ((midi % 12) === (step.midi % 12));
+      if (match) {
+        // Correct hit
+        const k = keyboard.keys.get(midi);
+        if (k) { k.rect.classList.remove('is-target'); k.rect.classList.add('is-target-hit'); }
+        setTimeout(() => this.advance(), 220);
+      } else {
+        if (!this.wrongMidis.has(midi)) {
+          this.errors++;
+          this.wrongMidis.add(midi);
+          const k = keyboard.keys.get(midi);
+          if (k) k.rect.classList.add('is-target-miss');
+          this.render();
+        }
+      }
+    } else if (step.type === 'chord') {
+      const pc = midi % 12;
+      if (step.pcs.has(pc)) {
+        this.chordPressed.add(pc);
+        const k = keyboard.keys.get(midi);
+        if (k) { k.rect.classList.remove('is-target'); k.rect.classList.add('is-target-hit'); }
+        // Check for completion: all target PCs pressed
+        let hasAll = true;
+        for (const need of step.pcs) if (!this.chordPressed.has(need)) { hasAll = false; break; }
+        if (hasAll) {
+          setTimeout(() => this.advance(), 320);
+        }
+      } else {
+        if (!this.wrongMidis.has(midi)) {
+          this.errors++;
+          this.wrongMidis.add(midi);
+          const k = keyboard.keys.get(midi);
+          if (k) k.rect.classList.add('is-target-miss');
+          this.render();
+        }
+      }
+    }
+  }
+  onNoteOff(midi) {
+    if (this.completed) return;
+    this.wrongMidis.delete(midi);
+    const k = keyboard.keys.get(midi);
+    if (!k) return;
+    k.rect.classList.remove('is-target-miss');
+    // If it was a hit target, keep it green briefly then re-mark as target
+    const step = this.currentStep();
+    if (!step) return;
+    if (step.type === 'chord' && step.midis.includes(midi)) {
+      k.rect.classList.remove('is-target-hit');
+      k.rect.classList.add('is-target');
+    } else if (step.type === 'note') {
+      const match = step.exactOctave ? (midi === step.midi) : ((midi % 12) === (step.midi % 12));
+      if (match) {
+        k.rect.classList.remove('is-target-hit');
+        k.rect.classList.add('is-target');
+      }
+    }
+  }
+  advance() {
+    keyboard.removeHighlight('is-target');
+    keyboard.removeHighlight('is-target-hit');
+    keyboard.removeHighlight('is-target-miss');
+    this.chordPressed.clear();
+    this.wrongMidis.clear();
+    this.currentIdx++;
+    if (this.currentIdx >= this.steps.length) {
+      this.complete();
+    } else {
+      this.render();
+      this.highlightCurrent();
+    }
+  }
+  complete() {
+    this.completed = true;
+    audio.ensure();
+    const chime = [72, 76, 79, 84];
+    chime.forEach((m, i) => setTimeout(() => {
+      audio.noteOn(m, 0.35);
+      setTimeout(() => audio.noteOff(m), 500);
+    }, i * 110));
+    this.render();
+    if (this.meta.exerciseKey) {
+      const state = JSON.parse(localStorage.getItem('piano12w:done') || '{}');
+      state[this.meta.exerciseKey] = true;
+      localStorage.setItem('piano12w:done', JSON.stringify(state));
+      const cb = document.querySelector('[data-check="' + this.meta.exerciseKey + '"]');
+      if (cb) {
+        cb.classList.add('is-checked');
+        cb.innerHTML = '<span class="checkbox__box"></span>Validé';
+      }
+      if (typeof updateProgress === 'function') updateProgress();
+    }
+  }
+  demo() {
+    const step = this.currentStep();
+    if (!step) return;
+    if (step.type === 'chord') {
+      audio.ensure();
+      for (const m of step.midis) { audio.noteOn(m, 0.5); }
+      setTimeout(() => { for (const m of step.midis) audio.noteOff(m); }, 900);
+    } else {
+      audio.ensure();
+      audio.noteOn(step.midi, 0.55);
+      setTimeout(() => audio.noteOff(step.midi), 800);
+    }
+  }
+  restart() {
+    this.currentIdx = 0;
+    this.errors = 0;
+    this.completed = false;
+    this.chordPressed.clear();
+    this.wrongMidis.clear();
+    this.el.classList.remove('is-complete');
+    this.render();
+    this.highlightCurrent();
+  }
+  close() {
+    keyboard.removeHighlight('is-target');
+    keyboard.removeHighlight('is-target-hit');
+    keyboard.removeHighlight('is-target-miss');
+    this.el.hidden = true;
+    this.el.classList.remove('is-complete');
+    document.body.classList.remove('drill-active');
+    DrillEngine.current = null;
+  }
+}
+
+class DrillEngine {
+  static start(patternStr, meta) {
+    const steps = parsePatternToSteps(patternStr);
+    if (!steps || steps.length === 0) {
+      console.warn('Drill: could not parse pattern', patternStr);
+      return;
+    }
+    if (this.current) this.current.close();
+    this.current = new Drill(steps, meta);
+    // Scroll the keyboard into view so the user sees the highlighted target
+    const instr = document.getElementById('instrument');
+    if (instr) instr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+DrillEngine.current = null;
+
+// ============================================================
 // RENDER PROGRAMME
 // ============================================================
 function renderProgramme() {
@@ -2650,6 +3162,7 @@ function openLesson(weekNum) {
   detail.className = 'lesson-detail is-open';
   const checkedKey = 'piano12w:done';
   const checked = JSON.parse(localStorage.getItem(checkedKey) || '{}');
+  const attr = (s) => String(s || '').replace(/"/g, '&quot;').replace(/</g, '&lt;');
   const bodyItems = week.body.map((section, sidx) => {
     if (section.type === 'exercises') {
       return `<h4>Exercices</h4>` + section.items.map((ex, i) => {
@@ -2659,7 +3172,8 @@ function openLesson(weekNum) {
           <div class="exercise">
             <div class="exercise__title"><b>${ex.name}</b><span class="t">${ex.time}</span></div>
             <p class="exercise__desc">${ex.desc}</p>
-            ${ex.play ? `<button class="try-btn" data-play="${ex.play}">Écouter</button>` : ''}
+            ${ex.play ? `<button class="try-btn" data-play="${attr(ex.play)}">Écouter</button>` : ''}
+            ${ex.play ? `<button class="try-btn" data-drill="${attr(ex.play)}" data-drill-key="${attr(key)}" data-drill-title="${attr(ex.name)}">S'exercer</button>` : ''}
             <button class="checkbox ${done ? 'is-checked' : ''}" data-check="${key}">
               <span class="checkbox__box"></span>${done ? 'Validé' : 'Marquer comme fait'}
             </button>
@@ -2696,6 +3210,13 @@ function openLesson(weekNum) {
   detail.querySelectorAll('[data-play]').forEach(b => b.addEventListener('click', () => {
     playAction(b.dataset.play);
     document.getElementById('instrument').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }));
+  detail.querySelectorAll('[data-drill]').forEach(b => b.addEventListener('click', () => {
+    DrillEngine.start(b.dataset.drill, {
+      exerciseKey: b.dataset.drillKey,
+      title: b.dataset.drillTitle,
+      weekNum: week.week,
+    });
   }));
   detail.querySelectorAll('[data-check]').forEach(b => b.addEventListener('click', () => {
     const key = b.dataset.check;
