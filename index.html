@@ -1641,6 +1641,220 @@
     0% { outline-color: var(--brass-hi); box-shadow: 0 0 24px rgba(200, 138, 46, 0.35); }
     100% { outline-color: var(--brass); box-shadow: none; }
   }
+
+  /* Numbered exercise */
+  .exercise__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .exercise__num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 1.5px solid var(--line);
+    color: var(--muted);
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-right: 12px;
+    line-height: 1;
+    transition: all .2s ease;
+  }
+  .exercise--done .exercise__num {
+    background: var(--sage);
+    color: var(--paper);
+    border-color: var(--sage);
+  }
+  .exercise__title-block {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+  }
+  .exercise__title-block b {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  /* Song exercise variant */
+  .exercise--song {
+    border-left-width: 4px;
+    border-left-color: var(--burgundy);
+    background: linear-gradient(135deg,
+      color-mix(in oklab, var(--paper-3) 88%, var(--burgundy) 12%),
+      var(--paper-3) 60%);
+    padding: 20px;
+    position: relative;
+  }
+  .song-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .song-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-family: Georgia, serif;
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--paper);
+  }
+  .song-badge--hiphop { background: var(--burgundy); }
+  .song-badge--pop { background: var(--brass); }
+  .song-badge--jazz { background: #4a4a2c; color: var(--paper); }
+  .song-year {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+  .song-difficulty {
+    color: var(--brass);
+    font-family: ui-monospace, monospace;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    margin-left: auto;
+  }
+  .song-difficulty .off { color: color-mix(in oklab, var(--muted) 40%, transparent); }
+  .song-artist {
+    font-family: Georgia, serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+  .song-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 12px;
+    letter-spacing: -0.005em;
+  }
+  .exercise--song .exercise__num {
+    background: var(--burgundy);
+    color: var(--paper);
+    border-color: var(--burgundy);
+  }
+
+  /* Per-lesson progress meter */
+  .lesson-detail__progress {
+    margin-bottom: 24px;
+    padding: 14px 18px;
+    background: color-mix(in oklab, var(--paper-3) 88%, var(--brass) 12%);
+    border-radius: 4px;
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .lesson-detail__progress-label {
+    font-family: Georgia, serif;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+  .lesson-detail__progress-label b { color: var(--brass); font-weight: 700; font-size: 14px; }
+  .lesson-detail__progress-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--paper);
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .lesson-detail__progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--brass), var(--brass-hi));
+    transition: width .4s ease;
+    width: 0%;
+  }
+  .lesson-detail__progress.is-complete .lesson-detail__progress-fill { background: var(--sage); }
+
+  /* End-of-lesson CTA */
+  .lesson-cta {
+    margin-top: 40px;
+    padding: 28px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 6px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 24px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .lesson-cta::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--brass), var(--brass-hi));
+  }
+  .lesson-cta.is-complete { background: linear-gradient(135deg, #4a5c38 0%, #3a4a2c 100%); }
+  .lesson-cta__icon {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 48px;
+    font-style: italic;
+    line-height: 1;
+    color: var(--brass-hi);
+    font-weight: 500;
+  }
+  .lesson-cta__body h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 22px;
+    margin: 0 0 6px 0;
+    color: var(--paper);
+  }
+  .lesson-cta__body p {
+    margin: 0;
+    color: rgba(255,255,255,0.7);
+    font-size: 14px;
+  }
+  .lesson-cta__btn {
+    background: var(--brass);
+    color: var(--paper);
+    border: none;
+    padding: 14px 24px;
+    border-radius: 4px;
+    font-family: Georgia, serif;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background .15s ease;
+  }
+  .lesson-cta__btn:hover { background: var(--brass-hi); }
+  .lesson-cta.is-complete .lesson-cta__btn { background: var(--brass-hi); color: var(--ink); }
+  .lesson-cta.is-complete .lesson-cta__btn:hover { background: var(--paper); }
+  @media (max-width: 700px) {
+    .lesson-cta { grid-template-columns: 1fr; gap: 16px; text-align: left; padding: 20px; }
+    .lesson-cta__icon { font-size: 36px; }
+  }
 </style>
 </head>
 <body>
@@ -2088,7 +2302,9 @@ const MIDI_LOW = 36;
 const MIDI_HIGH = 84;
 
 const CURRICULUM = [
+  // ============================================================
   // MODULE 1 — Fondations
+  // ============================================================
   {
     module: 1,
     moduleTitle: "Fondations",
@@ -2098,19 +2314,22 @@ const CURRICULUM = [
     obj: "Repérer chaque note en une seconde. Jouer une gamme et une mélodie de trois notes.",
     deck: "Avant d'aborder la théorie, il faut habiter l'espace physique du clavier.",
     duration: "3h30 sem",
-    exercises: 4,
+    exercises: 7,
     body: [
       { h: "Ce qu'on regarde", type: "prose", text: "Un clavier de 49 touches, c'est 4 octaves plus une note. Chaque octave contient 7 touches blanches et 5 noires, arrangées en un groupe de 2 et un groupe de 3. Ces deux groupes te servent de repère : la blanche juste à gauche des <b>deux noires</b> est un <b>Do</b>. Toujours." },
       { h: "Les 7 notes", type: "prose", text: "Do — Ré — Mi — Fa — Sol — La — Si — puis Do à nouveau, une octave plus haut. Ce sont les 7 blanches d'une octave. Les noires en anglo-saxon s'appellent \"dièses\" (♯, un demi-ton plus haut) ou \"bémols\" (♭, un demi-ton plus bas)." },
       { h: "Position de la main droite", type: "prose", text: "Pouce sur Do (le Do central, appelé C4). Les 5 doigts posent-toi sur Do, Ré, Mi, Fa, Sol. Le poignet reste souple, les doigts naturellement recourbés." },
       { h: "Exercices", type: "exercises", items: [
-        { name: "Trouver Do en 2s", time: "5×3 min", desc: "Ferme les yeux, ouvre-les, pose l'index sur le Do le plus proche. Toutes les octaves.", play: "C:4" },
-        { name: "Gamme Do majeur MD", time: "10 min", desc: "Ré doigté 1-2-3, passer le pouce sous, 1-2-3-4-5. Monter et descendre. Très lent.", play: "scale:C:major:4" },
-        { name: "Frère Jacques MD", time: "10 min", desc: "Do Ré Mi Do — Do Ré Mi Do — Mi Fa Sol — Mi Fa Sol.", play: "seq:C4,D4,E4,C4,C4,D4,E4,C4,E4,F4,G4,E4,F4,G4" },
-        { name: "Nommer sans regarder", time: "5 min", desc: "Ton doigt sur une touche au hasard. Nomme la note avant de vérifier." },
+        { name: "Trouver Do en 2 secondes", time: "5 min", desc: "Ferme les yeux, ouvre-les, pose l'index sur le Do le plus proche. Répète sur toutes les octaves.", play: "C:4" },
+        { name: "Toutes les Do", time: "5 min", desc: "Joue le Do de chaque octave, du plus grave au plus aigu. C2, C3, C4, C5, C6.", play: "seq:C2,C3,C4,C5,C6" },
+        { name: "Gamme de Do majeur MD", time: "10 min", desc: "Doigté 1-2-3, passer le pouce sous, 1-2-3-4-5. Monter et descendre très lentement.", play: "scale:C:major:4" },
+        { name: "Trouver Fa et Sol", time: "5 min", desc: "Repère toutes les Fa (blanche juste à gauche des 3 noires) et toutes les Sol (juste après).", play: "seq:F4,G4" },
+        { name: "Frère Jacques MD", time: "10 min", desc: "Do Ré Mi Do — Do Ré Mi Do — Mi Fa Sol — Mi Fa Sol. Puis Sol La Sol Fa Mi Do — Do Sol Do (basse).", play: "seq:C4,D4,E4,C4,C4,D4,E4,C4,E4,F4,G4,E4,F4,G4" },
+        { name: "Nommer 20 notes sans regarder", time: "5 min", desc: "Un doigt sur une touche au hasard, nomme la note avant de vérifier. Note ton score sur 20." },
+        { name: "Ode à la Joie (thème)", time: "10 min", desc: "Mi-Mi-Fa-Sol-Sol-Fa-Mi-Ré-Do-Do-Ré-Mi-Mi-Ré-Ré. Le thème le plus reconnaissable au monde.", play: "seq:E4,E4,F4,G4,G4,F4,E4,D4,C4,C4,D4,E4,E4,D4,D4" },
       ]},
       { h: "Le sais-tu ?", type: "aside", items: [
-        { b: "Ludovico Einaudi", s: "Nuvole Bianche — écouter la simplicité." },
+        { b: "Ludovico Einaudi", s: "Nuvole Bianche — simplicité radicale." },
         { b: "Erik Satie", s: "Gnossienne n°1 — mélodie unique, peu de notes." },
         { b: "The Beatles", s: "Let It Be (intro) — un seul doigt suffit." },
       ]},
@@ -2123,16 +2342,19 @@ const CURRICULUM = [
     obj: "Pulser à 60 BPM. Jouer 4 mesures main gauche seule sans caler.",
     deck: "Le rythme, c'est ce qui transforme des notes en musique. La main gauche ancre la pulsation.",
     duration: "3h30 sem",
-    exercises: 4,
+    exercises: 7,
     body: [
       { h: "Compter la musique", type: "prose", text: "Une mesure = un groupe de temps qui se répète. Le plus fréquent : 4 temps (« quatre-quatre »). Tu comptes 1, 2, 3, 4, 1, 2, 3, 4. Chaque chiffre = un temps. Une <b>noire</b> dure 1 temps, une <b>blanche</b> 2 temps, une <b>ronde</b> 4 temps. Une <b>croche</b> = un demi-temps." },
       { h: "Le tempo", type: "prose", text: "60 BPM (battements par minute) = 1 battement par seconde. Le tic-tac d'une horloge. Commence toujours en dessous du confort : mieux vaut jouer à 50 BPM proprement que 90 avec des trébuchements." },
       { h: "La main gauche", type: "prose", text: "Sur un 49 touches, la MG habite plutôt l'octave 2-3 (basses). Position de départ : petit doigt sur le Do (C3), 5-4-3-2-1 remonte sur Do-Ré-Mi-Fa-Sol." },
       { h: "Exercices", type: "exercises", items: [
-        { name: "Métronome intérieur", time: "5 min", desc: "Compte à voix haute 1-2-3-4, tape le pied sur chaque temps. 60 BPM.", },
+        { name: "Métronome intérieur", time: "5 min", desc: "Compte à voix haute 1-2-3-4, tape le pied sur chaque temps. 60 BPM. Sans piano." },
+        { name: "Subdiviser en croches", time: "5 min", desc: "1-et-2-et-3-et-4-et — chaque \"et\" est une croche entre deux temps. Deux fois plus rapide." },
         { name: "Gamme Do majeur MG", time: "10 min", desc: "Doigté 5-4-3-2-1, passer le 3 par-dessus, 3-2-1. Monter, descendre.", play: "scale:C:major:3" },
-        { name: "Basse Do-Sol", time: "10 min", desc: "MG : Do (2 temps) — Sol (2 temps) — Do — Sol. Quatre mesures. Bien régulier.", play: "seq:C3,-,G3,-,C3,-,G3,-" },
-        { name: "Basse alternée", time: "5 min", desc: "Do (temps 1), Sol (temps 3) — souvent utilisée en pop.", play: "seq:C3,-,G3,-,C3,-,G3,-" },
+        { name: "Basse Do-Sol", time: "10 min", desc: "MG : Do (2 temps) — Sol (2 temps) — Do — Sol. Quatre mesures régulières.", play: "seq:C3,-,G3,-,C3,-,G3,-" },
+        { name: "Basse descendante", time: "5 min", desc: "MG : Sol — Fa — Mi — Ré — Do (une note par mesure). Utile en pop.", play: "seq:G3,F3,E3,D3,C3" },
+        { name: "Basse alternée", time: "5 min", desc: "Do sur temps 1, Sol sur temps 3. Le \"boom-tchak\" de la pop-folk.", play: "seq:C3,-,G3,-,C3,-,G3,-" },
+        { name: "Basse walking en Do", time: "10 min", desc: "Do-Mi-Sol-Mi-Do (montée-descente). Le début du walking bass jazz.", play: "seq:C3,E3,G3,E3,C3" },
       ]},
       { h: "Le sais-tu ?", type: "aside", items: [
         { b: "The Beatles", s: "Let It Be — MG piano très simple." },
@@ -2148,24 +2370,31 @@ const CURRICULUM = [
     obj: "Jouer une mélodie main droite avec un accompagnement main gauche stable.",
     deck: "Le mur qu'on croit infranchissable — et qui tombe en trois jours de patience.",
     duration: "3h30 sem",
-    exercises: 3,
+    exercises: 7,
     body: [
       { h: "Le principe", type: "prose", text: "Commence toujours mains séparées, à tempo lent, très propre. Ensuite tu superposes : une main tient une note longue, l'autre bouge. Puis les deux bougent. Tu vas te tromper — reprends deux mesures avant." },
-      { h: "La technique du blocs", type: "prose", text: "Divise la mélodie en petits blocs (2-3 notes). Joue MG + MD sur le bloc 1 quinze fois, puis bloc 2 quinze fois, puis enchaîne. Bien plus efficace qu'une lecture linéaire." },
+      { h: "La technique des blocs", type: "prose", text: "Divise la mélodie en petits blocs (2-3 notes). Joue MG + MD sur le bloc 1 quinze fois, puis bloc 2 quinze fois, puis enchaîne. Bien plus efficace qu'une lecture linéaire." },
       { h: "Exercices", type: "exercises", items: [
-        { name: "Ostinato MG + note MD", time: "10 min", desc: "MG : Do-Sol-Do-Sol (noires). MD : Do (blanche) 2 temps, silence 2 temps.", play: "chord:C:0" },
+        { name: "Ostinato MG + Do MD", time: "8 min", desc: "MG : Do-Sol-Do-Sol (noires). MD : Do (blanche) 2 temps, silence 2 temps.", play: "chord:C:0" },
         { name: "Au clair de la lune", time: "15 min", desc: "MD : Do-Do-Do-Ré-Mi-Ré | Do-Mi-Ré-Ré-Do. MG : Do (ronde) tout du long.", play: "seq:C4,C4,C4,D4,E4,D4,C4,E4,D4,D4,C4" },
-        { name: "Ode à la Joie", time: "10 min", desc: "MD : Mi-Mi-Fa-Sol-Sol-Fa-Mi-Ré-Do-Do-Ré-Mi-Mi-Ré-Ré. MG : Do (blanche) sur chaque mesure.", play: "seq:E4,E4,F4,G4,G4,F4,E4,D4,C4,C4,D4,E4,E4,D4,D4" },
+        { name: "Twinkle Twinkle Little Star", time: "12 min", desc: "MD : Do-Do-Sol-Sol-La-La-Sol | Fa-Fa-Mi-Mi-Ré-Ré-Do. MG : Do en ronde puis Fa en ronde.", play: "seq:C4,C4,G4,G4,A4,A4,G4,F4,F4,E4,E4,D4,D4,C4" },
+        { name: "Ode à la Joie à deux mains", time: "10 min", desc: "MD : le thème (S1). MG : Do (blanche) sur les 4 premiers temps, Sol (blanche) sur les 4 suivants.", play: "seq:E4,E4,F4,G4,G4,F4,E4,D4,C4,C4,D4,E4,E4,D4,D4" },
+        { name: "Amazing Grace (intro)", time: "10 min", desc: "MD : Sol-Do-Mi-Do-Mi-Ré (Amazing Grace, how sweet the sound). MG : Do en ronde.", play: "seq:G3,C4,E4,C4,E4,D4" },
+        { name: "Runaway (Kanye West) — la note qui tue", time: "12 min", desc: "L'intro la plus célèbre du hip-hop : Mi5 martelé, 8 fois. MG : Do grave (Do3). Ensuite Mi5 seul, écoute le silence.", play: "seq:C3,E5,E5,E5,E5,E5,E5,E5,E5", song: { artist: "Kanye West", title: "Runaway", year: 2010, genre: "hip-hop", difficulty: 1 } },
+        { name: "Enregistrer et écouter", time: "5 min", desc: "Enregistre-toi jouer un des exercices sur ton téléphone. Écoute — l'oreille détecte ce que les doigts ratent." },
       ]},
       { h: "Le sais-tu ?", type: "aside", items: [
         { b: "Beethoven", s: "Ode à la Joie — l'exercice devient un tube." },
         { b: "Coldplay", s: "Clocks — pattern MG hypnotique." },
         { b: "Yiruma", s: "River Flows In You — pattern MD simple, MG lentement." },
+        { b: "Kanye West", s: "Runaway — 3 minutes d'intro sur une note." },
       ]},
     ]
   },
 
+  // ============================================================
   // MODULE 2 — Théorie & premiers accords
+  // ============================================================
   {
     module: 2,
     moduleTitle: "Théorie & premiers accords",
@@ -2175,7 +2404,7 @@ const CURRICULUM = [
     obj: "Construire n'importe quelle gamme majeure à partir de sa formule d'intervalles.",
     deck: "La gamme majeure est la mère de presque tout ce qu'on écoute. Six intervalles, un secret.",
     duration: "3h30 sem",
-    exercises: 3,
+    exercises: 7,
     body: [
       { h: "La formule sacrée", type: "prose", text: "Une gamme majeure suit toujours la même suite d'intervalles : <b>ton — ton — demi-ton — ton — ton — ton — demi-ton</b>. Sur Do, ça tombe naturellement sur les blanches. Sur Sol, il faut un Fa♯ pour que la formule reste juste." },
       { h: "Ton et demi-ton", type: "prose", text: "Un demi-ton = deux touches immédiatement voisines (Mi→Fa, Si→Do, Do→Do♯). Un ton = deux demi-tons (Do→Ré, Ré→Mi). Sur les blanches, Mi-Fa et Si-Do sont les seuls demi-tons naturels." },
@@ -2183,7 +2412,11 @@ const CURRICULUM = [
       { h: "Exercices", type: "exercises", items: [
         { name: "Gamme de Sol majeur MD", time: "10 min", desc: "Sol-La-Si-Do-Ré-Mi-Fa♯-Sol. Attention au Fa♯ (touche noire).", play: "scale:G:major:4" },
         { name: "Gamme de Fa majeur MD", time: "10 min", desc: "Fa-Sol-La-Si♭-Do-Ré-Mi-Fa. Attention au Si♭.", play: "scale:F:major:4" },
-        { name: "Construire Ré majeur", time: "10 min", desc: "Sans regarder, applique la formule T-T-1/2-T-T-T-1/2 à partir de Ré. Note les altérations.", play: "scale:D:major:4" },
+        { name: "Gamme de Ré majeur", time: "10 min", desc: "Ré-Mi-Fa♯-Sol-La-Si-Do♯-Ré. Deux dièses (Fa♯, Do♯).", play: "scale:D:major:4" },
+        { name: "Gamme de La majeur", time: "10 min", desc: "La-Si-Do♯-Ré-Mi-Fa♯-Sol♯-La. Trois dièses. Reconnais le motif.", play: "scale:A:major:4" },
+        { name: "Gamme pentatonique majeure", time: "8 min", desc: "5 notes seulement : Do-Ré-Mi-Sol-La. La \"gamme sans faute\" — tu peux improviser dessus sur presque tout.", play: "scale:C:pentmajor:4" },
+        { name: "C.R.E.A.M. (Wu-Tang Clan) — motif descendant", time: "12 min", desc: "Le sample de RZA suit une descente : Do5-Si4-La4-Sol4-Fa4-Mi4. La gamme majeure à l'envers, dans le boom-bap.", play: "seq:C5,B4,A4,G4,F4,E4,D4,C4", song: { artist: "Wu-Tang Clan", title: "C.R.E.A.M.", year: 1993, genre: "hip-hop", difficulty: 2 } },
+        { name: "Reconnaître une tonalité", time: "5 min", desc: "Écoute une chanson que tu connais. Trouve sa note finale — c'est presque toujours la tonique." },
       ]},
       { h: "Le sais-tu ?", type: "aside", items: [
         { b: "Do majeur", s: "0 altération — la tonalité \"par défaut\"." },
@@ -2200,21 +2433,26 @@ const CURRICULUM = [
     obj: "Empiler tierce + quinte à partir de n'importe quelle note. Nommer majeur/mineur à l'oreille.",
     deck: "Un accord est une construction, pas une forme. Trois notes, deux tierces, un caractère.",
     duration: "3h30 sem",
-    exercises: 4,
+    exercises: 8,
     body: [
       { h: "Recette d'une triade", type: "prose", text: "Prends une note (la fondamentale). Ajoute une tierce (2 touches blanches au-dessus, en ignorant la note de départ). Ajoute une quinte (encore 2 blanches au-dessus). Résultat : 3 notes empilées en tierces. C'est une <b>triade</b>." },
       { h: "Majeur vs mineur", type: "prose", text: "La différence entre majeur (joyeux) et mineur (mélancolique) tient à un seul demi-ton — celui de la <b>tierce</b>. Tierce majeure = 4 demi-tons. Tierce mineure = 3 demi-tons. Do majeur = Do-Mi-Sol. Do mineur = Do-Mi♭-Sol." },
       { h: "Les 7 triades de Do majeur", type: "prose", text: "En construisant une triade sur chaque note de la gamme, tu obtiens : <b>Do</b> majeur, Ré <b>mineur</b>, Mi <b>mineur</b>, <b>Fa</b> majeur, <b>Sol</b> majeur, La <b>mineur</b>, Si <b>diminué</b>. Le motif majeur-mineur-mineur-majeur-majeur-mineur-diminué est vrai pour toute gamme majeure." },
       { h: "Exercices", type: "exercises", items: [
-        { name: "Les triades de Do", time: "10 min", desc: "Joue chaque triade de Do majeur en montant : Do, Rém, Mim, Fa, Sol, Lam. Nomme-les.", play: "chords:C:0,Dm:0,Em:0,F:0,G:0,Am:0" },
-        { name: "Majeur vs mineur", time: "5 min", desc: "Joue Do majeur, puis Do mineur. Écoute la différence.", play: "chords:C:0,Cm:0" },
-        { name: "Deviner à l'oreille", time: "10 min", desc: "Ferme les yeux, joue un accord au hasard. Devine avant d'ouvrir les yeux." },
-        { name: "Enchaîner Do → Sol → Lam → Fa", time: "10 min", desc: "La progression pop la plus utilisée au monde. Une mesure par accord.", play: "chords:C:0,G:0,Am:0,F:0" },
+        { name: "Les 7 triades de Do", time: "10 min", desc: "Joue chaque triade en montant : Do, Rém, Mim, Fa, Sol, Lam. Nomme-les à voix haute.", play: "chords:C:0,Dm:0,Em:0,F:0,G:0,Am:0" },
+        { name: "Les 7 triades de Sol majeur", time: "10 min", desc: "Sol, Lam, Sim, Do, Ré, Mim. Applique le motif majeur-mineur-mineur-majeur-majeur-mineur.", play: "chords:G:0,Am:0,Bm:0,C:0,D:0,Em:0" },
+        { name: "Majeur vs mineur", time: "5 min", desc: "Joue Do majeur, puis Do mineur. La tierce descend d'un demi-ton. Écoute la différence — jour et nuit.", play: "chords:C:0,Cm:0" },
+        { name: "Triades sur toutes les blanches", time: "8 min", desc: "À partir de chaque blanche, joue la triade majeure. Do, Ré, Mi, Fa, Sol, La, Si — même si certaines sonnent \"faux\", c'est intentionnel." },
+        { name: "Deviner à l'oreille", time: "10 min", desc: "Ferme les yeux, joue un accord au hasard. Majeur ou mineur ? Puis regarde." },
+        { name: "Enchaîner Do-Sol-Lam-Fa", time: "10 min", desc: "La progression pop la plus utilisée au monde. Une mesure par accord.", play: "chords:C:0,G:0,Am:0,F:0" },
+        { name: "Still D.R.E. (Dr. Dre) — le loop mythique", time: "15 min", desc: "Dr. Dre en Do mineur : Dom - Do majeur - Fa mineur - Sol majeur. Simplification radicale du loop de 1999. Les 4 accords tournent en boucle.", play: "chords:Cm:0,C:0,Fm:0,G:0", song: { artist: "Dr. Dre feat. Snoop Dogg", title: "Still D.R.E.", year: 1999, genre: "hip-hop", difficulty: 3 } },
+        { name: "Composer 2 accords", time: "5 min", desc: "Choisis 2 triades qui te plaisent enchaînées. Enregistre 4 mesures. Réécoute." },
       ]},
       { h: "Le sais-tu ?", type: "aside", items: [
         { b: "The Axis of Awesome", s: "\"4 Chords\" — mashup de tubes tous en Do-Sol-Lam-Fa." },
         { b: "Journey", s: "Don't Stop Believin' — même 4 accords." },
         { b: "Ed Sheeran", s: "Perfect — variation de la même progression." },
+        { b: "Dr. Dre", s: "Still D.R.E. — 4 accords en Cm, 4 minutes." },
       ]},
     ]
   },
@@ -2225,25 +2463,33 @@ const CURRICULUM = [
     obj: "Enchaîner 4 accords avec un mouvement fluide en utilisant les renversements.",
     deck: "Les renversements sont ce qui distingue un débutant qui saute d'un accord à l'autre d'un pianiste qui \"connecte\".",
     duration: "3h30 sem",
-    exercises: 3,
+    exercises: 8,
     body: [
       { h: "Qu'est-ce qu'un renversement", type: "prose", text: "Un accord contient toujours les 3 mêmes notes, mais tu peux les empiler dans un ordre différent. Do-Mi-Sol (position fondamentale), Mi-Sol-Do (premier renversement), Sol-Do-Mi (deuxième renversement). Le son reste \"Do majeur\", mais la position change." },
       { h: "Pourquoi c'est utile", type: "prose", text: "Passer de Do (Do-Mi-Sol) à Sol (Sol-Si-Ré) implique un grand mouvement. Mais si tu joues Sol en 2e renversement (Ré-Sol-Si), tu ne bouges qu'un doigt. La progression sonne \"connectée\" au lieu de sauter." },
-      { h: "La progression pop I-V-vi-IV", type: "prose", text: "En Do majeur : Do → Sol → Lam → Fa. Avec renversements pour rester en place : <br><b>Do</b> (Do-Mi-Sol) → <b>Sol</b> 1er renv. (Si-Ré-Sol) → <b>Lam</b> (La-Do-Mi) → <b>Fa</b> 2e renv. (Do-Fa-La). Ta main bouge à peine." },
+      { h: "La progression pop I-V-vi-IV", type: "prose", text: "En Do majeur : Do → Sol → Lam → Fa. Avec renversements pour rester en place :<br><b>Do</b> (Do-Mi-Sol) → <b>Sol</b> 1er renv. (Si-Ré-Sol) → <b>Lam</b> (La-Do-Mi) → <b>Fa</b> 2e renv. (Do-Fa-La). Ta main bouge à peine." },
       { h: "Exercices", type: "exercises", items: [
-        { name: "Les 3 positions de Do", time: "8 min", desc: "Joue Do en position fondamentale, 1er renv., 2e renv. Écoute la couleur." },
+        { name: "Les 3 positions de Do", time: "8 min", desc: "Joue Do en position fondamentale, 1er renv. (Mi-Sol-Do), 2e renv. (Sol-Do-Mi). Écoute la couleur." },
+        { name: "Les 3 positions de Sol", time: "8 min", desc: "Sol-Si-Ré, Si-Ré-Sol, Ré-Sol-Si. Trouve la plus proche de Do en position fondamentale." },
+        { name: "Les 3 positions de Fa", time: "8 min", desc: "Fa-La-Do, La-Do-Fa, Do-Fa-La. Repère celle qui \"ressemble\" à Do." },
         { name: "Progression pop lisse", time: "15 min", desc: "Do → Sol/Si → Lam → Fa/Do. Mains droites, renversements choisis pour minimiser le mouvement.", play: "chords:C:0,G:1,Am:0,F:2" },
-        { name: "Trouver ta version", time: "7 min", desc: "Reprends Rém → Sol → Do → Fa. Trouve les renversements qui rendent le mouvement fluide." },
+        { name: "Progression vi-IV-I-V (rétro pop)", time: "10 min", desc: "Lam - Fa - Do - Sol. Le son \"années 50\" (I Will Always Love You, Every Breath You Take).", play: "chords:Am:0,F:0,C:0,G:0" },
+        { name: "Progression I-vi-IV-V (doo-wop)", time: "10 min", desc: "Do - Lam - Fa - Sol. La \"progression des années 50\" (Stand By Me, Earth Angel).", play: "chords:C:0,Am:0,F:0,G:0" },
+        { name: "Dear Mama (2Pac) — I-V-vi-IV en Fa", time: "15 min", desc: "L'hommage de 2Pac à sa mère. Progression Fa - Do - Rém - Si♭. Pattern de 4 accords, doux et posé.", play: "chords:F:0,C:0,Dm:0,Bb:0", song: { artist: "2Pac", title: "Dear Mama", year: 1995, genre: "hip-hop", difficulty: 3 } },
+        { name: "Ta propre progression", time: "8 min", desc: "Choisis 4 accords parmi Do, Rém, Mim, Fa, Sol, Lam. Enchaîne-les avec renversements. Note ceux qui te plaisent." },
       ]},
       { h: "Le sais-tu ?", type: "aside", items: [
         { b: "The Beatles", s: "Let It Be — I-V-vi-IV en Do." },
         { b: "Adele", s: "Someone Like You — I-iii-vi-IV." },
         { b: "U2", s: "With Or Without You — I-V-vi-IV." },
+        { b: "2Pac", s: "Dear Mama — I-V-vi-IV en Fa." },
       ]},
     ]
   },
 
-  // MODULE 3 — Jouer à deux mains
+  // ============================================================
+  // MODULE 3 — Deux mains, vraiment
+  // ============================================================
   {
     module: 3,
     moduleTitle: "Deux mains, vraiment",
@@ -2253,16 +2499,19 @@ const CURRICULUM = [
     obj: "Maîtriser trois patterns MG standard : basse-accord, basse alternée, arpèges.",
     deck: "Une bonne main gauche transforme une mélodie nue en chanson.",
     duration: "3h30 sem",
-    exercises: 4,
+    exercises: 7,
     body: [
       { h: "Le basse-accord (« oom-pah »)", type: "prose", text: "Le grand classique. Sur chaque mesure : temps 1 = fondamentale grave, temps 2/3/4 = accord au-dessus. Sur Do : Do (temps 1) — Do-Mi-Sol (temps 2, 3, 4). Utilisé partout en piano-bar et en variété." },
       { h: "La basse alternée", type: "prose", text: "Fondamentale sur les temps 1 et 3, quinte sur les temps 2 et 4. Sur Do : Do — Sol — Do — Sol. Très pop, très folk. Sonne \"marchant\"." },
       { h: "L'arpège", type: "prose", text: "Au lieu de jouer les 3 notes ensemble, tu les fais rouler une par une. Sur Do : Do — Sol — Mi — Sol (ou Do-Mi-Sol-Mi). C'est la texture \"berceuse\", romantique." },
       { h: "Exercices", type: "exercises", items: [
-        { name: "Pattern basse-accord Do", time: "8 min", desc: "MG : Do grave (temps 1), Do-Mi-Sol (temps 2-3-4). Recommence.", play: "chord:C:0" },
-        { name: "Basse alternée sur I-V-vi-IV", time: "10 min", desc: "MG : sur chaque accord, alterne fondamentale et quinte." },
-        { name: "Arpège en Do majeur", time: "10 min", desc: "MG : Do-Sol-Mi-Sol (croches, régulier). Recommence avec Fa, Sol, Lam." },
-        { name: "Arpège brisé (Alberti)", time: "10 min", desc: "Do-Sol-Mi-Sol répété — c'est le pattern de Mozart. Très classique.", play: "seq:C3,G3,E3,G3,C3,G3,E3,G3" },
+        { name: "Pattern basse-accord en Do", time: "8 min", desc: "MG : Do grave (temps 1), Do-Mi-Sol (temps 2-3-4). Recommence.", play: "chord:C:0" },
+        { name: "Basse alternée sur Do-Sol-Lam-Fa", time: "10 min", desc: "Sur chaque accord, alterne fondamentale et quinte. Do-Sol / Sol-Ré / La-Mi / Fa-Do.", play: "seq:C3,G3,G3,D4,A3,E4,F3,C4" },
+        { name: "Arpège en Do majeur", time: "10 min", desc: "MG : Do-Sol-Mi-Sol (croches régulières). Recommence avec Fa, Sol, Lam.", play: "seq:C3,G3,E3,G3,C3,G3,E3,G3" },
+        { name: "Arpège brisé (Alberti)", time: "10 min", desc: "Do-Sol-Mi-Sol répété — le pattern de Mozart, base du piano classique.", play: "seq:C3,G3,E3,G3,C3,G3,E3,G3" },
+        { name: "Broken 1-5-3-5 sur 4 accords", time: "10 min", desc: "Applique l'arpège Alberti à Do, Sol, Lam, Fa. C'est le son \"berceuse pop\".", play: "seq:C3,G3,E3,G3,G3,D4,B3,D4,A3,E4,C4,E4,F3,C4,A3,C4" },
+        { name: "Half-time feel", time: "10 min", desc: "Pattern MG sur 2 mesures au lieu de 1 : basse (1), accord (3). Espace, respiration." },
+        { name: "Basse-accord en Sol", time: "8 min", desc: "Refait le \"oom-pah\" en Sol majeur. Sol (temps 1), Sol-Si-Ré (2-3-4).", play: "chord:G:0" },
       ]},
       { h: "Le sais-tu ?", type: "aside", items: [
         { b: "Mozart", s: "Sonate K. 545 — l'Alberti bass pur." },
@@ -2278,20 +2527,25 @@ const CURRICULUM = [
     obj: "Chanter une mélodie main droite sur un accompagnement main gauche construit soi-même.",
     deck: "Là où tout se joue vraiment. Tu ne suis plus une partition — tu accompagnes une mélodie que tu as choisie.",
     duration: "3h30 sem",
-    exercises: 3,
+    exercises: 7,
     body: [
       { h: "La méthode \"grille + mélodie\"", type: "prose", text: "En pop, on note souvent juste la grille d'accords (C — G — Am — F) au-dessus des paroles. À toi de fabriquer l'accompagnement. Version débutant : joue la fondamentale de chaque accord en ronde à la MG, la mélodie à la MD. Ça marche déjà." },
       { h: "Enrichir progressivement", type: "prose", text: "Étape 1 : fondamentale MG en ronde. Étape 2 : fondamentale + quinte alternées. Étape 3 : basse-accord. Étape 4 : arpèges. Ne saute pas les étapes." },
       { h: "Choisir sa version", type: "prose", text: "Un même morceau se joue de dix manières. Adele lente et douce = arpèges. Beatles enjoués = basse-accord. Blues = basse alternée avec swing. Le choix du pattern raconte l'émotion." },
       { h: "Exercices", type: "exercises", items: [
-        { name: "Let It Be (débutant)", time: "20 min", desc: "Grille : Do-Sol-Lam-Fa | Do-Sol-Fa-Do. MG : fondamentales en ronde. MD : mélodie du refrain." },
-        { name: "Someone Like You (débutant)", time: "20 min", desc: "Grille : La-Mi/Sol♯-Fa♯m-Ré (arpèges MG). MD : mélodie principale." },
-        { name: "Ton propre morceau", time: "15 min", desc: "Choisis une chanson que tu aimes, trouve sa grille en ligne, applique ta méthode." },
+        { name: "Let It Be (débutant)", time: "20 min", desc: "Grille : Do-Sol-Lam-Fa | Do-Sol-Fa-Do. MG : fondamentales en ronde. MD : mélodie du refrain (Sol-La-Sol-Fa-Mi-Ré-Do).", play: "chords:C:0,G:0,Am:0,F:0,C:0,G:0,F:0,C:0" },
+        { name: "Someone Like You (arpèges)", time: "20 min", desc: "MG en arpèges sur La-Mi-Fa♯m-Ré. MD : la mélodie principale. Douceur d'Adele.", play: "chords:A:0,E:0,F#m:0,D:0" },
+        { name: "Amazing Grace complet", time: "15 min", desc: "MG en ronde sur Fa - Fa - Sib - Fa - Do - Fa. MD : mélodie complète du chant.", play: "chords:F:0,F:0,Bb:0,F:0,C:0,F:0" },
+        { name: "Twinkle deux mains", time: "10 min", desc: "MG : Do-Do-Sol-Sol / Fa-Fa-Do-Do. MD : la mélodie de Twinkle.", play: "seq:C4,C4,G4,G4,A4,A4,G4,F4,F4,E4,E4,D4,D4,C4" },
+        { name: "NY State of Mind (Nas) — mélodie seule", time: "20 min", desc: "Le loop de DJ Premier réduit à sa mélodie de 4 notes. En La mineur : La-Do-Mi-Ré, répété. Le sample le plus samplé du hip-hop.", play: "seq:A4,C5,E5,D5,A4,C5,E5,D5", song: { artist: "Nas", title: "NY State of Mind", year: 1994, genre: "hip-hop", difficulty: 3 } },
+        { name: "Simplifier une grille", time: "10 min", desc: "Prends une chanson pop que tu aimes. Cherche sa grille sur ultimate-guitar.com. Joue-la avec MG en ronde." },
+        { name: "Chanter en jouant", time: "5 min", desc: "Joue les accords MG + chante la mélodie. Sans MD. Coordonner la voix et les mains, c'est déjà un niveau." },
       ]},
       { h: "Le sais-tu ?", type: "aside", items: [
         { b: "Ultimate-Guitar", s: "ultimate-guitar.com — grilles de milliers de morceaux." },
         { b: "Chordify", s: "Analyse un YouTube et te donne les accords." },
         { b: "Hooktheory", s: "Base de données de progressions par style." },
+        { b: "Nas & DJ Premier", s: "Le duo qui a défini le boom-bap." },
       ]},
     ]
   },
@@ -2302,25 +2556,32 @@ const CURRICULUM = [
     obj: "Jouer un morceau entier — intro, couplet, refrain — à deux mains, de mémoire.",
     deck: "L'objectif de trois mois de fondations : tenir un morceau complet devant quelqu'un.",
     duration: "3h30 sem",
-    exercises: 3,
+    exercises: 7,
     body: [
-      { h: "Comment choisir", type: "prose", text: "Un morceau que tu aimes vraiment — tu vas le jouer 200 fois cette semaine. Idéalement 3-4 accords, tempo lent-moyen, pas trop de sauts d'octave. Suggestions : <i>Let It Be</i>, <i>Imagine</i>, <i>River Flows In You</i> (version simplifiée), <i>Comptine d'un autre été</i>." },
+      { h: "Comment choisir", type: "prose", text: "Un morceau que tu aimes vraiment — tu vas le jouer 200 fois cette semaine. Idéalement 3-4 accords, tempo lent-moyen, pas trop de sauts d'octave. Suggestions : <i>Let It Be</i>, <i>Imagine</i>, <i>NY State of Mind</i> (version simplifiée), <i>Comptine d'un autre été</i>." },
       { h: "Le découpage", type: "prose", text: "Divise le morceau en sections : intro, couplet, refrain, pont, fin. Travaille chaque section séparément, mains séparées d'abord, puis mains ensemble, puis à tempo. Assemble seulement quand chaque section est prête." },
       { h: "L'objectif de la semaine", type: "prose", text: "Tu ne dois pas jouer parfaitement — tu dois jouer <b>de bout en bout sans t'arrêter</b>. C'est différent. Une fausse note qu'on continue vaut mieux que dix reprises." },
       { h: "Exercices", type: "exercises", items: [
-        { name: "Choix + découpe", time: "10 min", desc: "Choisis ton morceau. Découpe-le en 4-5 sections. Note-les." },
-        { name: "Travail par section", time: "20 min ×5j", desc: "Chaque jour, une section jusqu'à ce qu'elle soit fluide MS puis MD." },
-        { name: "Enregistrement final", time: "15 min", desc: "En fin de semaine : joue le morceau entier en t'enregistrant sur ton téléphone. Écoute." },
+        { name: "Choisir + découper", time: "10 min", desc: "Choisis ton morceau. Découpe-le en 4-5 sections. Note-les sur papier." },
+        { name: "NY State of Mind — deux mains", time: "25 min", desc: "MG : La grave (La2), pédale toute la mesure. MD : le motif La-Do-Mi-Ré répété. Le hip-hop en 4 notes.", play: "seq:A2,A4,C5,E5,D5,A4,C5,E5,D5", song: { artist: "Nas", title: "NY State of Mind (deux mains)", year: 1994, genre: "hip-hop", difficulty: 4 } },
+        { name: "Travail par section (jour 1-3)", time: "20 min ×3j", desc: "Chaque jour, une section jusqu'à ce qu'elle soit fluide MS puis MD." },
+        { name: "Jouer sans regarder les mains", time: "10 min", desc: "Ferme les yeux 4 mesures. Puis 8. Puis un couplet entier. Ta mémoire musculaire prend le relais." },
+        { name: "Métronome à 60 BPM", time: "10 min", desc: "Joue ton morceau au métronome. Si tu accélères aux passages faciles et ralentis aux durs, tu vas t'entendre." },
+        { name: "Enregistrement final", time: "15 min", desc: "En fin de semaine : joue le morceau entier en t'enregistrant sur ton téléphone. Écoute avec attention." },
+        { name: "Jouer devant quelqu'un", time: "5 min", desc: "Un ami, un colocataire, un chat. Jouer sous les yeux d'un autre = 10x plus dur. Fais-le maintenant, pas plus tard." },
       ]},
       { h: "Le sais-tu ?", type: "aside", items: [
         { b: "Musescore.com", s: "Partitions gratuites classées par difficulté." },
         { b: "Sheet Music Boss", s: "YouTube — tutoriels lents, difficultés multiples." },
         { b: "PianoTv", s: "YouTube — bonnes explications techniques." },
+        { b: "Nas", s: "\"NY State of Mind\" — 1994, l'apogée du hip-hop new-yorkais." },
       ]},
     ]
   },
 
-  // MODULE 4 — Jazz & composition
+  // ============================================================
+  // MODULE 4 — Jazz, blues & composition
+  // ============================================================
   {
     module: 4,
     moduleTitle: "Jazz, blues & composition",
@@ -2330,15 +2591,20 @@ const CURRICULUM = [
     obj: "Construire et enchaîner maj7, m7, 7 (dominante). Jouer un ii-V-I en Do.",
     deck: "La 7e est la couleur qui fait passer du chant d'enfant à l'harmonie adulte.",
     duration: "3h30 sem",
-    exercises: 3,
+    exercises: 8,
     body: [
       { h: "Recette", type: "prose", text: "Prends une triade. Ajoute une 4e note : la septième. Il en existe trois principales :<br>— <b>Majeure (maj7)</b> : 11 demi-tons au-dessus de la fondamentale. Do-Mi-Sol-Si. Lumineux, jazz.<br>— <b>Mineure (m7)</b> : 10 demi-tons. Dom = Do-Mi♭-Sol-Si♭. Doux, feutré.<br>— <b>Dominante (7)</b> : 10 demi-tons sur une triade majeure. Do7 = Do-Mi-Sol-Si♭. Tension, blues." },
       { h: "Le ii-V-I", type: "prose", text: "Le mouvement fondamental du jazz. En Do : <b>Rém7</b> (le ii) → <b>Sol7</b> (le V) → <b>Do maj7</b> (le I). Trois mesures, une phrase complète. Ce mouvement se retrouve dans des milliers de standards." },
       { h: "Voicings de jazz", type: "prose", text: "Au piano jazz, on ne joue pas les accords \"empilés\" (fondamentale, tierce, quinte, septième). On saute la fondamentale (le bassiste s'en charge), et on joue tierce et septième : Do maj7 devient juste Mi-Si à la main gauche. C'est ce qui donne le son \"open\"." },
       { h: "Exercices", type: "exercises", items: [
-        { name: "Les 3 types de 7e sur Do", time: "10 min", desc: "Joue Cmaj7, Cm7, C7. Écoute la différence.", play: "chords:Cmaj7:0,Cm7:0,C7:0" },
-        { name: "ii-V-I en Do", time: "15 min", desc: "Dm7 → G7 → Cmaj7. Répète 20 fois.", play: "chords:Dm7:0,G7:0,Cmaj7:0" },
-        { name: "ii-V-I en Fa", time: "15 min", desc: "Gm7 → C7 → Fmaj7.", play: "chords:Gm7:0,C7:0,Fmaj7:0" },
+        { name: "Les 3 types de 7e sur Do", time: "10 min", desc: "Joue Cmaj7, Cm7, C7 à la suite. Écoute la différence — lumineux, feutré, tendu.", play: "chords:Cmaj7:0,Cm7:0,C7:0" },
+        { name: "Les 3 types sur Sol", time: "8 min", desc: "Gmaj7, Gm7, G7. Repère la 7e qui change.", play: "chords:Gmaj7:0,Gm7:0,G7:0" },
+        { name: "Cmaj7 en 3 positions", time: "10 min", desc: "Do-Mi-Sol-Si, Mi-Sol-Si-Do, Sol-Si-Do-Mi. Les renversements avec 7e.", play: "chords:Cmaj7:0,Cmaj7:1,Cmaj7:2" },
+        { name: "ii-V-I en Do", time: "15 min", desc: "Dm7 → G7 → Cmaj7. Répète 20 fois. Le tapis roulant du jazz.", play: "chords:Dm7:0,G7:0,Cmaj7:0" },
+        { name: "ii-V-I en Fa", time: "15 min", desc: "Gm7 → C7 → Fmaj7. Transposer, c'est le vrai apprentissage.", play: "chords:Gm7:0,C7:0,Fmaj7:0" },
+        { name: "ii-V-I en Sol", time: "10 min", desc: "Am7 → D7 → Gmaj7.", play: "chords:Am7:0,D7:0,Gmaj7:0" },
+        { name: "Voicing shell (3e + 7e)", time: "10 min", desc: "Pour Cmaj7, joue juste Mi + Si à la MG. Pour Fmaj7, La + Mi. Le son \"tierce+septième\" est la moelle du jazz." },
+        { name: "Enchainer les 7e en cercle", time: "10 min", desc: "Cmaj7 → Fmaj7 → Bbmaj7 → Ebmaj7… Le cycle des quintes descendantes en maj7. Test de fluidité.", play: "chords:Cmaj7:0,Fmaj7:0,Bbmaj7:0,Ebmaj7:0" },
       ]},
       { h: "Le sais-tu ?", type: "aside", items: [
         { b: "Autumn Leaves", s: "Standard jazz — ii-V-I en boucle." },
@@ -2354,20 +2620,25 @@ const CURRICULUM = [
     obj: "Jouer une grille de blues complète en Do. Improviser 4 mesures sur la gamme blues.",
     deck: "Le blues est le squelette du jazz, du rock et de la soul. Douze mesures qui contiennent une civilisation.",
     duration: "3h30 sem",
-    exercises: 3,
+    exercises: 7,
     body: [
-      { h: "La grille de 12 mesures", type: "prose", text: "En Do : <br><b>C7 — C7 — C7 — C7</b> (mesures 1-4)<br><b>F7 — F7 — C7 — C7</b> (mesures 5-8)<br><b>G7 — F7 — C7 — G7</b> (mesures 9-12)<br>Douze mesures, on reprend. Cette forme est universelle : <i>Sweet Home Chicago</i>, <i>Kansas City</i>, mille chansons." },
+      { h: "La grille de 12 mesures", type: "prose", text: "En Do :<br><b>C7 — C7 — C7 — C7</b> (mesures 1-4)<br><b>F7 — F7 — C7 — C7</b> (mesures 5-8)<br><b>G7 — F7 — C7 — G7</b> (mesures 9-12)<br>Douze mesures, on reprend. Cette forme est universelle : <i>Sweet Home Chicago</i>, <i>Kansas City</i>, mille chansons." },
       { h: "La gamme blues", type: "prose", text: "Do — Mi♭ — Fa — Fa♯ — Sol — Si♭ — Do. Six notes. Le Fa♯ est la fameuse \"blue note\" qui donne cette couleur. Tu peux improviser dessus sur tout un blues en Do, même quand les accords changent." },
       { h: "Le shuffle", type: "prose", text: "Le blues se joue rarement \"droit\". Chaque croche est légèrement plus longue que la suivante : une longue-courte, longue-courte. On dit \"swing\" ou \"shuffle\". Écoute et imite." },
       { h: "Exercices", type: "exercises", items: [
-        { name: "Grille en accords blocs", time: "15 min", desc: "MG : fondamentale grave. MD : accord de 7e. Joue la grille de 12 mesures.", play: "chords:C7:0,C7:0,C7:0,C7:0,F7:0,F7:0,C7:0,C7:0,G7:0,F7:0,C7:0,G7:0" },
-        { name: "Gamme blues", time: "10 min", desc: "MD : Do-Mi♭-Fa-Fa♯-Sol-Si♭-Do. Monter, descendre, plusieurs fois.", play: "scale:C:blues:4" },
-        { name: "Impro sur 4 mesures", time: "15 min", desc: "MG : joue Do7 en ronde. MD : improvise avec la gamme blues, une note à la fois." },
+        { name: "Grille en Do", time: "15 min", desc: "MG : fondamentale grave. MD : accord de 7e. Joue les 12 mesures.", play: "chords:C7:0,C7:0,C7:0,C7:0,F7:0,F7:0,C7:0,C7:0,G7:0,F7:0,C7:0,G7:0" },
+        { name: "Grille en Sol", time: "10 min", desc: "Transposition en Sol : G7-G7-G7-G7 / C7-C7-G7-G7 / D7-C7-G7-D7.", play: "chords:G7:0,G7:0,G7:0,G7:0,C7:0,C7:0,G7:0,G7:0,D7:0,C7:0,G7:0,D7:0" },
+        { name: "Gamme blues en Do", time: "10 min", desc: "Do-Mi♭-Fa-Fa♯-Sol-Si♭-Do. Monter, descendre. Plusieurs fois.", play: "scale:C:blues:4" },
+        { name: "Gamme blues en Sol", time: "8 min", desc: "Sol-Si♭-Do-Do♯-Ré-Fa-Sol.", play: "scale:G:blues:4" },
+        { name: "Impro sur 4 mesures", time: "15 min", desc: "MG : Do7 en ronde. MD : improvise avec la gamme blues, une note à la fois. Écoute-toi." },
+        { name: "Boogie-woogie bass", time: "10 min", desc: "MG en croches : Do-Mi-Sol-La-Sib-La-Sol-Mi. Le pattern historique du barrelhouse.", play: "seq:C3,E3,G3,A3,Bb3,A3,G3,E3" },
+        { name: "The Message (Grandmaster Flash) — walking bass", time: "12 min", desc: "L'ancêtre du hip-hop conscient : basse walking en Mim. Mi-Ré-Do-Si-La-Sol-Fa♯-Mi. Descente hypnotique.", play: "seq:E3,D3,C3,B2,A2,G2,F#2,E2", song: { artist: "Grandmaster Flash & The Furious Five", title: "The Message", year: 1982, genre: "hip-hop", difficulty: 3 } },
       ]},
       { h: "Le sais-tu ?", type: "aside", items: [
         { b: "Ray Charles", s: "What'd I Say — piano blues électrique." },
         { b: "B.B. King", s: "The Thrill Is Gone — blues mineur." },
         { b: "Nina Simone", s: "See-Line Woman — piano-voix minimal." },
+        { b: "Grandmaster Flash", s: "The Message — 1982, la naissance du hip-hop socialement engagé." },
       ]},
     ]
   },
@@ -2378,22 +2649,27 @@ const CURRICULUM = [
     obj: "Écrire et jouer une pièce originale de 16 mesures avec ta propre progression.",
     deck: "L'aboutissement. Tu ne joues plus la musique des autres — tu commences la tienne.",
     duration: "3h30 sem",
-    exercises: 4,
+    exercises: 8,
     body: [
       { h: "Choisir sa tonalité", type: "prose", text: "Do majeur pour la neutralité, Sol pour la brillance, Fa pour la chaleur, La mineur pour la mélancolie. Choisis selon l'émotion visée." },
       { h: "Construire une progression", type: "prose", text: "Ne réinvente pas la roue. Utilise les degrés de ta tonalité. Suggestions pour Do : <b>I-vi-IV-V</b> (rétro), <b>I-V-vi-IV</b> (pop), <b>ii-V-I</b> (jazz), <b>vi-IV-I-V</b> (émo). Fais 4 mesures × 4 = 16 mesures." },
       { h: "Ajouter une mélodie", type: "prose", text: "Une bonne mélodie utilise principalement les notes des accords en cours, avec quelques notes de passage. Commence sur une note d'accord, finis sur la fondamentale. Répète des motifs — le cerveau adore la répétition." },
       { h: "Structurer", type: "prose", text: "Intro (2 mesures) — A (4) — B (4) — A (4) — Fin (2). Ou : Verse (8) — Refrain (8). Alterne intensités : couplet doux, refrain plus fort." },
       { h: "Exercices", type: "exercises", items: [
-        { name: "Choisir progression + tonalité", time: "10 min", desc: "Ta tonalité, tes 4 accords. Note-les." },
-        { name: "Trouver une mélodie MD", time: "20 min", desc: "Improvise sur les accords. Retiens 4 idées, garde la meilleure. Écris-la (nom des notes)." },
+        { name: "Choisir ta tonalité + 4 accords", time: "10 min", desc: "Écris ta tonalité et tes 4 accords sur papier. Joue-les en boucle 20 fois." },
+        { name: "Trouver une mélodie MD", time: "20 min", desc: "Improvise sur tes accords. Retiens 4 idées, garde la meilleure. Écris-la (nom des notes)." },
         { name: "Ajouter accompagnement MG", time: "15 min", desc: "Choisis un pattern (basse-accord / arpège) et applique-le à tes 16 mesures." },
-        { name: "Jouer et enregistrer", time: "20 min", desc: "Répète, puis enregistre. Écoute avec attention." },
+        { name: "Analyser un beat de rap", time: "15 min", desc: "Prends un morceau de Nas, Dr. Dre ou Kanye. Trouve les accords à l'oreille (ou sur Chordify). Note-les." },
+        { name: "Composer un loop de 4 mesures", time: "20 min", desc: "Un beat hip-hop = un loop court qui tourne. Compose 4 mesures : basse répétitive + 3 notes MD. Répète 4 fois = 16 mesures." },
+        { name: "The World Is Yours (Nas) — sample piano", time: "20 min", desc: "Le sample d'Ahmad Jamal réduit : ostinato de piano en Fa mineur. MG : Fa2 pédale. MD : Fa4-La♭4-Do5-Si♭4. Le sommet de l'album Illmatic.", play: "seq:F2,F4,Ab4,C5,Bb4,F4,Ab4,C5,Bb4", song: { artist: "Nas", title: "The World Is Yours", year: 1994, genre: "hip-hop", difficulty: 4 } },
+        { name: "Jouer et enregistrer ta composition", time: "20 min", desc: "Répète ta composition, puis enregistre. Écoute avec attention. Note ce qui fonctionne, ce qui ne fonctionne pas." },
+        { name: "Partager", time: "5 min", desc: "Envoie l'enregistrement à quelqu'un. Recevoir un retour = la dernière étape de la composition." },
       ]},
       { h: "Le sais-tu ?", type: "aside", items: [
         { b: "Simplicité", s: "Les plus grands tubes ont 4 accords." },
         { b: "Contraste", s: "Alterne aigu/grave, fort/doux." },
         { b: "Répétition", s: "Ne change pas d'idée toutes les 2 mesures." },
+        { b: "Nas", s: "Illmatic (1994) — l'album qui a redéfini le hip-hop." },
       ]},
     ]
   },
@@ -3244,6 +3520,7 @@ class Drill {
         const exEl = cb.closest('.exercise');
         if (exEl) exEl.classList.add('exercise--done');
       }
+      if (this.meta.weekNum && typeof refreshLessonUI === 'function') refreshLessonUI(this.meta.weekNum);
       if (typeof updateProgress === 'function') updateProgress();
       // Highlight the next uncompleted exercise in the open lesson
       const openLessonEl = document.querySelector('.lesson-detail.is-open');
@@ -3477,23 +3754,49 @@ function openLesson(weekNum) {
   const checkedKey = 'piano12w:done';
   const checked = JSON.parse(localStorage.getItem(checkedKey) || '{}');
   const attr = (s) => String(s || '').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+  let exerciseCounter = 0;
+  const renderExercise = (ex, i) => {
+    const key = `w${week.week}_ex${i}`;
+    const st = JSON.parse(localStorage.getItem(checkedKey) || '{}');
+    const done = st[key] === true;
+    exerciseCounter++;
+    const num = String(exerciseCounter).padStart(2, '0');
+    const commonBody = `
+      <div class="exercise__title">
+        <div class="exercise__title-block">
+          <span class="exercise__num">${num}</span>
+          <b>${ex.name}</b>
+        </div>
+        <span class="t">${ex.time}</span>
+      </div>
+      <p class="exercise__desc">${ex.desc}</p>
+      ${ex.play ? `<button class="try-btn" data-play="${attr(ex.play)}">Écouter</button>` : ''}
+      ${ex.play ? `<button class="try-btn" data-drill="${attr(ex.play)}" data-drill-key="${attr(key)}" data-drill-title="${attr(ex.name)}">S'exercer</button>` : ''}
+      <button class="checkbox ${done ? 'is-checked' : ''}" data-check="${key}">
+        <span class="checkbox__box"></span>${done ? 'Validé' : 'Marquer comme fait'}
+      </button>`;
+    if (ex.song) {
+      const genreClass = ex.song.genre === 'hip-hop' ? 'hiphop' : (ex.song.genre || 'pop');
+      const genreLabel = (ex.song.genre || 'pop').toUpperCase();
+      const diff = Math.max(1, Math.min(5, ex.song.difficulty || 2));
+      const diffMarks = '◆'.repeat(diff) + `<span class="off">${'◆'.repeat(5 - diff)}</span>`;
+      return `
+        <div class="exercise exercise--song ${done ? 'exercise--done' : ''}" data-exkey="${attr(key)}">
+          <div class="song-header">
+            <span class="song-badge song-badge--${genreClass}">${genreLabel}</span>
+            <span class="song-year">${ex.song.year}</span>
+            <span class="song-difficulty">${diffMarks}</span>
+          </div>
+          <div class="song-artist">${ex.song.artist}</div>
+          <div class="song-title">« ${ex.song.title} »</div>
+          ${commonBody}
+        </div>`;
+    }
+    return `<div class="exercise ${done ? 'exercise--done' : ''}" data-exkey="${attr(key)}">${commonBody}</div>`;
+  };
   const bodyItems = week.body.map((section, sidx) => {
     if (section.type === 'exercises') {
-      return `<h4>Exercices</h4>` + section.items.map((ex, i) => {
-        const key = `w${week.week}_ex${i}`;
-        const done = checked[key] === true;
-        return `
-          <div class="exercise ${done ? 'exercise--done' : ''}" data-exkey="${attr(key)}">
-            <div class="exercise__title"><b>${ex.name}</b><span class="t">${ex.time}</span></div>
-            <p class="exercise__desc">${ex.desc}</p>
-            ${ex.play ? `<button class="try-btn" data-play="${attr(ex.play)}">Écouter</button>` : ''}
-            ${ex.play ? `<button class="try-btn" data-drill="${attr(ex.play)}" data-drill-key="${attr(key)}" data-drill-title="${attr(ex.name)}">S'exercer</button>` : ''}
-            <button class="checkbox ${done ? 'is-checked' : ''}" data-check="${key}">
-              <span class="checkbox__box"></span>${done ? 'Validé' : 'Marquer comme fait'}
-            </button>
-          </div>
-        `;
-      }).join('');
+      return `<h4>Exercices</h4>` + section.items.map((ex, i) => renderExercise(ex, i)).join('');
     }
     return `<h4>${section.h}</h4><p>${section.text}</p>`;
   }).join('');
@@ -3503,6 +3806,34 @@ function openLesson(weekNum) {
   const roman = ['','I','II','III','IV'][week.module];
   const modTitle = moduleTitleFor(week.module);
   const p = weekProgress(week.week);
+  const isDone = p.pct === 100;
+  const nextWeek = week.week < CURRICULUM.length ? CURRICULUM.find(w => w.week === week.week + 1) : null;
+  const ctaHTML = isDone && nextWeek
+    ? `<div class="lesson-cta is-complete">
+        <div class="lesson-cta__icon">✓</div>
+        <div class="lesson-cta__body">
+          <h4>Semaine ${String(week.week).padStart(2, '0')} — validée</h4>
+          <p>Cap sur la semaine ${nextWeek.week} : « ${nextWeek.title} »</p>
+        </div>
+        <button class="lesson-cta__btn" data-goto-week="${nextWeek.week}">Passer à la S${nextWeek.week} →</button>
+      </div>`
+    : isDone
+    ? `<div class="lesson-cta is-complete">
+        <div class="lesson-cta__icon">✓</div>
+        <div class="lesson-cta__body">
+          <h4>Fin du programme</h4>
+          <p>Tu as bouclé les 12 semaines. Chapeau — c'est le moment d'écrire ta propre musique.</p>
+        </div>
+        <button class="lesson-cta__btn" data-close>Fermer</button>
+      </div>`
+    : `<div class="lesson-cta">
+        <div class="lesson-cta__icon">${p.done}<span style="opacity:0.4">/${p.total}</span></div>
+        <div class="lesson-cta__body">
+          <h4>Il reste ${p.total - p.done} exercice${(p.total - p.done) > 1 ? 's' : ''}</h4>
+          <p>Termine cette semaine pour débloquer la suivante. Clique <b>S'exercer</b> pour que le piano valide tes gestes.</p>
+        </div>
+        ${nextWeek ? `<button class="lesson-cta__btn" data-goto-week="${nextWeek.week}">Aller à la S${nextWeek.week}</button>` : ''}
+      </div>`;
   detail.innerHTML = `
     <button class="lesson-detail__close" data-close>×</button>
     <div class="lesson-detail__nav">
@@ -3516,9 +3847,9 @@ function openLesson(weekNum) {
     </div>
     <h3>${week.title}</h3>
     <div class="lesson-detail__deck">${week.deck}</div>
-    <div class="lesson-detail__meta">
-      <span>Durée <b>${week.duration}</b></span>
-      <span><b>${p.done}</b> / ${p.total} exercices validés</span>
+    <div class="lesson-detail__progress ${isDone ? 'is-complete' : ''}">
+      <div class="lesson-detail__progress-label"><b>${p.done} / ${p.total}</b> exercices · <span style="color: var(--muted);">${week.duration}</span></div>
+      <div class="lesson-detail__progress-bar"><div class="lesson-detail__progress-fill" style="width: ${p.pct}%"></div></div>
     </div>
     <div class="lesson-detail__grid">
       <div class="lesson-detail__body">${bodyItems}</div>
@@ -3527,6 +3858,7 @@ function openLesson(weekNum) {
         ${asideItems}
       </aside>
     </div>
+    ${ctaHTML}
   `;
   slot.appendChild(detail);
   detail.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => { detail.remove(); openWeek = null; }));
@@ -3534,6 +3866,12 @@ function openLesson(weekNum) {
     const dir = b.dataset.nav;
     const target = dir === 'prev' ? week.week - 1 : week.week + 1;
     if (target < 1 || target > CURRICULUM.length) return;
+    detail.remove();
+    openWeek = null;
+    openLesson(target);
+  }));
+  detail.querySelectorAll('[data-goto-week]').forEach(b => b.addEventListener('click', () => {
+    const target = parseInt(b.dataset.gotoWeek, 10);
     detail.remove();
     openWeek = null;
     openLesson(target);
@@ -3558,9 +3896,69 @@ function openLesson(weekNum) {
     b.innerHTML = `<span class="checkbox__box"></span>${state[key] ? 'Validé' : 'Marquer comme fait'}`;
     const exEl = b.closest('.exercise');
     if (exEl) exEl.classList.toggle('exercise--done', state[key]);
+    refreshLessonUI(week.week);
     updateProgress();
   }));
   setTimeout(() => detail.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+}
+
+function refreshLessonUI(weekNum) {
+  const detail = document.querySelector('.lesson-detail.is-open');
+  if (!detail) return;
+  const p = weekProgress(weekNum);
+  const isDone = p.pct === 100;
+  const pEl = detail.querySelector('.lesson-detail__progress');
+  if (pEl) {
+    pEl.classList.toggle('is-complete', isDone);
+    const labelB = pEl.querySelector('.lesson-detail__progress-label b');
+    if (labelB) labelB.textContent = `${p.done} / ${p.total}`;
+    const fill = pEl.querySelector('.lesson-detail__progress-fill');
+    if (fill) fill.style.width = p.pct + '%';
+  }
+  // Re-render the CTA
+  const week = CURRICULUM.find(w => w.week === weekNum);
+  const nextWeek = week && week.week < CURRICULUM.length ? CURRICULUM.find(w => w.week === week.week + 1) : null;
+  const oldCta = detail.querySelector('.lesson-cta');
+  if (!oldCta || !week) return;
+  const attr = (s) => String(s || '').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+  const newCtaHTML = isDone && nextWeek
+    ? `<div class="lesson-cta is-complete">
+        <div class="lesson-cta__icon">✓</div>
+        <div class="lesson-cta__body">
+          <h4>Semaine ${String(week.week).padStart(2, '0')} — validée</h4>
+          <p>Cap sur la semaine ${nextWeek.week} : « ${nextWeek.title} »</p>
+        </div>
+        <button class="lesson-cta__btn" data-goto-week="${nextWeek.week}">Passer à la S${nextWeek.week} →</button>
+      </div>`
+    : isDone
+    ? `<div class="lesson-cta is-complete">
+        <div class="lesson-cta__icon">✓</div>
+        <div class="lesson-cta__body">
+          <h4>Fin du programme</h4>
+          <p>Tu as bouclé les 12 semaines. Chapeau — c'est le moment d'écrire ta propre musique.</p>
+        </div>
+        <button class="lesson-cta__btn" data-close>Fermer</button>
+      </div>`
+    : `<div class="lesson-cta">
+        <div class="lesson-cta__icon">${p.done}<span style="opacity:0.4">/${p.total}</span></div>
+        <div class="lesson-cta__body">
+          <h4>Il reste ${p.total - p.done} exercice${(p.total - p.done) > 1 ? 's' : ''}</h4>
+          <p>Termine cette semaine pour débloquer la suivante. Clique <b>S'exercer</b> pour que le piano valide tes gestes.</p>
+        </div>
+        ${nextWeek ? `<button class="lesson-cta__btn" data-goto-week="${nextWeek.week}">Aller à la S${nextWeek.week}</button>` : ''}
+      </div>`;
+  const tmp = document.createElement('div');
+  tmp.innerHTML = newCtaHTML;
+  const newCta = tmp.firstElementChild;
+  oldCta.replaceWith(newCta);
+  // Wire the new CTA buttons
+  newCta.querySelectorAll('[data-goto-week]').forEach(b => b.addEventListener('click', () => {
+    const target = parseInt(b.dataset.gotoWeek, 10);
+    detail.remove();
+    openWeek = null;
+    openLesson(target);
+  }));
+  newCta.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => { detail.remove(); openWeek = null; }));
 }
 
 // ============================================================
