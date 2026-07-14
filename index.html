@@ -2866,15 +2866,26 @@ class AudioEngine {
     this.gainNode = this.ctx.createGain();
     this.gainNode.gain.value = 0.6;
     this.gainNode.connect(this.ctx.destination);
-    // Kick off sample loading immediately once the AudioContext exists
-    this.sampler = new PianoSampler(this.ctx, this.gainNode);
-    updateSampleBadge('loading', 0, 17);
-    this.sampler.load((loaded, total) => {
-      updateSampleBadge('loading', loaded, total);
-    }).then(ok => {
-      this.samplerReady = ok;
-      updateSampleBadge(ok ? 'ready' : 'failed');
-    });
+    console.log('[Audio] AudioContext created, state:', this.ctx.state);
+    // Kick off sample loading in the background — synth stays available as fallback
+    try {
+      this.sampler = new PianoSampler(this.ctx, this.gainNode);
+      updateSampleBadge('loading', 0, 17);
+      this.sampler.load((loaded, total) => {
+        updateSampleBadge('loading', loaded, total);
+      }).then(ok => {
+        this.samplerReady = ok;
+        updateSampleBadge(ok ? 'ready' : 'failed');
+        console.log('[Audio] Sampler load done, ready:', ok, 'samples loaded:', this.sampler.samples.size);
+      }).catch(e => {
+        console.warn('[Audio] Sampler load rejected:', e);
+        this.samplerReady = false;
+        updateSampleBadge('failed');
+      });
+    } catch (e) {
+      console.warn('[Audio] Could not init sampler:', e);
+      updateSampleBadge('failed');
+    }
   }
   ensure() {
     if (!this.ctx) this.init();
@@ -2901,12 +2912,18 @@ class AudioEngine {
   }
   noteOn(midi, velocity = 0.7) {
     this.ensure();
+    let played = false;
     if (this.sampler && this.samplerReady) {
       if (this.activeNotes.has(midi)) this._synthNoteOff(midi, true);
-      this.sampler.noteOn(midi, velocity);
-      return;
+      played = this.sampler.noteOn(midi, velocity);
     }
-    this._synthNoteOn(midi, velocity);
+    if (!played) {
+      try {
+        this._synthNoteOn(midi, velocity);
+      } catch (e) {
+        console.error('[Audio] _synthNoteOn threw:', e);
+      }
+    }
   }
   noteOff(midi, immediate = false) {
     if (this.sustain && !immediate) return;
