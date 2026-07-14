@@ -2020,6 +2020,10 @@
             <span class="dot"></span>
             <span id="midiBadgeText">MIDI · non détecté</span>
           </span>
+          <span class="instrument__badge wait" id="sampleBadge">
+            <span class="dot"></span>
+            <span id="sampleBadgeText">Piano · en attente</span>
+          </span>
         </div>
         <div class="instrument__controls">
           <button class="btn is-active" id="btnLabels">Notes affichées</button>
@@ -2730,11 +2734,129 @@ const SCALE_LABELS = {
 // ============================================================
 // AUDIO ENGINE (Web Audio API)
 // ============================================================
+// ============================================================
+// PIANO SAMPLER — real Salamander Grand Piano recordings
+// (via tonejs.github.io/audio/salamander/, public samples)
+// ============================================================
+class PianoSampler {
+  constructor(ctx, output) {
+    this.ctx = ctx;
+    this.output = output;
+    this.samples = new Map(); // midi -> AudioBuffer
+    this.baseUrl = 'https://tonejs.github.io/audio/salamander/';
+    // 17 samples every 3 semitones covering C2 (36) to C6 (84)
+    this.sampleList = [
+      ['C2', 36], ['Ds2', 39], ['Fs2', 42], ['A2', 45],
+      ['C3', 48], ['Ds3', 51], ['Fs3', 54], ['A3', 57],
+      ['C4', 60], ['Ds4', 63], ['Fs4', 66], ['A4', 69],
+      ['C5', 72], ['Ds5', 75], ['Fs5', 78], ['A5', 81],
+      ['C6', 84],
+    ];
+    this.ready = false;
+    this.loading = false;
+    this.activeNodes = new Map();
+  }
+  async load(onProgress) {
+    if (this.loading || this.ready) return this.ready;
+    this.loading = true;
+    let loaded = 0;
+    const total = this.sampleList.length;
+    if (onProgress) onProgress(0, total);
+    const promises = this.sampleList.map(async ([name, midi]) => {
+      try {
+        const res = await fetch(this.baseUrl + name + '.mp3');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const buf = await res.arrayBuffer();
+        const decoded = await this.ctx.decodeAudioData(buf);
+        this.samples.set(midi, decoded);
+      } catch (e) {
+        console.warn('Piano sample', name, 'failed:', e && e.message);
+      } finally {
+        loaded++;
+        if (onProgress) onProgress(loaded, total);
+      }
+    });
+    await Promise.all(promises);
+    this.ready = this.samples.size >= 8;
+    this.loading = false;
+    return this.ready;
+  }
+  findClosest(midi) {
+    let closest = null;
+    let minDiff = Infinity;
+    for (const m of this.samples.keys()) {
+      const diff = Math.abs(m - midi);
+      if (diff < minDiff) { minDiff = diff; closest = m; }
+    }
+    return closest;
+  }
+  noteOn(midi, velocity = 0.7) {
+    if (!this.ready) return false;
+    if (this.activeNodes.has(midi)) this.noteOff(midi, true);
+    const closestMidi = this.findClosest(midi);
+    if (closestMidi == null) return false;
+    const buffer = this.samples.get(closestMidi);
+    if (!buffer) return false;
+    const source = this.ctx.createBufferSource();
+    source.buffer = buffer;
+    const semitones = midi - closestMidi;
+    source.playbackRate.value = Math.pow(2, semitones / 12);
+    const gain = this.ctx.createGain();
+    // Nonlinear velocity curve like a real hammer
+    gain.gain.value = Math.pow(velocity, 1.5) * 0.9;
+    source.connect(gain).connect(this.output);
+    source.start();
+    this.activeNodes.set(midi, { source, gain });
+    return true;
+  }
+  noteOff(midi, immediate = false) {
+    const node = this.activeNodes.get(midi);
+    if (!node) return false;
+    const now = this.ctx.currentTime;
+    // Piano damper release — slightly longer than synth to sound natural
+    const release = immediate ? 0.02 : 0.35;
+    try {
+      node.gain.gain.cancelScheduledValues(now);
+      node.gain.gain.setValueAtTime(Math.max(0.0001, node.gain.gain.value), now);
+      node.gain.gain.exponentialRampToValueAtTime(0.0005, now + release);
+      setTimeout(() => { try { node.source.stop(); } catch (e) {} }, release * 1000 + 100);
+    } catch (e) {}
+    this.activeNodes.delete(midi);
+    return true;
+  }
+  releaseAll() {
+    for (const midi of Array.from(this.activeNodes.keys())) {
+      this.noteOff(midi, true);
+    }
+  }
+  has(midi) { return this.activeNodes.has(midi); }
+}
+
+function updateSampleBadge(state, loaded, total) {
+  const el = document.getElementById('sampleBadge');
+  const text = document.getElementById('sampleBadgeText');
+  if (!el || !text) return;
+  el.classList.remove('live', 'wait');
+  if (state === 'loading') {
+    el.classList.add('wait');
+    text.textContent = 'Piano · ' + (loaded || 0) + ' / ' + (total || 17);
+  } else if (state === 'ready') {
+    el.classList.add('live');
+    text.textContent = 'Piano · sons chargés';
+  } else if (state === 'failed') {
+    text.textContent = 'Piano · synthé de secours';
+  } else {
+    text.textContent = 'Piano · en attente';
+  }
+}
+
 class AudioEngine {
   constructor() {
     this.ctx = null;
     this.gainNode = null;
-    this.activeNotes = new Map(); // midi -> { osc, gain, releaseTime }
+    this.sampler = null;
+    this.samplerReady = false;
+    this.activeNotes = new Map(); // synth-only active notes
     this.sustain = false;
   }
   init() {
@@ -2742,8 +2864,17 @@ class AudioEngine {
     const AC = window.AudioContext || window.webkitAudioContext;
     this.ctx = new AC();
     this.gainNode = this.ctx.createGain();
-    this.gainNode.gain.value = 0.5;
+    this.gainNode.gain.value = 0.6;
     this.gainNode.connect(this.ctx.destination);
+    // Kick off sample loading immediately once the AudioContext exists
+    this.sampler = new PianoSampler(this.ctx, this.gainNode);
+    updateSampleBadge('loading', 0, 17);
+    this.sampler.load((loaded, total) => {
+      updateSampleBadge('loading', loaded, total);
+    }).then(ok => {
+      this.samplerReady = ok;
+      updateSampleBadge(ok ? 'ready' : 'failed');
+    });
   }
   ensure() {
     if (!this.ctx) this.init();
@@ -2770,7 +2901,34 @@ class AudioEngine {
   }
   noteOn(midi, velocity = 0.7) {
     this.ensure();
-    if (this.activeNotes.has(midi)) this.noteOff(midi, true);
+    if (this.sampler && this.samplerReady) {
+      if (this.activeNotes.has(midi)) this._synthNoteOff(midi, true);
+      this.sampler.noteOn(midi, velocity);
+      return;
+    }
+    this._synthNoteOn(midi, velocity);
+  }
+  noteOff(midi, immediate = false) {
+    if (this.sustain && !immediate) return;
+    if (this.sampler && this.sampler.has(midi)) {
+      this.sampler.noteOff(midi, immediate);
+    }
+    if (this.activeNotes.has(midi)) {
+      this._synthNoteOff(midi, immediate);
+    }
+  }
+  releaseAll() {
+    if (this.sampler) this.sampler.releaseAll();
+    for (const midi of Array.from(this.activeNotes.keys())) {
+      this._synthNoteOff(midi, true);
+    }
+  }
+  setSustain(on) {
+    this.sustain = on;
+    if (!on) this.releaseAll();
+  }
+  _synthNoteOn(midi, velocity = 0.7) {
+    if (this.activeNotes.has(midi)) this._synthNoteOff(midi, true);
     const now = this.ctx.currentTime;
     const freq = this.midiToFreq(midi);
     // Piano-style additive synthesis: 6 harmonics with independent decay
@@ -2829,12 +2987,10 @@ class AudioEngine {
     g.connect(lp).connect(this.gainNode);
     this.activeNotes.set(midi, { oscs, gain: g, noise, startedAt: now, releasing: false });
   }
-  noteOff(midi, immediate = false) {
+  _synthNoteOff(midi, immediate = false) {
     const note = this.activeNotes.get(midi);
     if (!note) return;
-    if (this.sustain && !immediate) return;
     const now = this.ctx.currentTime;
-    // Piano damper release: quick, ~120ms
     const release = immediate ? 0.02 : 0.12;
     try {
       note.gain.gain.cancelScheduledValues(now);
@@ -2845,20 +3001,6 @@ class AudioEngine {
       try { note.oscs.forEach(o => { try { o.stop(); } catch(e) {} }); } catch(e) {}
     }, release * 1000 + 60);
     this.activeNotes.delete(midi);
-  }
-  releaseAll() {
-    for (const midi of Array.from(this.activeNotes.keys())) {
-      this.noteOff(midi, true);
-    }
-  }
-  setSustain(on) {
-    this.sustain = on;
-    if (!on) {
-      // Release all held notes that were sustained
-      for (const midi of Array.from(this.activeNotes.keys())) {
-        this.noteOff(midi, true);
-      }
-    }
   }
 }
 const audio = new AudioEngine();
